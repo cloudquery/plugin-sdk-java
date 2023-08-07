@@ -1,0 +1,25 @@
+name: publish
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+   publish:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Checkout
+         uses: actions/checkout@v3
+       - uses: actions/setup-java@v3
+         with:
+           distribution: 'temurin'
+           java-version: '18'
+           cache: 'gradle'
+       - name: Validate Gradle wrapper
+         uses: gradle/wrapper-validation-action@56b90f209b02bf6d1deae490e9ef18b21a389cd4
+       - name: Publish package
+         uses: gradle/gradle-build-action@a4cf152f482c7ca97ef56ead29bf08bcd953284c
+         with:
+           arguments: publish
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

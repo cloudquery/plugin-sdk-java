@@ -1,0 +1,3 @@
+{
+  extends: ["github>cloudquery/.github//.github/renovate-java-default.json5"],
+}

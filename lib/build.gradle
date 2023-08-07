@@ -1,7 +1,13 @@
 plugins {
     id 'java-library'
     id "io.freefair.lombok" version "8.1.0"
+    id "maven-publish"
 }
+
+group 'io.cloudquery'
+// x-release-please-start-version
+version = '0.0.1'
+// x-release-please-end
 
 repositories {
     maven {
@@ -26,7 +32,7 @@ dependencies {
     implementation "io.grpc:grpc-stub:1.57.0"
     implementation "io.grpc:grpc-services:1.57.0"
     implementation "io.grpc:grpc-testing:1.15.1"
-    implementation 'com.cloudquery:plugin-pb-java:0.0.2'
+    implementation "io.cloudquery:plugin-pb-java:0.0.5"
 }
 
 testing {
@@ -43,5 +49,23 @@ testing {
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(20)
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/cloudquery/plugin-sdk-java")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
     }
 }
