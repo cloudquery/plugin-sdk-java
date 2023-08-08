@@ -33,6 +33,7 @@ dependencies {
     implementation "io.grpc:grpc-services:1.57.1"
     implementation "io.grpc:grpc-testing:1.57.1"
     implementation "io.cloudquery:plugin-pb-java:0.0.5"
+    implementation "org.apache.arrow:arrow-vector:12.0.1"
 }
 
 testing {
