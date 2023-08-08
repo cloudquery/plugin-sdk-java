@@ -14,7 +14,7 @@ public class Binary implements Scalar {
         if (this.valid) {
             return Base64.encodeBase64String(this.value);
         }
-        return "";
+        return NULL_VALUE_STRING;
     }
 
     @Override

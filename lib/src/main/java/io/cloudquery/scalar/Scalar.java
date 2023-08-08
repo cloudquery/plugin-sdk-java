@@ -14,4 +14,6 @@ public interface Scalar {
     Object Get();
 
     boolean Equal(Scalar other);
+
+    public static final String NULL_VALUE_STRING = "(null)";
 }
