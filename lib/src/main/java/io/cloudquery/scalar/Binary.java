@@ -1,6 +1,7 @@
 package io.cloudquery.scalar;
 
 import org.apache.arrow.vector.types.pojo.ArrowType;
+import org.apache.commons.codec.binary.Base64;
 
 import java.util.Arrays;
 
@@ -10,7 +11,10 @@ public class Binary implements Scalar {
 
     @Override
     public String toString() {
-        return null;
+        if (this.valid) {
+            return Base64.encodeBase64String(this.value);
+        }
+        return "";
     }
 
     @Override
@@ -49,5 +53,3 @@ public class Binary implements Scalar {
         return (this.valid && o.valid) && Arrays.equals(this.value, o.value);
     }
 }
-
-;
