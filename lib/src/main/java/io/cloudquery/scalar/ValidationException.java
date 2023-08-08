@@ -2,14 +2,16 @@ package io.cloudquery.scalar;
 
 import org.apache.arrow.vector.types.pojo.ArrowType;
 
-public class ValidationErrorException extends Exception {
+public class ValidationException extends Exception {
     public Throwable cause;
     public String message;
     public ArrowType type;
     private final Object value;
 
+    static final String NO_CONVERSION_AVAILABLE = "no conversion available";
 
-    ValidationErrorException(Throwable cause, String message, ArrowType type, Object value) {
+
+    ValidationException(Throwable cause, String message, ArrowType type, Object value) {
         super(message, cause);
         this.cause = cause;
         this.message = message;
@@ -17,7 +19,7 @@ public class ValidationErrorException extends Exception {
         this.value = value;
     }
 
-    ValidationErrorException(String message, ArrowType type, Object value) {
+    ValidationException(String message, ArrowType type, Object value) {
         super(message);
         this.message = message;
         this.type = type;

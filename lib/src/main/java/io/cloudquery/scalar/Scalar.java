@@ -5,15 +5,15 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 public interface Scalar {
     String toString();
 
-    boolean IsValid();
+    boolean isValid();
 
-    ArrowType DataType();
+    ArrowType dataType();
 
-    void Set(Object obj);
+    void set(Object value) throws ValidationException;
 
-    Object Get();
+    Object get();
 
-    boolean Equal(Scalar other);
+    boolean equals(Object other);
 
-    public static final String NULL_VALUE_STRING = "(null)";
+    String NULL_VALUE_STRING = "(null)";
 }
