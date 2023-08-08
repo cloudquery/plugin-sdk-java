@@ -5,12 +5,11 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 import java.util.Arrays;
 
 public class Binary implements Scalar {
-    private byte[] value;
-    private boolean valid;
-    private static final ArrowType dataType = new org.apache.arrow.vector.types.pojo.ArrowType.Binary();
+    protected byte[] value;
+    protected boolean valid;
 
     @Override
-    public String String() {
+    public String toString() {
         return null;
     }
 
@@ -21,7 +20,7 @@ public class Binary implements Scalar {
 
     @Override
     public ArrowType DataType() {
-        return dataType;
+        return ArrowType.Binary.INSTANCE;
     }
 
     @Override
@@ -50,3 +49,5 @@ public class Binary implements Scalar {
         return (this.valid && o.valid) && Arrays.equals(this.value, o.value);
     }
 }
+
+;

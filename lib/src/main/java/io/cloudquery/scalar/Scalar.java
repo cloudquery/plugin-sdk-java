@@ -3,7 +3,7 @@ package io.cloudquery.scalar;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 
 public interface Scalar {
-    String String();
+    String toString();
 
     boolean IsValid();
 
