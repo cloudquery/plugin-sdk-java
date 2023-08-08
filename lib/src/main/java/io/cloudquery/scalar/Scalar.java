@@ -5,7 +5,7 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 public interface Scalar {
     String String();
 
-    Boolean IsValid();
+    boolean IsValid();
 
     ArrowType DataType();
 
@@ -13,5 +13,5 @@ public interface Scalar {
 
     Object Get();
 
-    Boolean Equal(Scalar other);
+    boolean Equal(Scalar other);
 }
