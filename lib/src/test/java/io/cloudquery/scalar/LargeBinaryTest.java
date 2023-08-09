@@ -1,47 +1,41 @@
 package io.cloudquery.scalar;
 
-import io.cloudquery.scalar.Binary;
-import io.cloudquery.scalar.ValidationException;
-
 import org.apache.arrow.vector.types.pojo.ArrowType;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class BinaryTest {
+public class LargeBinaryTest {
     @Test
     public void testNew() {
         assertDoesNotThrow(() -> {
-            new Binary();
+            new LargeBinary();
         });
     }
 
     @Test
     public void testNewWithValidParam() {
         assertDoesNotThrow(() -> {
-            new Binary(new byte[]{'a', 'b', 'c'});
-            new Binary("abc");
-            new Binary(new char[]{'a', 'b', 'c'});
+            new LargeBinary(new byte[]{'a', 'b', 'c'});
+            new LargeBinary("abc");
+            new LargeBinary(new char[]{'a', 'b', 'c'});
 
-            Scalar s = new Binary(new char[]{'a', 'b', 'c'});
-            new Binary(s);
+            Scalar s = new LargeBinary(new char[]{'a', 'b', 'c'});
+            new LargeBinary(s);
         });
     }
 
     @Test
     public void testNewWithInvalidParam() {
         assertThrows(ValidationException.class, () -> {
-            new Binary(false);
+            new LargeBinary(false);
         });
     }
 
     @Test
     public void testToString() {
-        Binary b = new Binary();
+        LargeBinary b = new LargeBinary();
         assertEquals(Scalar.NULL_VALUE_STRING, b.toString());
 
         assertDoesNotThrow(() -> {
@@ -57,14 +51,14 @@ public class BinaryTest {
 
     @Test
     public void testDataType() {
-        Binary b = new Binary();
-        assertEquals(ArrowType.Binary.INSTANCE, b.dataType());
-        assertEquals(new ArrowType.Binary(), b.dataType());
+        LargeBinary b = new LargeBinary();
+        assertEquals(ArrowType.LargeBinary.INSTANCE, b.dataType());
+        assertEquals(new ArrowType.LargeBinary(), b.dataType());
     }
 
     @Test
     public void testIsValid() {
-        Binary b = new Binary();
+        LargeBinary b = new LargeBinary();
         assertFalse(b.isValid());
 
         assertDoesNotThrow(() -> {
@@ -75,20 +69,20 @@ public class BinaryTest {
 
     @Test
     public void testSet() {
-        Binary b = new Binary();
+        LargeBinary b = new LargeBinary();
         assertDoesNotThrow(() -> {
             b.set(new byte[]{'a', 'b', 'c'});
             b.set("abc");
             b.set(new char[]{'a', 'b', 'c'});
 
-            Scalar s = new Binary(new char[]{'a', 'b', 'c'});
+            Scalar s = new LargeBinary(new char[]{'a', 'b', 'c'});
             b.set(s);
         });
     }
 
     @Test
     public void testSetWithInvalidParam() {
-        Binary b = new Binary();
+        LargeBinary b = new LargeBinary();
         assertThrows(ValidationException.class, () -> {
             b.set(false);
         });
@@ -96,7 +90,7 @@ public class BinaryTest {
 
     @Test
     public void testGet() {
-        Binary b = new Binary();
+        LargeBinary b = new LargeBinary();
         assertFalse(b.isValid());
         assertNull(b.get());
 
@@ -119,38 +113,43 @@ public class BinaryTest {
         assertArrayEquals(new byte[]{105, -73}, (byte[]) b.get());
 
         assertDoesNotThrow(() -> {
-            Scalar s = new Binary(new char[]{'a', 'b', 'c'});
+            Scalar s = new LargeBinary(new char[]{'a', 'b', 'c'});
             b.set(s);
         });
         assertTrue(b.isValid());
         assertArrayEquals(new byte[]{105, -73}, (byte[]) b.get());
 
         assertDoesNotThrow(() -> {
-            Scalar s = new Binary(new byte[]{'a', 'b', 'c'});
+            Scalar s = new LargeBinary(new byte[]{'a', 'b', 'c'});
             b.set(s);
         });
         assertTrue(b.isValid());
         assertArrayEquals(new byte[]{'a', 'b', 'c'}, (byte[]) b.get());
     }
-
     @Test
     public void testEquals() {
-        Binary a = new Binary();
-        Binary b = new Binary();
+        LargeBinary a = new LargeBinary();
+        LargeBinary b = new LargeBinary();
         assertEquals(a, b);
-        assertNotEquals(a, null);
-        assertEquals(a, new LargeBinary()); // we can cast LargeBinary to Binary
+        assertNotEquals(a,null);
+        assertNotEquals(a,new Binary()); // we can't cast Binary to LargeBinary
         assertNotEquals(null, a);
 
         assertDoesNotThrow(() -> {
             a.set(new byte[]{'a', 'b', 'c'});
         });
-        assertNotEquals(a, b);
+        assertNotEquals(a,b);
 
         assertDoesNotThrow(() -> {
-            for (Object obj : new Object[]{null, new byte[]{'a', 'b', 'c'}, new char[]{'a', 'b', 'c'}, "abc", new Binary("abc"),}) {
+            for (Object obj: new Object[]{
+                    null,
+                    new byte[]{'a', 'b', 'c'},
+                    new char[]{'a', 'b', 'c'},
+                    "abc",
+                    new LargeBinary("abc"),
+            }) {
                 a.set(obj);
-                assertEquals(a, new Binary(obj));
+                assertEquals(a, new LargeBinary(obj));
             }
         });
     }
