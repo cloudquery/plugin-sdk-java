@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TableFilterDFSTest {
     public static final List<Table> BASIC_TABLES = Stream.of("table1", "table2", "table3").map(

@@ -92,6 +92,6 @@ public class Binary implements Scalar {
             return false;
         }
 
-        return (this.valid && o.valid) && Arrays.equals(this.value, o.value);
+        return (this.valid == o.valid) && Arrays.equals(this.value, o.value);
     }
 }

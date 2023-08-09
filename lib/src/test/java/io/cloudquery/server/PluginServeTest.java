@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-
 @Disabled(value = "blocking tests - only used manually to test the gRPC runs correctly")
 public class PluginServeTest {
     public static final String URL = "https://sentry.url";
