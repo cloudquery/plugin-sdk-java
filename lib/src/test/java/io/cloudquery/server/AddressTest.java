@@ -1,17 +1,17 @@
 package io.cloudquery.server;
 
 import io.cloudquery.server.AddressConverter.Address;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddressTest {
 
     private AddressConverter addressConverter;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         addressConverter = new AddressConverter();
     }
@@ -31,6 +31,6 @@ public class AddressTest {
 
         AddressConverter addressConverter = new AddressConverter();
 
-        Assert.assertThrows(AddressConverter.AddressParseException.class, () -> addressConverter.convert(rawAddress));
+        assertThrows(AddressConverter.AddressParseException.class, () -> addressConverter.convert(rawAddress));
     }
 }

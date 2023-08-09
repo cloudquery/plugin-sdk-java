@@ -1,12 +1,12 @@
 package io.cloudquery.glob;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static io.cloudquery.glob.Glob.GLOB;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GlobTest {
     @Test
@@ -75,7 +75,7 @@ public class GlobTest {
             assertGlobMatch(pattern, "this is a ϗѾ test");
         }
 
-        for(String pattern:List.of(
+        for (String pattern : List.of(
                 "test*",               // Implicit substring match
                 "*is",                 // Partial match
                 "*no*",                // Globs without a match between them
@@ -90,11 +90,11 @@ public class GlobTest {
     }
 
     public void assertGlobMatch(String pattern, String subject) {
-        assertTrue(String.format("\"%s\" should match \"%s\"", pattern, subject), Glob.match(pattern, subject));
+        assertTrue(Glob.match(pattern, subject), String.format("\"%s\" should match \"%s\"", pattern, subject));
     }
 
     public void assertNotGlobMatch(String pattern, String subject) {
-        assertFalse(String.format("\"%s\" should not match \"%s\"", pattern, subject), Glob.match(pattern, subject));
+        assertFalse(Glob.match(pattern, subject), String.format("\"%s\" should not match \"%s\"", pattern, subject));
     }
 
 }
