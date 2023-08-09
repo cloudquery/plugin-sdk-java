@@ -35,16 +35,18 @@ dependencies {
     implementation "io.cloudquery:plugin-pb-java:0.0.5"
     implementation "org.apache.arrow:arrow-vector:12.0.1"
 
+    testImplementation(platform('org.junit:junit-bom:5.10.0'))
+    testImplementation('org.junit.jupiter:junit-jupiter:5.10.0')
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.10.0')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.10.0')
+
     testImplementation 'org.assertj:assertj-core:3.24.2'
 }
 
-testing {
-    suites {
-        // Configure the built-in test suite
-        test {
-            // Use JUnit4 test framework
-            useJUnit('4.13.2')
-        }
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
     }
 }
 

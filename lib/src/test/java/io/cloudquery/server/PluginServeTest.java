@@ -2,20 +2,20 @@ package io.cloudquery.server;
 
 import io.cloudquery.plugin.Plugin;
 import io.cloudquery.server.PluginServe.PluginServeBuilder;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 
-@Ignore(value = "blocking tests - only used manually to test the gRPC runs correctly")
+@Disabled(value = "blocking tests - only used manually to test the gRPC runs correctly")
 public class PluginServeTest {
     public static final String URL = "https://sentry.url";
 
     private Plugin plugin;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         plugin = Plugin.builder("test-plugin", "0.1.0").build();
     }
