@@ -1,6 +1,6 @@
 package io.cloudquery.schema;
 
-import io.cloudquery.helper.GlobMatcher;
+import io.cloudquery.glob.Glob;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -28,38 +28,35 @@ public class Table {
     }
 
     public static List<Table> filterDFS(List<Table> tables, List<String> includeConfiguration, List<String> skipConfiguration, boolean skipDependentTables) throws SchemaException {
-        List<GlobMatcher> includes = includeConfiguration.stream().map(GlobMatcher::new).toList();
-        List<GlobMatcher> excludes = skipConfiguration.stream().map(GlobMatcher::new).toList();
-
         List<Table> flattenedTables = flattenTables(tables);
-        for (GlobMatcher includeMatcher : includes) {
+        for (String includePattern : includeConfiguration) {
             boolean includeMatch = false;
             for (Table table : flattenedTables) {
-                if (includeMatcher.matches(table.getName())) {
+                if (Glob.match(includePattern, table.getName())) {
                     includeMatch = true;
                     break;
                 }
             }
             if (!includeMatch) {
-                throw new SchemaException("table configuration includes a pattern \"" + includeMatcher.getStringMatch() + "\" with no matches");
+                throw new SchemaException("table configuration includes a pattern \"" + includePattern + "\" with no matches");
             }
         }
-        for (GlobMatcher excludeMatcher : excludes) {
+        for (String excludePattern : skipConfiguration) {
             boolean excludeMatch = false;
             for (Table table : flattenedTables) {
-                if (excludeMatcher.matches(table.getName())) {
+                if (Glob.match(excludePattern, table.getName())) {
                     excludeMatch = true;
                     break;
                 }
             }
             if (!excludeMatch) {
-                throw new SchemaException("skip configuration includes a pattern \"" + excludeMatcher.getStringMatch() + "\" with no matches");
+                throw new SchemaException("skip configuration includes a pattern \"" + excludePattern + "\" with no matches");
             }
         }
 
         Predicate<Table> include = table -> {
-            for (GlobMatcher matcher : includes) {
-                if (matcher.matches(table.getName())) {
+            for (String includePattern : includeConfiguration) {
+                if (Glob.match(includePattern, table.getName())) {
                     return true;
                 }
             }
@@ -67,8 +64,8 @@ public class Table {
         };
 
         Predicate<Table> exclude = table -> {
-            for (GlobMatcher matcher : excludes) {
-                if (matcher.matches(table.getName())) {
+            for (String excludePattern : skipConfiguration) {
+                if (Glob.match(excludePattern, table.getName())) {
                     return true;
                 }
             }
