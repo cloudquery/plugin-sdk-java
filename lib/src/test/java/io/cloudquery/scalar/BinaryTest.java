@@ -1,13 +1,7 @@
 package io.cloudquery.scalar;
 
-import io.cloudquery.scalar.Binary;
-import io.cloudquery.scalar.ValidationException;
-
 import org.apache.arrow.vector.types.pojo.ArrowType;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -139,7 +133,7 @@ public class BinaryTest {
         Binary b = new Binary();
         assertEquals(a, b);
         assertNotEquals(a, null);
-        assertEquals(a, new LargeBinary()); // we can cast LargeBinary to Binary
+        assertNotEquals(a, new Bool()); // we can't cast Bool to Binary
         assertNotEquals(null, a);
 
         assertDoesNotThrow(() -> {

@@ -126,22 +126,23 @@ public class LargeBinaryTest {
         assertTrue(b.isValid());
         assertArrayEquals(new byte[]{'a', 'b', 'c'}, (byte[]) b.get());
     }
+
     @Test
     public void testEquals() {
         LargeBinary a = new LargeBinary();
         LargeBinary b = new LargeBinary();
         assertEquals(a, b);
-        assertNotEquals(a,null);
-        assertNotEquals(a,new Binary()); // we can't cast Binary to LargeBinary
+        assertNotEquals(a, null);
+        assertNotEquals(a, new Bool()); // we can't cast Bool to LargeBinary
         assertNotEquals(null, a);
 
         assertDoesNotThrow(() -> {
             a.set(new byte[]{'a', 'b', 'c'});
         });
-        assertNotEquals(a,b);
+        assertNotEquals(a, b);
 
         assertDoesNotThrow(() -> {
-            for (Object obj: new Object[]{
+            for (Object obj : new Object[]{
                     null,
                     new byte[]{'a', 'b', 'c'},
                     new char[]{'a', 'b', 'c'},
