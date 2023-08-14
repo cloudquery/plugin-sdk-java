@@ -3,7 +3,6 @@ package io.cloudquery.transformers;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.cloudquery.caser.Caser;
 
-import javax.xml.transform.TransformerException;
 import java.lang.reflect.Field;
 
 public interface NameTransformer {
@@ -16,10 +15,9 @@ public interface NameTransformer {
          *
          * @param field Field to transform
          * @return Transformed field name
-         * @throws TransformerException If the field name cannot be transformed
          */
         @Override
-        public String transform(Field field) throws TransformerException {
+        public String transform(Field field) {
             JsonProperty annotation = field.getAnnotation(JsonProperty.class);
             if (annotation != null) {
                 return annotation.value();
