@@ -69,9 +69,9 @@ public class DateMilli implements Scalar {
             return;
         }
 
-        if (value instanceof String string) {
+        if (value instanceof CharSequence sequence) {
             this.valid = true;
-            this.value = Long.parseLong(string);
+            this.value = Long.parseLong(sequence.toString());
             return;
         }
 

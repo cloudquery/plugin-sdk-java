@@ -56,9 +56,9 @@ public class Bool implements Scalar {
             return;
         }
 
-        if (value instanceof String string) {
+        if (value instanceof CharSequence sequence) {
             this.valid = true;
-            this.value = Boolean.parseBoolean(string);
+            this.value = Boolean.parseBoolean(sequence.toString());
             return;
         }
 

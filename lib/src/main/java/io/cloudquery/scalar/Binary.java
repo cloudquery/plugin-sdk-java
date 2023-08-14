@@ -59,9 +59,9 @@ public class Binary implements Scalar {
             return;
         }
 
-        if (value instanceof String string) {
+        if (value instanceof CharSequence sequence) {
             this.valid = true;
-            this.value = Base64.decodeBase64(string);
+            this.value = Base64.decodeBase64(sequence.toString());
             return;
         }
 
