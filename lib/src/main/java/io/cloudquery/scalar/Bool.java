@@ -1,7 +1,6 @@
 package io.cloudquery.scalar;
 
 import org.apache.arrow.vector.types.pojo.ArrowType;
-import org.apache.commons.codec.binary.Base64;
 
 public class Bool implements Scalar {
     protected boolean value;
