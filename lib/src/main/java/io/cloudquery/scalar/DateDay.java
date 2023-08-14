@@ -63,9 +63,9 @@ public class DateDay implements Scalar {
             return;
         }
 
-        if (value instanceof String string) {
+        if (value instanceof CharSequence sequence) {
             this.valid = true;
-            this.value = Integer.parseInt(string);
+            this.value = Integer.parseInt(sequence.toString());
             return;
         }
 
