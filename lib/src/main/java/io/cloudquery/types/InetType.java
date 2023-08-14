@@ -20,9 +20,7 @@ public class InetType extends ArrowType.ExtensionType {
 
     @Override
     public boolean extensionEquals(ExtensionType other) {
-        if (!(other instanceof InetType))
-            return false;
-        return true;
+        return other instanceof InetType;
     }
 
     @Override

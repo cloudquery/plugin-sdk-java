@@ -46,9 +46,6 @@ public class JSONType extends ExtensionType {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof JSONType)) {
-            return false;
-        }
-        return true;
+        return obj instanceof JSONType;
     }
 }
