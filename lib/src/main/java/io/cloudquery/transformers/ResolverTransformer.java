@@ -7,6 +7,9 @@ import io.cloudquery.schema.ColumnResolver;
 import java.lang.reflect.Field;
 
 public interface ResolverTransformer {
+
+    ColumnResolver transform(Field field, String path) throws TransformerException;
+
     class DefaulResolverTransformer implements ResolverTransformer {
         @Override
         public ColumnResolver transform(Field field, String path) throws TransformerException {
@@ -19,6 +22,4 @@ public interface ResolverTransformer {
             };
         }
     }
-
-    ColumnResolver transform(Field field, String path) throws TransformerException;
 }
