@@ -10,6 +10,9 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 import java.lang.reflect.Field;
 
 public interface TypeTransformer {
+
+    ArrowType transform(Field field) throws TransformerException;
+
     class DefaultTypeTransformer implements TypeTransformer {
         @Override
         public ArrowType transform(Field field) throws TransformerException {
@@ -55,6 +58,4 @@ public interface TypeTransformer {
             throw new TransformerException("Unsupported type: " + type.getName() + " for field: " + name);
         }
     }
-
-    ArrowType transform(Field field) throws TransformerException;
 }

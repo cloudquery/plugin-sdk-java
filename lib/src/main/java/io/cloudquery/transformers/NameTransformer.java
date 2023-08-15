@@ -6,6 +6,9 @@ import io.cloudquery.caser.Caser;
 import java.lang.reflect.Field;
 
 public interface NameTransformer {
+
+    String transform(Field field) throws TransformerException;
+
     class DefaultNameTransformer implements NameTransformer {
         private final Caser caser = Caser.builder().build();
 
@@ -25,6 +28,4 @@ public interface NameTransformer {
             return caser.toSnake(field.getName());
         }
     }
-
-    String transform(Field field) throws TransformerException;
 }
