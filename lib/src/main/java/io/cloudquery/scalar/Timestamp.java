@@ -6,7 +6,7 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 import java.time.*;
 
 public class Timestamp implements Scalar {
-    public static final ZoneId zoneID = ZoneOffset.UTC.normalized();
+    public static final ZoneId zoneID = ZoneOffset.UTC;
 
     // TODO: add more units support later
     private static final ArrowType dt = new ArrowType.Timestamp(TimeUnit.MILLISECOND, zoneID.toString());
@@ -76,12 +76,12 @@ public class Timestamp implements Scalar {
         }
 
         if (value instanceof Integer integer) {
-            this.value = ZonedDateTime.ofInstant(Instant.ofEpochMilli(integer), ZoneOffset.UTC.normalized());
+            this.value = ZonedDateTime.ofInstant(Instant.ofEpochMilli(integer), ZoneOffset.UTC);
             return;
         }
 
         if (value instanceof Long longValue) {
-            this.value = ZonedDateTime.ofInstant(Instant.ofEpochMilli(longValue), ZoneOffset.UTC.normalized());
+            this.value = ZonedDateTime.ofInstant(Instant.ofEpochMilli(longValue), ZoneOffset.UTC);
             return;
         }
 
