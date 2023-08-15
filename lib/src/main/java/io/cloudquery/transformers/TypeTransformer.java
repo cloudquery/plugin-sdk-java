@@ -48,7 +48,9 @@ public interface TypeTransformer {
                         if (componentType.getName().equals("byte")) {
                             return ArrowType.Binary.INSTANCE;
                         }
-                        return ListType.listOf(transformArrowType(name, componentType));
+                        // if element type is already json just return JSON rather than a list of JSON
+                        ArrowType elementType = transformArrowType(name, componentType);
+                        return elementType == JSONType.INSTANCE ? elementType : ListType.listOf(elementType);
                     }
                     if (!type.isPrimitive()) {
                         return JSONType.INSTANCE;

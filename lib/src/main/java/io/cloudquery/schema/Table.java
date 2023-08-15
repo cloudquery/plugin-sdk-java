@@ -1,8 +1,10 @@
 package io.cloudquery.schema;
 
 import io.cloudquery.glob.Glob;
+import io.cloudquery.transformers.TransformerException;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +17,11 @@ import java.util.function.Predicate;
 @Builder(toBuilder = true)
 @Getter
 public class Table {
+
+    public interface Transform {
+        void transformTable(Table table) throws TransformerException;
+    }
+
     public static List<Table> flattenTables(List<Table> tables) {
         Map<String, Table> flattenMap = new HashMap<>();
         for (Table table : tables) {
@@ -100,11 +107,21 @@ public class Table {
     }
 
     private String name;
-
+    @Setter
     private Table parent;
+    @Builder.Default
+    private List<Column> columns = new ArrayList<>();
 
     @Builder.Default
     private List<Table> relations = Collections.emptyList();
+
+    private Transform transform;
+
+    public void transform() throws TransformerException {
+        if (transform != null) {
+            transform.transformTable(this);
+        }
+    }
 
     private Optional<Table> filterDfs(boolean parentMatched, Predicate<Table> include, Predicate<Table> exclude, boolean skipDependentTables) {
         if (exclude.test(this)) {
@@ -129,4 +146,12 @@ public class Table {
         return Optional.empty();
     }
 
+    public Optional<Column> getColumn(String name) {
+        for (Column column : columns) {
+            if (column.getName().equals(name)) {
+                return Optional.of(column);
+            }
+        }
+        return Optional.empty();
+    }
 }
