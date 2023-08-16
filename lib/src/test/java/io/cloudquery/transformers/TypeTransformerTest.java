@@ -54,6 +54,8 @@ class TypeTransformerTest {
         private InetAddress inetField;
 
         private byte[] byteArrayField;
+
+        private Object[] objectArrayField;
     }
 
     @ParameterizedTest
@@ -104,7 +106,10 @@ class TypeTransformerTest {
                 Arguments.of("byteArrayField", ArrowType.Binary.INSTANCE),
 
                 // Inet
-                Arguments.of("inetField", InetType.INSTANCE)
+                Arguments.of("inetField", InetType.INSTANCE),
+
+                // Object array
+                Arguments.of("objectArrayField", JSONType.INSTANCE)
         );
     }
 }
