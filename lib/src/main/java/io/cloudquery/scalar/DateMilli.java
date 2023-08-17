@@ -3,9 +3,8 @@ package io.cloudquery.scalar;
 import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 
-public class DateMilli implements Scalar {
-    protected long value;
-    protected boolean valid;
+public class DateMilli implements Scalar<Long> {
+    protected Long value;
 
     public DateMilli() {
     }
@@ -16,15 +15,15 @@ public class DateMilli implements Scalar {
 
     @Override
     public String toString() {
-        if (this.valid) {
-            return Long.toString(this.value);
+        if (this.value != null) {
+            return this.value.toString();
         }
         return NULL_VALUE_STRING;
     }
 
     @Override
     public boolean isValid() {
-        return this.valid;
+        return this.value != null;
     }
 
     @Override
@@ -35,20 +34,17 @@ public class DateMilli implements Scalar {
     @Override
     public void set(Object value) throws ValidationException {
         if (value == null) {
-            this.valid = false;
-            this.value = 0;
+            this.value = null;
             return;
         }
 
-        if (value instanceof Scalar scalar) {
+        if (value instanceof Scalar<?> scalar) {
             if (!scalar.isValid()) {
-                this.valid = false;
-                this.value = 0;
+                this.value = null;
                 return;
             }
 
             if (scalar instanceof DateMilli date) {
-                this.valid = date.valid;
                 this.value = date.value;
                 return;
             }
@@ -58,19 +54,16 @@ public class DateMilli implements Scalar {
         }
 
         if (value instanceof Long b) {
-            this.valid = true;
             this.value = b;
             return;
         }
 
         if (value instanceof Integer b) {
-            this.valid = true;
-            this.value = b;
+            this.value = Long.valueOf(b);
             return;
         }
 
         if (value instanceof CharSequence sequence) {
-            this.valid = true;
             this.value = Long.parseLong(sequence.toString());
             return;
         }
@@ -79,23 +72,18 @@ public class DateMilli implements Scalar {
     }
 
     @Override
-    public Object get() {
-        if (this.valid) {
-            return this.value;
-        }
-        return null;
+    public Long get() {
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == null) {
-            return false;
+        if (other instanceof DateMilli o) {
+            if (this.value == null) {
+                return o.value == null;
+            }
+            return this.value.equals(o.value);
         }
-
-        if (!(other instanceof DateMilli o)) {
-            return false;
-        }
-
-        return (this.valid == o.valid) && (this.value == o.value);
+        return false;
     }
 }

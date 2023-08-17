@@ -2,7 +2,7 @@ package io.cloudquery.scalar;
 
 import org.apache.arrow.vector.types.pojo.ArrowType;
 
-public interface Scalar {
+public interface Scalar<T> {
     String toString();
 
     boolean isValid();
@@ -11,7 +11,7 @@ public interface Scalar {
 
     void set(Object value) throws ValidationException;
 
-    Object get();
+    T get();
 
     boolean equals(Object other);
 

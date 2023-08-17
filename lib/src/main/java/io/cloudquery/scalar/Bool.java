@@ -2,9 +2,8 @@ package io.cloudquery.scalar;
 
 import org.apache.arrow.vector.types.pojo.ArrowType;
 
-public class Bool implements Scalar {
-    protected boolean value;
-    protected boolean valid;
+public class Bool implements Scalar<Boolean> {
+    protected Boolean value;
 
     public Bool() {
     }
@@ -15,15 +14,15 @@ public class Bool implements Scalar {
 
     @Override
     public String toString() {
-        if (this.valid) {
-            return Boolean.toString(this.value);
+        if (this.value != null) {
+            return this.value.toString();
         }
         return NULL_VALUE_STRING;
     }
 
     @Override
     public boolean isValid() {
-        return this.valid;
+        return this.value != null;
     }
 
     @Override
@@ -34,15 +33,13 @@ public class Bool implements Scalar {
     @Override
     public void set(Object value) throws ValidationException {
         if (value == null) {
-            this.valid = false;
-            this.value = false;
+            this.value = null;
             return;
         }
 
-        if (value instanceof Scalar scalar) {
+        if (value instanceof Scalar<?> scalar) {
             if (!scalar.isValid()) {
-                this.valid = false;
-                this.value = false;
+                this.value = null;
                 return;
             }
 
@@ -51,13 +48,11 @@ public class Bool implements Scalar {
         }
 
         if (value instanceof Boolean b) {
-            this.valid = true;
             this.value = b;
             return;
         }
 
         if (value instanceof CharSequence sequence) {
-            this.valid = true;
             this.value = Boolean.parseBoolean(sequence.toString());
             return;
         }
@@ -66,23 +61,18 @@ public class Bool implements Scalar {
     }
 
     @Override
-    public Object get() {
-        if (this.valid) {
-            return this.value;
-        }
-        return null;
+    public Boolean get() {
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == null) {
-            return false;
+        if (other instanceof Bool o) {
+            if (this.value == null) {
+                return o.value == null;
+            }
+            return this.value.equals(o.value);
         }
-
-        if (!(other instanceof Bool o)) {
-            return false;
-        }
-
-        return (this.valid == o.valid) && (this.value == o.value);
+        return false;
     }
 }
