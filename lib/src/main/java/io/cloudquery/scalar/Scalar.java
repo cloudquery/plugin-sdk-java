@@ -2,6 +2,8 @@ package io.cloudquery.scalar;
 
 import org.apache.arrow.vector.types.pojo.ArrowType;
 
+import java.util.Objects;
+
 public abstract class Scalar<T> {
     protected T value;
 
@@ -64,6 +66,10 @@ public abstract class Scalar<T> {
         }
 
         return this.value.equals(o.value);
+    }
+
+    public final int hashCode() {
+        return Objects.hash(value);
     }
 
     public static final String NULL_VALUE_STRING = "(null)";

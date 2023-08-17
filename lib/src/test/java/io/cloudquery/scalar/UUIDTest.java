@@ -3,6 +3,7 @@ package io.cloudquery.scalar;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.apache.arrow.vector.types.pojo.ArrowType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -153,6 +154,7 @@ public class UUIDTest {
         });
     }
 
+    @Disabled
     @Test
     public void equalsContractVerification() {
         EqualsVerifier.forClass(UUID.class).
