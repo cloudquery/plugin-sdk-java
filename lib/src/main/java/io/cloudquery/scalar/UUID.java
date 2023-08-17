@@ -82,15 +82,10 @@ public class UUID implements Scalar {
 
     @Override
     public final boolean equals(Object other) {
-        if (other == null) {
-            return false;
+        if (other instanceof UUID o) {
+            return this.value == o.value || Objects.equals(this.value, o.value);
         }
-
-        if (!(other instanceof UUID o)) {
-            return false;
-        }
-
-        return this.value == o.value || Objects.equals(this.value, o.value);
+        return false;
     }
 
     @Override
