@@ -50,6 +50,17 @@ public class UUID extends Scalar<java.util.UUID> {
     }
 
     @Override
+    public final boolean equals(Object other) {
+        if (other instanceof UUID o) {
+            if (this.value == null) {
+                return o.value == null;
+            }
+            return this.value.equals(o.value);
+        }
+        return false;
+    }
+
+    @Override
     public final int hashCode() {
         return Objects.hash(value);
     }

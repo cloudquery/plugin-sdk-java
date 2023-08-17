@@ -49,19 +49,13 @@ public class Binary extends Scalar<byte[]> {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Binary o)) {
-            return false;
+        if (other instanceof Binary o) {
+            if (this.value == null) {
+                return o.value == null;
+            }
+            return Arrays.equals(this.value, o.value);
         }
-
-        if (!o.getClass().equals(this.getClass())) {
-            return false;
-        }
-
-        if (this.value == null) {
-            return o.value == null;
-        }
-
-        return Arrays.equals(this.value, o.value);
+        return false;
     }
 
     public static class LargeBinary extends Binary {
