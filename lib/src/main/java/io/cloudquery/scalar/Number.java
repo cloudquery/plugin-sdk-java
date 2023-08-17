@@ -35,10 +35,12 @@ public abstract class Number<T> extends Scalar<T> {
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = Byte.valueOf(sequence.toString());
+                return;
             }
 
             if (value instanceof java.lang.Number number) {
                 this.value = number.byteValue();
+                return;
             }
 
             throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
@@ -65,10 +67,12 @@ public abstract class Number<T> extends Scalar<T> {
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = Short.valueOf(sequence.toString());
+                return;
             }
 
             if (value instanceof java.lang.Number number) {
                 this.value = number.shortValue();
+                return;
             }
 
             throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
@@ -95,10 +99,12 @@ public abstract class Number<T> extends Scalar<T> {
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = Integer.valueOf(sequence.toString());
+                return;
             }
 
             if (value instanceof java.lang.Number number) {
                 this.value = number.intValue();
+                return;
             }
 
             throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
@@ -125,10 +131,12 @@ public abstract class Number<T> extends Scalar<T> {
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = Long.valueOf(sequence.toString());
+                return;
             }
 
             if (value instanceof java.lang.Number number) {
                 this.value = number.longValue();
+                return;
             }
 
             throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
@@ -155,10 +163,12 @@ public abstract class Number<T> extends Scalar<T> {
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = UByte.valueOf(sequence.toString());
+                return;
             }
 
             if (value instanceof java.lang.Number number) {
                 this.value = UByte.valueOf(number.byteValue());
+                return;
             }
 
             throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
@@ -185,10 +195,12 @@ public abstract class Number<T> extends Scalar<T> {
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = UShort.valueOf(sequence.toString());
+                return;
             }
 
             if (value instanceof java.lang.Number number) {
                 this.value = UShort.valueOf(number.shortValue());
+                return;
             }
 
             throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
@@ -215,10 +227,12 @@ public abstract class Number<T> extends Scalar<T> {
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = UInteger.valueOf(sequence.toString());
+                return;
             }
 
             if (value instanceof java.lang.Number number) {
                 this.value = UInteger.valueOf(number.intValue());
+                return;
             }
 
             throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
@@ -245,10 +259,12 @@ public abstract class Number<T> extends Scalar<T> {
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = ULong.valueOf(sequence.toString());
+                return;
             }
 
             if (value instanceof java.lang.Number number) {
                 this.value = ULong.valueOf(number.longValue());
+                return;
             }
 
             throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
@@ -275,10 +291,12 @@ public abstract class Number<T> extends Scalar<T> {
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = Float.valueOf(sequence.toString());
+                return;
             }
 
             if (value instanceof java.lang.Number number) {
                 this.value = number.floatValue();
+                return;
             }
 
             throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
@@ -305,10 +323,12 @@ public abstract class Number<T> extends Scalar<T> {
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = Double.valueOf(sequence.toString());
+                return;
             }
 
             if (value instanceof java.lang.Number number) {
                 this.value = number.doubleValue();
+                return;
             }
 
             throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
