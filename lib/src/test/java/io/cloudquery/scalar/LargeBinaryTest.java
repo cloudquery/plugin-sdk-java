@@ -10,32 +10,32 @@ public class LargeBinaryTest {
     @Test
     public void testNew() {
         assertDoesNotThrow(() -> {
-            new LargeBinary();
+            new Binary.LargeBinary();
         });
     }
 
     @Test
     public void testNewWithValidParam() {
         assertDoesNotThrow(() -> {
-            new LargeBinary(new byte[]{'a', 'b', 'c'});
-            new LargeBinary("abc");
-            new LargeBinary(new char[]{'a', 'b', 'c'});
+            new Binary.LargeBinary(new byte[]{'a', 'b', 'c'});
+            new Binary.LargeBinary("abc");
+            new Binary.LargeBinary(new char[]{'a', 'b', 'c'});
 
-            Scalar s = new LargeBinary(new char[]{'a', 'b', 'c'});
-            new LargeBinary(s);
+            Scalar s = new Binary.LargeBinary(new char[]{'a', 'b', 'c'});
+            new Binary.LargeBinary(s);
         });
     }
 
     @Test
     public void testNewWithInvalidParam() {
         assertThrows(ValidationException.class, () -> {
-            new LargeBinary(false);
+            new Binary.LargeBinary(false);
         });
     }
 
     @Test
     public void testToString() {
-        LargeBinary b = new LargeBinary();
+        Binary.LargeBinary b = new Binary.LargeBinary();
         assertEquals(Scalar.NULL_VALUE_STRING, b.toString());
 
         assertDoesNotThrow(() -> {
@@ -51,14 +51,14 @@ public class LargeBinaryTest {
 
     @Test
     public void testDataType() {
-        LargeBinary b = new LargeBinary();
+        Binary.LargeBinary b = new Binary.LargeBinary();
         assertEquals(ArrowType.LargeBinary.INSTANCE, b.dataType());
         assertEquals(new ArrowType.LargeBinary(), b.dataType());
     }
 
     @Test
     public void testIsValid() {
-        LargeBinary b = new LargeBinary();
+        Binary.LargeBinary b = new Binary.LargeBinary();
         assertFalse(b.isValid());
 
         assertDoesNotThrow(() -> {
@@ -69,20 +69,20 @@ public class LargeBinaryTest {
 
     @Test
     public void testSet() {
-        LargeBinary b = new LargeBinary();
+        Binary.LargeBinary b = new Binary.LargeBinary();
         assertDoesNotThrow(() -> {
             b.set(new byte[]{'a', 'b', 'c'});
             b.set("abc");
             b.set(new char[]{'a', 'b', 'c'});
 
-            Scalar s = new LargeBinary(new char[]{'a', 'b', 'c'});
+            Scalar s = new Binary.LargeBinary(new char[]{'a', 'b', 'c'});
             b.set(s);
         });
     }
 
     @Test
     public void testSetWithInvalidParam() {
-        LargeBinary b = new LargeBinary();
+        Binary.LargeBinary b = new Binary.LargeBinary();
         assertThrows(ValidationException.class, () -> {
             b.set(false);
         });
@@ -90,7 +90,7 @@ public class LargeBinaryTest {
 
     @Test
     public void testGet() {
-        LargeBinary b = new LargeBinary();
+        Binary.LargeBinary b = new Binary.LargeBinary();
         assertFalse(b.isValid());
         assertNull(b.get());
 
@@ -113,14 +113,14 @@ public class LargeBinaryTest {
         assertArrayEquals(new byte[]{105, -73}, (byte[]) b.get());
 
         assertDoesNotThrow(() -> {
-            Scalar s = new LargeBinary(new char[]{'a', 'b', 'c'});
+            Scalar s = new Binary.LargeBinary(new char[]{'a', 'b', 'c'});
             b.set(s);
         });
         assertTrue(b.isValid());
         assertArrayEquals(new byte[]{105, -73}, (byte[]) b.get());
 
         assertDoesNotThrow(() -> {
-            Scalar s = new LargeBinary(new byte[]{'a', 'b', 'c'});
+            Scalar s = new Binary.LargeBinary(new byte[]{'a', 'b', 'c'});
             b.set(s);
         });
         assertTrue(b.isValid());
@@ -129,11 +129,11 @@ public class LargeBinaryTest {
 
     @Test
     public void testEquals() {
-        LargeBinary a = new LargeBinary();
-        LargeBinary b = new LargeBinary();
+        Binary.LargeBinary a = new Binary.LargeBinary();
+        Binary.LargeBinary b = new Binary.LargeBinary();
         assertEquals(a, b);
         assertNotEquals(a, null);
-        assertNotEquals(a, new Bool()); // we can't cast Bool to LargeBinary
+        assertNotEquals(a, new Bool()); // we can't cast Bool to Binary.LargeBinary
         assertNotEquals(null, a);
 
         assertDoesNotThrow(() -> {
@@ -147,10 +147,10 @@ public class LargeBinaryTest {
                     new byte[]{'a', 'b', 'c'},
                     new char[]{'a', 'b', 'c'},
                     "abc",
-                    new LargeBinary("abc"),
+                    new Binary.LargeBinary("abc"),
             }) {
                 a.set(obj);
-                assertEquals(a, new LargeBinary(obj));
+                assertEquals(a, new Binary.LargeBinary(obj));
             }
         });
     }
