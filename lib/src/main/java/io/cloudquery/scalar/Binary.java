@@ -5,9 +5,8 @@ import org.apache.commons.codec.binary.Base64;
 
 import java.util.Arrays;
 
-public class Binary implements Scalar {
+public class Binary implements Scalar<byte[]> {
     protected byte[] value;
-    protected boolean valid;
 
     public Binary() {
     }
@@ -18,7 +17,7 @@ public class Binary implements Scalar {
 
     @Override
     public String toString() {
-        if (this.valid) {
+        if (this.value != null) {
             return Base64.encodeBase64String(this.value);
         }
         return NULL_VALUE_STRING;
@@ -26,7 +25,7 @@ public class Binary implements Scalar {
 
     @Override
     public boolean isValid() {
-        return this.valid;
+        return this.value != null;
     }
 
     @Override
@@ -37,14 +36,12 @@ public class Binary implements Scalar {
     @Override
     public void set(Object value) throws ValidationException {
         if (value == null) {
-            this.valid = false;
             this.value = null;
             return;
         }
 
-        if (value instanceof Scalar scalar) {
+        if (value instanceof Scalar<?> scalar) {
             if (!scalar.isValid()) {
-                this.valid = false;
                 this.value = null;
                 return;
             }
@@ -54,19 +51,16 @@ public class Binary implements Scalar {
         }
 
         if (value instanceof byte[] bytes) {
-            this.valid = true;
             this.value = bytes;
             return;
         }
 
         if (value instanceof CharSequence sequence) {
-            this.valid = true;
             this.value = Base64.decodeBase64(sequence.toString());
             return;
         }
 
         if (value instanceof char[] chars) {
-            this.valid = true;
             this.value = Base64.decodeBase64(new String(chars));
             return;
         }
@@ -75,23 +69,18 @@ public class Binary implements Scalar {
     }
 
     @Override
-    public Object get() {
-        if (this.valid) {
-            return this.value;
-        }
-        return null;
+    public byte[] get() {
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == null) {
-            return false;
+        if (other instanceof Binary o) {
+            if (this.value == null) {
+                return o.value == null;
+            }
+            return Arrays.equals(this.value, o.value);
         }
-
-        if (!(other instanceof Binary o)) {
-            return false;
-        }
-
-        return (this.valid == o.valid) && Arrays.equals(this.value, o.value);
+        return false;
     }
 }
