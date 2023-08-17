@@ -41,7 +41,7 @@ public class Duration implements Scalar<java.time.Duration> {
             return;
         }
 
-        if (value instanceof Scalar scalar) {
+        if (value instanceof Scalar<?> scalar) {
             if (!scalar.isValid()) {
                 this.value = null;
                 return;

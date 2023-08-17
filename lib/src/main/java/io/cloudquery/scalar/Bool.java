@@ -37,7 +37,7 @@ public class Bool implements Scalar<Boolean> {
             return;
         }
 
-        if (value instanceof Scalar scalar) {
+        if (value instanceof Scalar<?> scalar) {
             if (!scalar.isValid()) {
                 this.value = null;
                 return;

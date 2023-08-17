@@ -45,7 +45,7 @@ public class Timestamp implements Scalar<ZonedDateTime> {
             return;
         }
 
-        if (value instanceof Scalar scalar) {
+        if (value instanceof Scalar<?> scalar) {
             if (!scalar.isValid()) {
                 this.value = null;
                 return;

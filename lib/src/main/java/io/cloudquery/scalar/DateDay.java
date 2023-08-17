@@ -38,7 +38,7 @@ public class DateDay implements Scalar<Integer> {
             return;
         }
 
-        if (value instanceof Scalar scalar) {
+        if (value instanceof Scalar<?> scalar) {
             if (!scalar.isValid()) {
                 this.value = 0;
                 return;

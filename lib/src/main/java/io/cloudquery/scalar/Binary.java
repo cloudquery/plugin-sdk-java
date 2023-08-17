@@ -40,7 +40,7 @@ public class Binary implements Scalar<byte[]> {
             return;
         }
 
-        if (value instanceof Scalar scalar) {
+        if (value instanceof Scalar<?> scalar) {
             if (!scalar.isValid()) {
                 this.value = null;
                 return;

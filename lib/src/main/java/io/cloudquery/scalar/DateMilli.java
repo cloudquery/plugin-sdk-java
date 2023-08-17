@@ -38,7 +38,7 @@ public class DateMilli implements Scalar<Long> {
             return;
         }
 
-        if (value instanceof Scalar scalar) {
+        if (value instanceof Scalar<?> scalar) {
             if (!scalar.isValid()) {
                 this.value = null;
                 return;

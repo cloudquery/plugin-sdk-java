@@ -44,7 +44,7 @@ public class UUID implements Scalar<java.util.UUID> {
             return;
         }
 
-        if (value instanceof Scalar scalar) {
+        if (value instanceof Scalar<?> scalar) {
             if (!scalar.isValid()) {
                 this.value = null;
                 return;
