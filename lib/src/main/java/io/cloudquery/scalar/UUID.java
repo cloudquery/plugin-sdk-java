@@ -56,8 +56,8 @@ public class UUID implements Scalar {
             return;
         }
 
-        if (value instanceof String s) {
-            this.value = java.util.UUID.fromString(s);
+        if (value instanceof CharSequence sequence) {
+            this.value = java.util.UUID.fromString(sequence.toString());
             return;
         }
 
