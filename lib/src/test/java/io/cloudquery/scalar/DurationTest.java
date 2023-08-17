@@ -23,7 +23,7 @@ public class DurationTest {
             new Duration(java.time.Duration.ZERO);
             new Duration(java.time.Duration.ofNanos(1));
 
-            Scalar s = new Duration(java.time.Duration.ZERO);
+            Scalar<?> s = new Duration(java.time.Duration.ZERO);
             new Duration(s);
         });
     }
@@ -77,7 +77,7 @@ public class DurationTest {
             duration.set("PT8H6M12.345S");
             duration.set(java.time.Duration.ZERO);
 
-            Scalar s = new Duration(java.time.Duration.ZERO);
+            Scalar<?> s = new Duration(java.time.Duration.ZERO);
             duration.set(s);
         });
     }

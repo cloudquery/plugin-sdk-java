@@ -7,61 +7,12 @@ import org.joou.UInteger;
 import org.joou.ULong;
 import org.joou.UShort;
 
-public abstract class Number<T> implements Scalar<T> {
-    protected T value;
-
-    protected abstract void setValue(Object value) throws ValidationException;
-
-
+public abstract class Number<T> extends Scalar<T> {
     public Number() {
     }
 
     public Number(Object value) throws ValidationException {
         this.set(value);
-    }
-
-    @Override
-    public String toString() {
-        if (this.value != null) {
-            return this.value.toString();
-        }
-        return NULL_VALUE_STRING;
-    }
-
-    @Override
-    public boolean isValid() {
-        return this.value != null;
-    }
-
-    @Override
-    public void set(Object value) throws ValidationException {
-        if (value == null) {
-            this.value = null;
-            return;
-        }
-
-        if (value instanceof Scalar<?> scalar) {
-            if (!scalar.isValid()) {
-                this.value = null;
-                return;
-            }
-
-            this.setValue(scalar.get());
-            return;
-        }
-
-        throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other instanceof Number<?> o) {
-            if (this.value == null) {
-                return o.value == null;
-            }
-            return this.value.equals(o.value);
-        }
-        return false;
     }
 
     public static class Int8 extends Number<Byte> {
@@ -78,11 +29,6 @@ public abstract class Number<T> implements Scalar<T> {
         @Override
         public ArrowType dataType() {
             return dt;
-        }
-
-        @Override
-        public Byte get() {
-            return this.value;
         }
 
         @Override
@@ -116,11 +62,6 @@ public abstract class Number<T> implements Scalar<T> {
         }
 
         @Override
-        public Short get() {
-            return this.value;
-        }
-
-        @Override
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = Short.valueOf(sequence.toString());
@@ -148,11 +89,6 @@ public abstract class Number<T> implements Scalar<T> {
         @Override
         public ArrowType dataType() {
             return dt;
-        }
-
-        @Override
-        public Integer get() {
-            return this.value;
         }
 
         @Override
@@ -186,11 +122,6 @@ public abstract class Number<T> implements Scalar<T> {
         }
 
         @Override
-        public Long get() {
-            return this.value;
-        }
-
-        @Override
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = Long.valueOf(sequence.toString());
@@ -218,11 +149,6 @@ public abstract class Number<T> implements Scalar<T> {
         @Override
         public ArrowType dataType() {
             return dt;
-        }
-
-        @Override
-        public UByte get() {
-            return this.value;
         }
 
         @Override
@@ -256,11 +182,6 @@ public abstract class Number<T> implements Scalar<T> {
         }
 
         @Override
-        public UShort get() {
-            return this.value;
-        }
-
-        @Override
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = UShort.valueOf(sequence.toString());
@@ -288,11 +209,6 @@ public abstract class Number<T> implements Scalar<T> {
         @Override
         public ArrowType dataType() {
             return dt;
-        }
-
-        @Override
-        public UInteger get() {
-            return this.value;
         }
 
         @Override
@@ -326,11 +242,6 @@ public abstract class Number<T> implements Scalar<T> {
         }
 
         @Override
-        public ULong get() {
-            return this.value;
-        }
-
-        @Override
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = ULong.valueOf(sequence.toString());
@@ -361,11 +272,6 @@ public abstract class Number<T> implements Scalar<T> {
         }
 
         @Override
-        public Float get() {
-            return this.value;
-        }
-
-        @Override
         protected void setValue(Object value) throws ValidationException {
             if (value instanceof CharSequence sequence) {
                 this.value = Float.valueOf(sequence.toString());
@@ -378,6 +284,7 @@ public abstract class Number<T> implements Scalar<T> {
             throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
         }
     }
+
     public static class Float64 extends Number<Double> {
         protected static final ArrowType dt = new ArrowType.FloatingPoint(FloatingPointPrecision.DOUBLE);
 
@@ -392,11 +299,6 @@ public abstract class Number<T> implements Scalar<T> {
         @Override
         public ArrowType dataType() {
             return dt;
-        }
-
-        @Override
-        public Double get() {
-            return this.value;
         }
 
         @Override

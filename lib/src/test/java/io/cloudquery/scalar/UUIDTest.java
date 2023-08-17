@@ -31,7 +31,7 @@ public class UUIDTest {
                     new UUID(java.util.UUID.randomUUID());
                     new UUID(COMPLETE_BYTE_SEQUENCE);
 
-                    Scalar s = new UUID(java.util.UUID.randomUUID());
+                    Scalar<?> s = new UUID(java.util.UUID.randomUUID());
                     new UUID(s);
                 }
         );
@@ -90,7 +90,7 @@ public class UUIDTest {
             uuid.set(java.util.UUID.randomUUID());
             uuid.set(COMPLETE_BYTE_SEQUENCE);
 
-            Scalar s = new UUID(java.util.UUID.randomUUID());
+            Scalar<?> s = new UUID(java.util.UUID.randomUUID());
             uuid.set(s);
         });
     }
@@ -156,7 +156,7 @@ public class UUIDTest {
     @Test
     public void equalsContractVerification() {
         EqualsVerifier.forClass(UUID.class).
-                suppress(Warning.NONFINAL_FIELDS). // Scalar classes are intentionally mutable
+                suppress(Warning.NONFINAL_FIELDS). // Scalar<?> classes are intentionally mutable
                 verify();
     }
 }

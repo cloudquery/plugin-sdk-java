@@ -21,7 +21,7 @@ public class DateDayTest {
             new DateDay(1);
             new DateDay("1");
 
-            Scalar s = new DateDay(2);
+            Scalar<?> s = new DateDay(2);
             new DateDay(s);
         });
     }
@@ -73,7 +73,7 @@ public class DateDayTest {
             new DateDay(1);
             new DateDay("2");
 
-            Scalar s = new DateDay(1);
+            Scalar<?> s = new DateDay(1);
             dateDay.set(s);
         });
     }

@@ -5,14 +5,13 @@ import org.apache.commons.codec.binary.Base64;
 
 import java.util.Arrays;
 
-public class Binary implements Scalar<byte[]> {
-    protected byte[] value;
-
+public class Binary extends Scalar<byte[]> {
     public Binary() {
+        super();
     }
 
     public Binary(Object value) throws ValidationException {
-        this.set(value);
+        super(value);
     }
 
     @Override
@@ -24,32 +23,12 @@ public class Binary implements Scalar<byte[]> {
     }
 
     @Override
-    public boolean isValid() {
-        return this.value != null;
-    }
-
-    @Override
     public ArrowType dataType() {
         return ArrowType.Binary.INSTANCE;
     }
 
     @Override
-    public void set(Object value) throws ValidationException {
-        if (value == null) {
-            this.value = null;
-            return;
-        }
-
-        if (value instanceof Scalar<?> scalar) {
-            if (!scalar.isValid()) {
-                this.value = null;
-                return;
-            }
-
-            this.set(scalar.get());
-            return;
-        }
-
+    public void setValue(Object value) throws ValidationException {
         if (value instanceof byte[] bytes) {
             this.value = bytes;
             return;
@@ -69,19 +48,20 @@ public class Binary implements Scalar<byte[]> {
     }
 
     @Override
-    public byte[] get() {
-        return this.value;
-    }
-
-    @Override
     public boolean equals(Object other) {
-        if (other instanceof Binary o) {
-            if (this.value == null) {
-                return o.value == null;
-            }
-            return Arrays.equals(this.value, o.value);
+        if (!(other instanceof Binary o)) {
+            return false;
         }
-        return false;
+
+        if (!o.getClass().equals(this.getClass())) {
+            return false;
+        }
+
+        if (this.value == null) {
+            return o.value == null;
+        }
+
+        return Arrays.equals(this.value, o.value);
     }
 
     public static class LargeBinary extends Binary {
@@ -97,17 +77,6 @@ public class Binary implements Scalar<byte[]> {
         @Override
         public ArrowType dataType() {
             return ArrowType.LargeBinary.INSTANCE;
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            if (other instanceof LargeBinary o) {
-                if (this.value == null) {
-                    return o.value == null;
-                }
-                return Arrays.equals(this.value, o.value);
-            }
-            return false;
         }
     }
 }

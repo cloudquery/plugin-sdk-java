@@ -21,7 +21,7 @@ public class LargeBinaryTest {
             new Binary.LargeBinary("abc");
             new Binary.LargeBinary(new char[]{'a', 'b', 'c'});
 
-            Scalar s = new Binary.LargeBinary(new char[]{'a', 'b', 'c'});
+            Scalar<?> s = new Binary.LargeBinary(new char[]{'a', 'b', 'c'});
             new Binary.LargeBinary(s);
         });
     }
@@ -75,7 +75,7 @@ public class LargeBinaryTest {
             b.set("abc");
             b.set(new char[]{'a', 'b', 'c'});
 
-            Scalar s = new Binary.LargeBinary(new char[]{'a', 'b', 'c'});
+            Scalar<?> s = new Binary.LargeBinary(new char[]{'a', 'b', 'c'});
             b.set(s);
         });
     }
@@ -113,14 +113,14 @@ public class LargeBinaryTest {
         assertArrayEquals(new byte[]{105, -73}, (byte[]) b.get());
 
         assertDoesNotThrow(() -> {
-            Scalar s = new Binary.LargeBinary(new char[]{'a', 'b', 'c'});
+            Scalar<?> s = new Binary.LargeBinary(new char[]{'a', 'b', 'c'});
             b.set(s);
         });
         assertTrue(b.isValid());
         assertArrayEquals(new byte[]{105, -73}, (byte[]) b.get());
 
         assertDoesNotThrow(() -> {
-            Scalar s = new Binary.LargeBinary(new byte[]{'a', 'b', 'c'});
+            Scalar<?> s = new Binary.LargeBinary(new byte[]{'a', 'b', 'c'});
             b.set(s);
         });
         assertTrue(b.isValid());

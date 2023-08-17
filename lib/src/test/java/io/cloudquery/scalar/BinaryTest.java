@@ -21,7 +21,7 @@ public class BinaryTest {
             new Binary("abc");
             new Binary(new char[]{'a', 'b', 'c'});
 
-            Scalar s = new Binary(new char[]{'a', 'b', 'c'});
+            Scalar<?> s = new Binary(new char[]{'a', 'b', 'c'});
             new Binary(s);
         });
     }
@@ -75,7 +75,7 @@ public class BinaryTest {
             b.set("abc");
             b.set(new char[]{'a', 'b', 'c'});
 
-            Scalar s = new Binary(new char[]{'a', 'b', 'c'});
+            Scalar<?> s = new Binary(new char[]{'a', 'b', 'c'});
             b.set(s);
         });
     }
@@ -113,14 +113,14 @@ public class BinaryTest {
         assertArrayEquals(new byte[]{105, -73}, (byte[]) b.get());
 
         assertDoesNotThrow(() -> {
-            Scalar s = new Binary(new char[]{'a', 'b', 'c'});
+            Scalar<?> s = new Binary(new char[]{'a', 'b', 'c'});
             b.set(s);
         });
         assertTrue(b.isValid());
         assertArrayEquals(new byte[]{105, -73}, (byte[]) b.get());
 
         assertDoesNotThrow(() -> {
-            Scalar s = new Binary(new byte[]{'a', 'b', 'c'});
+            Scalar<?> s = new Binary(new byte[]{'a', 'b', 'c'});
             b.set(s);
         });
         assertTrue(b.isValid());

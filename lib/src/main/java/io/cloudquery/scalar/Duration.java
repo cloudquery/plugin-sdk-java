@@ -3,30 +3,16 @@ package io.cloudquery.scalar;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 
-public class Duration implements Scalar<java.time.Duration> {
-    protected java.time.Duration value;
-
+public class Duration extends Scalar<java.time.Duration> {
     // TODO: add more units support later
     private static final ArrowType dt = new ArrowType.Duration(TimeUnit.MILLISECOND);
 
     public Duration() {
+        super();
     }
 
     public Duration(Object value) throws ValidationException {
-        this.set(value);
-    }
-
-    @Override
-    public String toString() {
-        if (this.value != null) {
-            return this.value.toString();
-        }
-        return NULL_VALUE_STRING;
-    }
-
-    @Override
-    public boolean isValid() {
-        return this.value != null;
+        super(value);
     }
 
     @Override
@@ -35,27 +21,7 @@ public class Duration implements Scalar<java.time.Duration> {
     }
 
     @Override
-    public void set(Object value) throws ValidationException {
-        if (value == null) {
-            this.value = null;
-            return;
-        }
-
-        if (value instanceof Scalar<?> scalar) {
-            if (!scalar.isValid()) {
-                this.value = null;
-                return;
-            }
-
-            if (scalar instanceof Duration duration) {
-                this.value = duration.value;
-                return;
-            }
-
-            this.set(scalar.get());
-            return;
-        }
-
+    public void setValue(Object value) throws ValidationException {
         if (value instanceof java.time.Duration duration) {
             this.value = duration;
             return;
@@ -77,21 +43,5 @@ public class Duration implements Scalar<java.time.Duration> {
         }
 
         throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
-    }
-
-    @Override
-    public java.time.Duration get() {
-        return this.value;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other instanceof Duration o) {
-            if (this.value == null) {
-                return o.value == null;
-            }
-            return this.value.equals(o.value);
-        }
-        return false;
     }
 }

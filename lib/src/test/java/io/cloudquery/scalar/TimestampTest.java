@@ -26,7 +26,7 @@ public class TimestampTest {
             new Timestamp("2011-12-03T10:15:30+01:00[Europe/Paris]");
             new Timestamp(ZonedDateTime.now());
 
-            Scalar s = new Timestamp(ZonedDateTime.now());
+            Scalar<?> s = new Timestamp(ZonedDateTime.now());
             new Timestamp(s);
         });
     }
@@ -81,7 +81,7 @@ public class TimestampTest {
             timestamp.set("2011-12-03T10:15:30+01:00[Europe/Paris]");
             timestamp.set(ZonedDateTime.now());
 
-            Scalar s = new Timestamp(ZonedDateTime.now());
+            Scalar<?> s = new Timestamp(ZonedDateTime.now());
             timestamp.set(s);
         });
     }
