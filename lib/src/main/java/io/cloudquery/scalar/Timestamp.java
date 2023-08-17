@@ -5,7 +5,7 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 
 import java.time.*;
 
-public class Timestamp implements Scalar {
+public class Timestamp implements Scalar<ZonedDateTime> {
     public static final ZoneId zoneID = ZoneOffset.UTC;
 
     // TODO: add more units support later
@@ -94,20 +94,18 @@ public class Timestamp implements Scalar {
     }
 
     @Override
-    public Object get() {
-        return this.value; // null or proper value
+    public ZonedDateTime get() {
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == null) {
-            return false;
+        if (other instanceof Timestamp o) {
+            if (this.value == null) {
+                return o.value == null;
+            }
+            return this.value.equals(o.value);
         }
-
-        if (!(other instanceof Timestamp o)) {
-            return false;
-        }
-
-        return this.value == o.value || this.value.equals(o.value);
+        return false;
     }
 }

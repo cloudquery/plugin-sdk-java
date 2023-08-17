@@ -6,7 +6,7 @@ import org.apache.arrow.vector.types.pojo.ArrowType.FixedSizeBinary;
 import java.nio.ByteBuffer;
 import java.util.Objects;
 
-public class UUID implements Scalar {
+public class UUID implements Scalar<java.util.UUID> {
     private static final int BYTE_WIDTH = 16;
     private static final FixedSizeBinary dt = new FixedSizeBinary(BYTE_WIDTH);
 
@@ -17,6 +17,14 @@ public class UUID implements Scalar {
 
     public UUID(Object value) throws ValidationException {
         this.set(value);
+    }
+
+    @Override
+    public String toString() {
+        if (this.value != null) {
+            return this.value.toString();
+        }
+        return NULL_VALUE_STRING;
     }
 
     @Override
@@ -76,14 +84,17 @@ public class UUID implements Scalar {
     }
 
     @Override
-    public Object get() {
+    public java.util.UUID get() {
         return this.value;
     }
 
     @Override
     public final boolean equals(Object other) {
         if (other instanceof UUID o) {
-            return this.value == o.value || Objects.equals(this.value, o.value);
+            if (this.value == null) {
+                return o.value == null;
+            }
+            return this.value.equals(o.value);
         }
         return false;
     }
@@ -91,13 +102,5 @@ public class UUID implements Scalar {
     @Override
     public final int hashCode() {
         return Objects.hash(value);
-    }
-
-    @Override
-    public String toString() {
-        if (this.value != null) {
-            return this.value.toString();
-        }
-        return NULL_VALUE_STRING;
     }
 }

@@ -3,7 +3,7 @@ package io.cloudquery.scalar;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 
-public class Duration implements Scalar {
+public class Duration implements Scalar<java.time.Duration> {
     protected java.time.Duration value;
 
     // TODO: add more units support later
@@ -80,20 +80,18 @@ public class Duration implements Scalar {
     }
 
     @Override
-    public Object get() {
-        return this.value; // null or proper value
+    public java.time.Duration get() {
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == null) {
-            return false;
+        if (other instanceof Duration o) {
+            if (this.value == null) {
+                return o.value == null;
+            }
+            return this.value.equals(o.value);
         }
-
-        if (!(other instanceof Duration o)) {
-            return false;
-        }
-
-        return this.value == o.value || this.value.equals(o.value);
+        return false;
     }
 }
