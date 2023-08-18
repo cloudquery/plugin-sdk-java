@@ -15,6 +15,7 @@ import static org.apache.arrow.vector.types.pojo.ArrowType.ExtensionType;
 
 public class UUIDType extends ExtensionType {
     public static final int BYTE_WIDTH = 16;
+    public static final String EXTENSION_NAME = "uuid";
 
     @Override
     public ArrowType storageType() {
@@ -23,7 +24,7 @@ public class UUIDType extends ExtensionType {
 
     @Override
     public String extensionName() {
-        return "uuid";
+        return EXTENSION_NAME;
     }
 
     @Override
