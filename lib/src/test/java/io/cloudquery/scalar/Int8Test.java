@@ -7,111 +7,111 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class DateDayTest {
+public class Int8Test {
     @Test
     public void testNew() {
         assertDoesNotThrow(() -> {
-            new DateDay();
+            new Number.Int8();
         });
     }
 
     @Test
     public void testNewWithValidParam() {
         assertDoesNotThrow(() -> {
-            new DateDay(1);
-            new DateDay("1");
+            new Number.Int8(1);
+            new Number.Int8("1");
 
-            Scalar<?> s = new DateDay(2);
-            new DateDay(s);
+            Scalar<?> s = new Number.Int8(2);
+            new Number.Int8(s);
         });
     }
 
     @Test
     public void testNewWithInvalidParam() {
         assertThrows(ValidationException.class, () -> {
-            new DateDay(new char[]{'q'});
+            new Number.Int8(new char[]{'q'});
         });
     }
 
     @Test
     public void testToString() {
-        DateDay dateDay = new DateDay();
-        assertEquals(Scalar.NULL_VALUE_STRING, dateDay.toString());
+        Number.Int8 int8 = new Number.Int8();
+        assertEquals(Scalar.NULL_VALUE_STRING, int8.toString());
 
         assertDoesNotThrow(() -> {
-            dateDay.set("1");
+            int8.set("1");
         });
-        assertEquals("1", dateDay.toString());
+        assertEquals("1", int8.toString());
 
         assertDoesNotThrow(() -> {
-            dateDay.set(2);
+            int8.set(2);
         });
-        assertEquals("2", dateDay.toString());
+        assertEquals("2", int8.toString());
     }
 
     @Test
     public void testDataType() {
-        DateDay dateDay = new DateDay();
-        assertEquals(new ArrowType.Date(DateUnit.DAY), dateDay.dataType());
+        Number.Int8 int8 = new Number.Int8();
+        assertEquals(new ArrowType.Int(Byte.SIZE, true), int8.dataType());
     }
 
     @Test
     public void testIsValid() {
-        DateDay dateDay = new DateDay();
-        assertFalse(dateDay.isValid());
+        Number.Int8 int8 = new Number.Int8();
+        assertFalse(int8.isValid());
 
         assertDoesNotThrow(() -> {
-            dateDay.set("1");
+            int8.set("1");
         });
-        assertTrue(dateDay.isValid());
+        assertTrue(int8.isValid());
     }
 
     @Test
     public void testSet() {
-        DateDay dateDay = new DateDay();
+        Number.Int8 int8 = new Number.Int8();
         assertDoesNotThrow(() -> {
-            new DateDay(1);
-            new DateDay("2");
+            new Number.Int8(1);
+            new Number.Int8("2");
 
-            Scalar<?> s = new DateDay(1);
-            dateDay.set(s);
+            Scalar<?> s = new Number.Int8(1);
+            int8.set(s);
         });
     }
 
     @Test
     public void testSetWithInvalidParam() {
-        DateDay dateDay = new DateDay();
+        Number.Int8 int8 = new Number.Int8();
         assertThrows(ValidationException.class, () -> {
-            dateDay.set(new char[]{});
+            int8.set(new char[]{});
         });
     }
 
     @Test
     public void testGet() {
-        DateDay dateDay = new DateDay();
-        assertFalse(dateDay.isValid());
-        assertNull(dateDay.get());
+        Number.Int8 int8 = new Number.Int8();
+        assertFalse(int8.isValid());
+        assertNull(int8.get());
 
         assertDoesNotThrow(() -> {
-            dateDay.set(1);
+            int8.set(1);
         });
-        assertTrue(dateDay.isValid());
-        assertEquals(1, dateDay.get());
+        assertTrue(int8.isValid());
+        assertEquals((byte) 1, int8.get());
 
         assertDoesNotThrow(() -> {
-            dateDay.set("-1");
+            int8.set("-1");
         });
-        assertTrue(dateDay.isValid());
-        assertEquals(-1, dateDay.get());
+        assertTrue(int8.isValid());
+        assertEquals((byte) -1, int8.get());
     }
 
     @Test
     public void testEquals() {
-        DateDay a = new DateDay();
-        DateDay b = new DateDay();
+        Number.Int8 a = new Number.Int8();
+        Number.Int8 b = new Number.Int8();
         assertEquals(a, b);
         assertNotEquals(a, null);
-        assertNotEquals(a, new Binary()); // we can't cast Binary to DateDay
+        assertNotEquals(a, new Binary()); // we can't cast Binary to Number.Int8
         assertNotEquals(null, a);
 
         assertDoesNotThrow(() -> {
@@ -122,7 +122,7 @@ public class DateDayTest {
         assertDoesNotThrow(() -> {
             for (Object obj : new Object[]{null, 1, -1, "2"}) {
                 a.set(obj);
-                assertEquals(a, new DateDay(obj));
+                assertEquals(a, new Number.Int8(obj));
             }
         });
     }

@@ -26,7 +26,7 @@ public class TimestampTest {
             new Timestamp("2011-12-03T10:15:30+01:00[Europe/Paris]");
             new Timestamp(ZonedDateTime.now());
 
-            Scalar s = new Timestamp(ZonedDateTime.now());
+            Scalar<?> s = new Timestamp(ZonedDateTime.now());
             new Timestamp(s);
         });
     }
@@ -48,7 +48,7 @@ public class TimestampTest {
         });
         assertEquals("1970-01-01T00:00:00.001Z", timestamp.toString());
 
-        String ts = ZonedDateTime.now(ZoneOffset.UTC).toString();
+        java.lang.String ts = ZonedDateTime.now(ZoneOffset.UTC).toString();
         assertDoesNotThrow(() -> {
             timestamp.set(ts);
         });
@@ -81,7 +81,7 @@ public class TimestampTest {
             timestamp.set("2011-12-03T10:15:30+01:00[Europe/Paris]");
             timestamp.set(ZonedDateTime.now());
 
-            Scalar s = new Timestamp(ZonedDateTime.now());
+            Scalar<?> s = new Timestamp(ZonedDateTime.now());
             timestamp.set(s);
         });
     }

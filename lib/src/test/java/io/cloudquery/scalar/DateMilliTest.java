@@ -21,7 +21,7 @@ public class DateMilliTest {
             new DateMilli(1);
             new DateMilli("1");
 
-            Scalar s = new DateMilli(2);
+            Scalar<?> s = new DateMilli(2);
             new DateMilli(s);
         });
     }
@@ -73,7 +73,7 @@ public class DateMilliTest {
             new DateMilli(1);
             new DateMilli("2");
 
-            Scalar s = new DateMilli(1);
+            Scalar<?> s = new DateMilli(1);
             dateMilli.set(s);
         });
     }

@@ -20,7 +20,7 @@ public class BoolTest {
             new Bool(true);
             new Bool("true");
 
-            Scalar s = new Bool(true);
+            Scalar<?> s = new Bool(true);
             new Bool(s);
         });
     }
@@ -73,7 +73,7 @@ public class BoolTest {
             new Bool(true);
             new Bool("true");
 
-            Scalar s = new Bool(true);
+            Scalar<?> s = new Bool(true);
             b.set(s);
         });
     }

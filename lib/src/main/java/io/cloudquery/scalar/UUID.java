@@ -4,32 +4,17 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.types.pojo.ArrowType.FixedSizeBinary;
 
 import java.nio.ByteBuffer;
-import java.util.Objects;
 
-public class UUID implements Scalar<java.util.UUID> {
+public class UUID extends Scalar<java.util.UUID> {
     private static final int BYTE_WIDTH = 16;
     private static final FixedSizeBinary dt = new FixedSizeBinary(BYTE_WIDTH);
 
-    private java.util.UUID value;
-
     public UUID() {
+        super();
     }
 
     public UUID(Object value) throws ValidationException {
-        this.set(value);
-    }
-
-    @Override
-    public String toString() {
-        if (this.value != null) {
-            return this.value.toString();
-        }
-        return NULL_VALUE_STRING;
-    }
-
-    @Override
-    public boolean isValid() {
-        return this.value != null;
+        super(value);
     }
 
     @Override
@@ -38,27 +23,7 @@ public class UUID implements Scalar<java.util.UUID> {
     }
 
     @Override
-    public void set(Object value) throws ValidationException {
-        if (value == null) {
-            this.value = null;
-            return;
-        }
-
-        if (value instanceof Scalar<?> scalar) {
-            if (!scalar.isValid()) {
-                this.value = null;
-                return;
-            }
-
-            if (scalar instanceof UUID uuid) {
-                this.value = uuid.value;
-                return;
-            }
-
-            this.set(scalar.get());
-            return;
-        }
-
+    public void setValue(Object value) throws ValidationException {
         if (value instanceof java.util.UUID uuid) {
             this.value = uuid;
             return;
@@ -81,26 +46,5 @@ public class UUID implements Scalar<java.util.UUID> {
         }
 
         throw new ValidationException(ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
-    }
-
-    @Override
-    public java.util.UUID get() {
-        return this.value;
-    }
-
-    @Override
-    public final boolean equals(Object other) {
-        if (other instanceof UUID o) {
-            if (this.value == null) {
-                return o.value == null;
-            }
-            return this.value.equals(o.value);
-        }
-        return false;
-    }
-
-    @Override
-    public final int hashCode() {
-        return Objects.hash(value);
     }
 }
