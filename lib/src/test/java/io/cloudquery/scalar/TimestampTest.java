@@ -48,7 +48,7 @@ public class TimestampTest {
         });
         assertEquals("1970-01-01T00:00:00.001Z", timestamp.toString());
 
-        String ts = ZonedDateTime.now(ZoneOffset.UTC).toString();
+        java.lang.String ts = ZonedDateTime.now(ZoneOffset.UTC).toString();
         assertDoesNotThrow(() -> {
             timestamp.set(ts);
         });

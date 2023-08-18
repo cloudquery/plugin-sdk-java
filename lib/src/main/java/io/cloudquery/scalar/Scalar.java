@@ -18,7 +18,7 @@ public abstract class Scalar<T> {
 
     public abstract ArrowType dataType();
 
-    public String toString() {
+    public java.lang.String toString() {
         if (this.value != null) {
             return this.value.toString();
         }
@@ -72,5 +72,5 @@ public abstract class Scalar<T> {
         return Objects.hash(value);
     }
 
-    public static final String NULL_VALUE_STRING = "(null)";
+    public static final java.lang.String NULL_VALUE_STRING = "(null)";
 }

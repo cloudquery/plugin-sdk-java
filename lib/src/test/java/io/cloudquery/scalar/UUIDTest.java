@@ -145,7 +145,7 @@ public class UUIDTest {
 
     @Test
     public void testCorrectEndianBehaviour() {
-        String expectUUID = "00010203-0405-0607-0809-0a0b0c0d0e0f";
+        java.lang.String expectUUID = "00010203-0405-0607-0809-0a0b0c0d0e0f";
 
         UUID uuid = new UUID();
         assertDoesNotThrow(() -> {

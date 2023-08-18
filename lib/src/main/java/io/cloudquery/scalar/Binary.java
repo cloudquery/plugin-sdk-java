@@ -15,7 +15,7 @@ public class Binary extends Scalar<byte[]> {
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         if (this.value != null) {
             return Base64.encodeBase64String(this.value);
         }
@@ -40,7 +40,7 @@ public class Binary extends Scalar<byte[]> {
         }
 
         if (value instanceof char[] chars) {
-            this.value = Base64.decodeBase64(new String(chars));
+            this.value = Base64.decodeBase64(new java.lang.String(chars));
             return;
         }
 
