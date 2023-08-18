@@ -8,6 +8,7 @@ import org.apache.arrow.vector.types.pojo.FieldType;
 
 public class JSONType extends ExtensionType {
     public static final JSONType INSTANCE = new JSONType();
+    public static final String EXTENSION_NAME = "json";
 
     @Override
     public ArrowType storageType() {
@@ -16,7 +17,7 @@ public class JSONType extends ExtensionType {
 
     @Override
     public String extensionName() {
-        return "json";
+        return EXTENSION_NAME;
     }
 
     @Override
