@@ -7,6 +7,7 @@ import org.apache.arrow.vector.types.pojo.FieldType;
 
 public class InetType extends ArrowType.ExtensionType {
     public static final InetType INSTANCE = new InetType();
+    public static final String EXTENSION_NAME = "inet";
 
     @Override
     public ArrowType storageType() {
@@ -15,7 +16,7 @@ public class InetType extends ArrowType.ExtensionType {
 
     @Override
     public String extensionName() {
-        return "inet";
+        return EXTENSION_NAME;
     }
 
     @Override
