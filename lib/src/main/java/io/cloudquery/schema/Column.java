@@ -29,6 +29,7 @@ public class Column {
             name("_cq_parent_id").
             type(new UUIDType()).
             description("Internal CQ ID of the parent row").
+            resolver(new ParentCQUUIDResolver()).
             ignoreInTests(true).
             build();
 
