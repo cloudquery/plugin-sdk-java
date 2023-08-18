@@ -81,16 +81,10 @@ public class ServeCommand implements Callable<Integer> {
         LoggerContext context = this.initLogger();
 
         try {
-            // Configure open telemetry
-            // Configure test listener
-            // Configure gRPC server
             Server server = Grpc.newServerBuilderForPort(address.port(), InsecureServerCredentials.create())
                     .addService(new DiscoverServer(DISCOVERY_VERSIONS)).addService(new PluginServer(plugin))
                     .addService(ProtoReflectionService.newInstance()).executor(Executors.newFixedThreadPool(10))
                     .build();
-            // Configure sentry
-            // Log we are listening on address and port
-            // Run gRPC server and block
             server.start();
             logger.info("Started server on {}:{}", address.host(), address.port());
             server.awaitTermination();
