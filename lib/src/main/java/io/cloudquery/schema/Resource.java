@@ -1,14 +1,40 @@
 package io.cloudquery.schema;
 
+import io.cloudquery.scalar.Scalar;
+import io.cloudquery.scalar.ValidationException;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public class Resource {
     private Object item;
+    private Resource parent;
+    private Table table;
 
+    private final List<Scalar<?>> data;
 
-    public void set(String columnName, Object value) {
+    @Builder(toBuilder = true)
+    public Resource(Table table, Resource parent, Object item) {
+        this.item = item;
+        this.parent = parent;
+        this.table = table != null ? table : Table.builder().build();
+        this.data = new ArrayList<>();
+
+        for (Column column : this.table.getColumns()) {
+            this.data.add(Scalar.fromArrowType(column.getType()));
+        }
+    }
+
+    public void set(String columnName, Object value) throws ValidationException {
+        int index = table.indexOfColumn(columnName);
+        this.data.get(index).set(value);
+    }
+
+    public Scalar<?> get(String columnName) {
+        int index = table.indexOfColumn(columnName);
+        return this.data.get(index);
     }
 }

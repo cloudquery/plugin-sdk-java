@@ -1,5 +1,6 @@
 package io.cloudquery.transformers;
 
+import io.cloudquery.scalar.ValidationException;
 import io.cloudquery.schema.Column;
 import io.cloudquery.schema.Resource;
 import io.cloudquery.transformers.ResolverTransformer.DefaulResolverTransformer;
@@ -36,7 +37,7 @@ class DefaultResolverTransformerTest {
     }
 
     @Test
-    public void shouldTransformCustomFieldNamesFromResource() throws TransformerException {
+    public void shouldTransformCustomFieldNamesFromResource() throws TransformerException, ValidationException {
         Column targetColumn = Column.builder().name("id").build();
 
         transformer.transform(null, "myCustomID").resolve(null, resource, targetColumn);

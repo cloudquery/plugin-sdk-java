@@ -154,6 +154,15 @@ public class Table {
         }
     }
 
+    public int indexOfColumn(String columnName) {
+        for (int index = 0; index < columns.size(); index++) {
+            if (columns.get(index).getName().equals(columnName)) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
     public List<String> primaryKeys() {
         return columns.stream().filter(Column::isPrimaryKey).map(Column::getName).toList();
     }
