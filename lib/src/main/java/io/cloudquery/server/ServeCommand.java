@@ -9,20 +9,28 @@ import io.grpc.InsecureServerCredentials;
 import io.grpc.Server;
 import io.grpc.protobuf.services.ProtoReflectionService;
 import lombok.ToString;
-
+import picocli.CommandLine.Command;
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static picocli.CommandLine.Command;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.layout.JsonLayout;
+import org.apache.logging.log4j.core.layout.PatternLayout;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.appender.ConsoleAppender;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.config.ConfigurationFactory;
+import org.apache.logging.log4j.core.config.LoggerConfig;
+
 import static picocli.CommandLine.Option;
 
-@Command
+@Command(name = "serve", description = "start plugin gRPC server")
 @ToString
 public class ServeCommand implements Callable<Integer> {
-    private static final Logger logger = Logger.getLogger(ServeCommand.class.getName());
+    private static Logger logger;
     public static final List<Integer> DISCOVERY_VERSIONS = List.of(3);
 
     @Option(names = "--address", converter = AddressConverter.class, description = "address to serve on. can be tcp: localhost:7777 or unix socket: `/tmp/plugin.rpc.sock` (default \"${DEFAULT-VALUE}\")")
@@ -52,31 +60,47 @@ public class ServeCommand implements Callable<Integer> {
         this.plugin = plugin;
     }
 
+    private LoggerContext initLogger() {
+        ConsoleAppender appender = ConsoleAppender.createDefaultAppenderForLayout(
+                this.logFormat == "text" ? PatternLayout.createDefaultLayout() : JsonLayout.createDefaultLayout());
+
+        Configuration configuration = ConfigurationFactory.newConfigurationBuilder().build();
+        configuration.addAppender(appender);
+        LoggerConfig loggerConfig = new LoggerConfig("io.cloudquery", Level.getLevel(logLevel), false);
+        loggerConfig.addAppender(appender, null, null);
+        configuration.addLogger("io.cloudquery", loggerConfig);
+        LoggerContext context = new LoggerContext(ServeCommand.class.getName() + "Context");
+        context.start(configuration);
+
+        logger = context.getLogger(ServeCommand.class.getName());
+        return context;
+    }
+
     @Override
-    public Integer call() throws Exception {
-        // Initialize a logger
+    public Integer call() {
+        LoggerContext context = this.initLogger();
 
-        // Configure open telemetry
-
-        // Configure test listener
-
-        // Configure gRPC server
-        Server server = Grpc.newServerBuilderForPort(address.port(), InsecureServerCredentials.create()).
-                addService(new DiscoverServer(DISCOVERY_VERSIONS)).
-                addService(new PluginServer(plugin)).
-                addService(ProtoReflectionService.newInstance()).
-                executor(Executors.newFixedThreadPool(10)).
-                build();
-
-        // Configure sentry
-
-        // Log we are listening on address and port
-
-        // Run gRPC server and block
-        server.start();
-        logger.log(Level.INFO, "Started server on {0}", address);
-        server.awaitTermination();
-        return 0;
+        try {
+            // Configure open telemetry
+            // Configure test listener
+            // Configure gRPC server
+            Server server = Grpc.newServerBuilderForPort(address.port(), InsecureServerCredentials.create())
+                    .addService(new DiscoverServer(DISCOVERY_VERSIONS)).addService(new PluginServer(plugin))
+                    .addService(ProtoReflectionService.newInstance()).executor(Executors.newFixedThreadPool(10))
+                    .build();
+            // Configure sentry
+            // Log we are listening on address and port
+            // Run gRPC server and block
+            server.start();
+            logger.info("Started server on {}:{}", address.host(), address.port());
+            server.awaitTermination();
+            return 0;
+        } catch (IOException | InterruptedException e) {
+            logger.error("Failed to start server", e);
+            return 1;
+        } finally {
+            context.close();
+        }
     }
 
 }

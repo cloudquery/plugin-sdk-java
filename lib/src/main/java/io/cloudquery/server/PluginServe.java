@@ -6,28 +6,14 @@ import lombok.Builder;
 import lombok.NonNull;
 import picocli.CommandLine;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Builder(access = AccessLevel.PUBLIC)
 public class PluginServe {
     @NonNull
     private final Plugin plugin;
     @Builder.Default
-    private List<String> args = new ArrayList<>();
-    private boolean destinationV0V1Server;
-    private String sentryDSN;
-    private boolean testListener;
-    //TODO: Allow a test listener to be passed in
-    // 	testListenerConn      *bufconn.Listener
+    private String[] args = new String[] {};
 
-    public void Serve() throws ServerException {
-        int exitStatus = new CommandLine(new RootCommand()).
-                addSubcommand("serve", new ServeCommand(plugin)).
-                addSubcommand("doc", new DocCommand()).
-                execute(args.toArray(new String[]{}));
-        if (exitStatus != 0) {
-            throw new ServerException("error processing command line exit status = "+exitStatus);
-        }
+    public int Serve() {
+        return new CommandLine(new RootCommand()).addSubcommand(new ServeCommand(plugin)).execute(args);
     }
 }
