@@ -1,6 +1,7 @@
 package io.cloudquery.schema;
 
 import io.cloudquery.glob.Glob;
+import io.cloudquery.schema.Column.ColumnBuilder;
 import io.cloudquery.transformers.TransformerException;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +18,6 @@ import java.util.function.Predicate;
 @Builder(toBuilder = true)
 @Getter
 public class Table {
-
     public interface Transform {
         void transformTable(Table table) throws TransformerException;
     }
@@ -113,7 +113,7 @@ public class Table {
     private List<Column> columns = new ArrayList<>();
 
     @Builder.Default
-    private List<Table> relations = Collections.emptyList();
+    private List<Table> relations = new ArrayList<>();
 
     private Transform transform;
 
@@ -121,6 +121,30 @@ public class Table {
         if (transform != null) {
             transform.transformTable(this);
         }
+    }
+
+    public void addCQIDs() {
+        boolean havePrimaryKeys = !primaryKeys().isEmpty();
+        ColumnBuilder cqIdColumnBuilder = Column.CQ_ID_COLUMN.toBuilder();
+        if (!havePrimaryKeys) {
+            cqIdColumnBuilder.primaryKey(true);
+        }
+
+        List<Column> newColumns = List.of(cqIdColumnBuilder.build(), Column.CQ_PARENT_ID_COLUMN);
+        for (int i = 0; i < newColumns.size(); i++) {
+            columns.add(i, newColumns.get(i));
+        }
+
+        for (Table relation : relations) {
+            relation.addCQIDs();
+        }
+    }
+
+    public List<String> primaryKeys() {
+        return columns.stream().
+                filter(Column::isPrimaryKey).
+                map(Column::getName).
+                toList();
     }
 
     private Optional<Table> filterDfs(boolean parentMatched, Predicate<Table> include, Predicate<Table> exclude, boolean skipDependentTables) {
