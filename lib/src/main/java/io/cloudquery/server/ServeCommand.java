@@ -88,6 +88,7 @@ public class ServeCommand implements Callable<Integer> {
     context.start(configuration);
 
     logger = context.getLogger(ServeCommand.class.getName());
+    this.plugin.setLogger(logger);
     return context;
   }
 

@@ -2,6 +2,7 @@ package io.cloudquery.plugin;
 
 import io.cloudquery.schema.SchemaException;
 import io.cloudquery.schema.Table;
+import io.grpc.stub.StreamObserver;
 import java.util.List;
 import lombok.Getter;
 import lombok.NonNull;
@@ -22,7 +23,14 @@ public abstract class Plugin {
       List<String> includeList, List<String> skipList, boolean skipDependentTables)
       throws SchemaException;
 
-  public abstract void sync();
+  public abstract void sync(
+      List<String> includeList,
+      List<String> skipList,
+      boolean skipDependentTables,
+      boolean deterministicCqId,
+      BackendOptions backendOptions,
+      StreamObserver<io.cloudquery.plugin.v3.Sync.Response> syncStream)
+      throws SchemaException;
 
   public abstract void read();
 

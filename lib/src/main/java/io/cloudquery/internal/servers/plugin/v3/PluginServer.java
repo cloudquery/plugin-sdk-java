@@ -1,20 +1,14 @@
 package io.cloudquery.internal.servers.plugin.v3;
 
 import com.google.protobuf.ByteString;
+import io.cloudquery.plugin.BackendOptions;
 import io.cloudquery.plugin.Plugin;
 import io.cloudquery.plugin.v3.PluginGrpc.PluginImplBase;
 import io.cloudquery.plugin.v3.Write;
 import io.cloudquery.schema.Table;
 import io.grpc.stub.StreamObserver;
-import java.io.ByteArrayOutputStream;
-import java.nio.channels.Channels;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.arrow.memory.BufferAllocator;
-import org.apache.arrow.memory.RootAllocator;
-import org.apache.arrow.vector.VectorSchemaRoot;
-import org.apache.arrow.vector.ipc.ArrowStreamWriter;
-import org.apache.arrow.vector.types.pojo.Schema;
 
 public class PluginServer extends PluginImplBase {
   private final Plugin plugin;
@@ -64,18 +58,7 @@ public class PluginServer extends PluginImplBase {
               request.getSkipDependentTables());
       List<ByteString> byteStrings = new ArrayList<>();
       for (Table table : tables) {
-        try (BufferAllocator bufferAllocator = new RootAllocator()) {
-          Schema schema = table.toArrowSchema();
-          VectorSchemaRoot schemaRoot = VectorSchemaRoot.create(schema, bufferAllocator);
-          try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-            try (ArrowStreamWriter writer =
-                new ArrowStreamWriter(schemaRoot, null, Channels.newChannel(out))) {
-              writer.start();
-              writer.end();
-              byteStrings.add(ByteString.copyFrom(out.toByteArray()));
-            }
-          }
-        }
+        byteStrings.add(table.encode());
       }
       responseObserver.onNext(
           io.cloudquery.plugin.v3.GetTables.Response.newBuilder()
@@ -91,9 +74,18 @@ public class PluginServer extends PluginImplBase {
   public void sync(
       io.cloudquery.plugin.v3.Sync.Request request,
       StreamObserver<io.cloudquery.plugin.v3.Sync.Response> responseObserver) {
-    plugin.sync();
-    responseObserver.onNext(io.cloudquery.plugin.v3.Sync.Response.newBuilder().build());
-    responseObserver.onCompleted();
+    try {
+      plugin.sync(
+          request.getTablesList(),
+          request.getSkipTablesList(),
+          request.getSkipDependentTables(),
+          request.getDeterministicCqId(),
+          new BackendOptions(
+              request.getBackend().getTableName(), request.getBackend().getConnection()),
+          responseObserver);
+    } catch (Exception e) {
+      responseObserver.onError(e);
+    }
   }
 
   @Override
