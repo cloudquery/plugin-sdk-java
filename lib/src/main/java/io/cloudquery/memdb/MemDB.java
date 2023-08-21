@@ -29,8 +29,10 @@ public class MemDB extends Plugin {
   }
 
   @Override
-  public List<Table> tables() throws SchemaException {
-    return Table.filterDFS(allTables, List.of("*"), List.of(), false);
+  public List<Table> tables(
+      List<String> includeList, List<String> skipList, boolean skipDependentTables)
+      throws SchemaException {
+    return Table.filterDFS(allTables, includeList, skipList, skipDependentTables);
   }
 
   @Override
