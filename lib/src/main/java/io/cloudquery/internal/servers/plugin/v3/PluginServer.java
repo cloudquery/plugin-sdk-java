@@ -57,7 +57,11 @@ public class PluginServer extends PluginImplBase {
       io.cloudquery.plugin.v3.GetTables.Request request,
       StreamObserver<io.cloudquery.plugin.v3.GetTables.Response> responseObserver) {
     try {
-      List<Table> tables = plugin.tables();
+      List<Table> tables =
+          plugin.tables(
+              request.getTablesList(),
+              request.getSkipTablesList(),
+              request.getSkipDependentTables());
       List<ByteString> byteStrings = new ArrayList<>();
       for (Table table : tables) {
         try (BufferAllocator bufferAllocator = new RootAllocator()) {

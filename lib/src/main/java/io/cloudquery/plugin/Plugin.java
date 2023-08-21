@@ -18,7 +18,9 @@ public abstract class Plugin {
 
   public abstract void init();
 
-  public abstract List<Table> tables() throws SchemaException;
+  public abstract List<Table> tables(
+      List<String> includeList, List<String> skipList, boolean skipDependentTables)
+      throws SchemaException;
 
   public abstract void sync();
 
