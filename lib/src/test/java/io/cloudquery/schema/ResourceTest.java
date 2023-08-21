@@ -17,19 +17,13 @@ public class ResourceTest {
 
     @Test
     public void shouldBuildWithNoErrors() {
-        assertDoesNotThrow(() -> Resource.builder().build());
+        assertDoesNotThrow(() -> Resource.builder().table(Table.builder().name("").build()).build());
     }
 
     @Test
     public void shouldCreateScalarData() {
-        Column column1 = Column.builder().
-                name("test_column1").
-                type(new UUIDType()).
-                build();
-        Column column2 = Column.builder().
-                name("test_column2").
-                type(ArrowType.Utf8.INSTANCE).
-                build();
+        Column column1 = Column.builder().name("test_column1").type(new UUIDType()).build();
+        Column column2 = Column.builder().name("test_column2").type(ArrowType.Utf8.INSTANCE).build();
         Table table = Table.builder().name("test").columns(List.of(column1, column2)).build();
 
         Resource resource = Resource.builder().table(table).build();
@@ -40,10 +34,7 @@ public class ResourceTest {
 
     @Test
     public void shouldSetAndGetDataTypes() throws ValidationException {
-        Column column1 = Column.builder().
-                name("test_column1").
-                type(new UUIDType()).
-                build();
+        Column column1 = Column.builder().name("test_column1").type(new UUIDType()).build();
         Table table = Table.builder().name("test").columns(List.of(column1)).build();
 
         Resource resource = Resource.builder().table(table).build();

@@ -78,9 +78,7 @@ public class ServeCommand implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        LoggerContext context = this.initLogger();
-
-        try {
+        try (LoggerContext context = this.initLogger()) {
             Server server = Grpc.newServerBuilderForPort(address.port(), InsecureServerCredentials.create())
                     .addService(new DiscoverServer(DISCOVERY_VERSIONS)).addService(new PluginServer(plugin))
                     .addService(ProtoReflectionService.newInstance()).executor(Executors.newFixedThreadPool(10))
@@ -92,8 +90,6 @@ public class ServeCommand implements Callable<Integer> {
         } catch (IOException | InterruptedException e) {
             logger.error("Failed to start server", e);
             return 1;
-        } finally {
-            context.close();
         }
     }
 

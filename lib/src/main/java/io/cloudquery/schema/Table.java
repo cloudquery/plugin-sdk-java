@@ -200,7 +200,7 @@ public class Table {
         return Optional.empty();
     }
 
-    public byte[] encodeToArrowSchema() {
+    public Schema toArrowSchema() {
         Field[] fields = new Field[columns.size()];
         for (int i = 0; i < columns.size(); i++) {
             Column column = columns.get(i);
@@ -219,6 +219,6 @@ public class Table {
             metadata.put("cq:table_depends_on", parent.getName());
         }
         Schema schema = new Schema(asList(fields), metadata);
-        return schema.toByteArray();
+        return schema;
     }
 }

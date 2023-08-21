@@ -5,10 +5,16 @@ import io.cloudquery.schema.Table;
 import io.cloudquery.plugin.v3.Write;
 import io.grpc.stub.StreamObserver;
 
+import java.io.ByteArrayOutputStream;
+import java.nio.channels.Channels;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.primitives.Bytes;
+import org.apache.arrow.memory.BufferAllocator;
+import org.apache.arrow.memory.RootAllocator;
+import org.apache.arrow.vector.VectorSchemaRoot;
+import org.apache.arrow.vector.ipc.ArrowStreamWriter;
+import org.apache.arrow.vector.types.pojo.Schema;
 import com.google.protobuf.ByteString;
 
 import io.cloudquery.plugin.Plugin;
@@ -51,8 +57,18 @@ public class PluginServer extends PluginImplBase {
             List<Table> tables = plugin.tables();
             List<ByteString> byteStrings = new ArrayList<>();
             for (Table table : tables) {
-                byteStrings.add(ByteString.copyFrom(table.encodeToArrowSchema()));
-
+                try (BufferAllocator bufferAllocator = new RootAllocator()) {
+                    Schema schema = table.toArrowSchema();
+                    VectorSchemaRoot schemaRoot = VectorSchemaRoot.create(schema, bufferAllocator);
+                    try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+                        try (ArrowStreamWriter writer = new ArrowStreamWriter(schemaRoot, null,
+                                Channels.newChannel(out))) {
+                            writer.start();
+                            writer.end();
+                            byteStrings.add(ByteString.copyFrom(out.toByteArray()));
+                        }
+                    }
+                }
             }
             responseObserver
                     .onNext(io.cloudquery.plugin.v3.GetTables.Response.newBuilder().addAllTables(byteStrings).build());

@@ -4,6 +4,7 @@ import io.cloudquery.scalar.Scalar;
 import io.cloudquery.scalar.ValidationException;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +18,10 @@ public class Resource {
     private final List<Scalar<?>> data;
 
     @Builder(toBuilder = true)
-    public Resource(Table table, Resource parent, Object item) {
+    public Resource(@NonNull Table table, Resource parent, Object item) {
         this.item = item;
         this.parent = parent;
-        this.table = table != null ? table : Table.builder().build();
+        this.table = table;
         this.data = new ArrayList<>();
 
         for (Column column : this.table.getColumns()) {
