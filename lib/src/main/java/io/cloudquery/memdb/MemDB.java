@@ -1,9 +1,12 @@
 package io.cloudquery.memdb;
 
+import io.cloudquery.plugin.BackendOptions;
 import io.cloudquery.plugin.Plugin;
+import io.cloudquery.scheduler.Scheduler;
 import io.cloudquery.schema.Column;
 import io.cloudquery.schema.SchemaException;
 import io.cloudquery.schema.Table;
+import io.grpc.stub.StreamObserver;
 import java.util.List;
 import org.apache.arrow.vector.types.pojo.ArrowType.Utf8;
 
@@ -36,9 +39,22 @@ public class MemDB extends Plugin {
   }
 
   @Override
-  public void sync() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'Sync'");
+  public void sync(
+      List<String> includeList,
+      List<String> skipList,
+      boolean skipDependentTables,
+      boolean deterministicCqId,
+      BackendOptions backendOptions,
+      StreamObserver<io.cloudquery.plugin.v3.Sync.Response> syncStream)
+      throws SchemaException {
+    List<Table> filtered = Table.filterDFS(allTables, includeList, skipList, skipDependentTables);
+    Scheduler.builder()
+        .tables(filtered)
+        .syncStream(syncStream)
+        .deterministicCqId(deterministicCqId)
+        .logger(getLogger())
+        .build()
+        .sync();
   }
 
   @Override
