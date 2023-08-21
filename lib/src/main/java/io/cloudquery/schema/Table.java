@@ -5,6 +5,7 @@ import io.cloudquery.schema.Column.ColumnBuilder;
 import io.cloudquery.transformers.TransformerException;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -14,6 +15,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
+
+import org.apache.arrow.vector.types.pojo.Field;
+import org.apache.arrow.vector.types.pojo.Schema;
+
+import static java.util.Arrays.asList;
 
 @Builder(toBuilder = true)
 @Getter
@@ -34,7 +40,8 @@ public class Table {
         return flattenMap.values().stream().toList();
     }
 
-    public static List<Table> filterDFS(List<Table> tables, List<String> includeConfiguration, List<String> skipConfiguration, boolean skipDependentTables) throws SchemaException {
+    public static List<Table> filterDFS(List<Table> tables, List<String> includeConfiguration,
+            List<String> skipConfiguration, boolean skipDependentTables) throws SchemaException {
         List<Table> flattenedTables = flattenTables(tables);
         for (String includePattern : includeConfiguration) {
             boolean includeMatch = false;
@@ -45,7 +52,8 @@ public class Table {
                 }
             }
             if (!includeMatch) {
-                throw new SchemaException("table configuration includes a pattern \"" + includePattern + "\" with no matches");
+                throw new SchemaException(
+                        "table configuration includes a pattern \"" + includePattern + "\" with no matches");
             }
         }
         for (String excludePattern : skipConfiguration) {
@@ -57,7 +65,8 @@ public class Table {
                 }
             }
             if (!excludeMatch) {
-                throw new SchemaException("skip configuration includes a pattern \"" + excludePattern + "\" with no matches");
+                throw new SchemaException(
+                        "skip configuration includes a pattern \"" + excludePattern + "\" with no matches");
             }
         }
 
@@ -82,11 +91,13 @@ public class Table {
         return filterDFSFunc(tables, include, exclude, skipDependentTables);
     }
 
-    private static List<Table> filterDFSFunc(List<Table> tables, Predicate<Table> include, Predicate<Table> exclude, boolean skipDependentTables) {
+    private static List<Table> filterDFSFunc(List<Table> tables, Predicate<Table> include, Predicate<Table> exclude,
+            boolean skipDependentTables) {
         List<Table> filteredTables = new ArrayList<>();
         for (Table table : tables) {
             Table filteredTable = table.toBuilder().parent(null).build();
-            Optional<Table> optionalFilteredTable = filteredTable.filterDfs(false, include, exclude, skipDependentTables);
+            Optional<Table> optionalFilteredTable = filteredTable.filterDfs(false, include, exclude,
+                    skipDependentTables);
             optionalFilteredTable.ifPresent(filteredTables::add);
         }
         return filteredTables;
@@ -106,7 +117,10 @@ public class Table {
         return depth;
     }
 
+    @NonNull
     private String name;
+    private String title;
+    private String description;
     @Setter
     private Table parent;
     @Builder.Default
@@ -150,13 +164,11 @@ public class Table {
     }
 
     public List<String> primaryKeys() {
-        return columns.stream().
-                filter(Column::isPrimaryKey).
-                map(Column::getName).
-                toList();
+        return columns.stream().filter(Column::isPrimaryKey).map(Column::getName).toList();
     }
 
-    private Optional<Table> filterDfs(boolean parentMatched, Predicate<Table> include, Predicate<Table> exclude, boolean skipDependentTables) {
+    private Optional<Table> filterDfs(boolean parentMatched, Predicate<Table> include, Predicate<Table> exclude,
+            boolean skipDependentTables) {
         if (exclude.test(this)) {
             return Optional.empty();
         }
@@ -186,5 +198,27 @@ public class Table {
             }
         }
         return Optional.empty();
+    }
+
+    public Schema toArrowSchema() {
+        Field[] fields = new Field[columns.size()];
+        for (int i = 0; i < columns.size(); i++) {
+            Column column = columns.get(i);
+            Field field = Field.nullable(column.getName(), column.getType());
+            fields[i] = field;
+        }
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("cq:table_name", name);
+        if (title != null) {
+            metadata.put("cq:table_title", title);
+        }
+        if (description != null) {
+            metadata.put("cq:table_description", description);
+        }
+        if (parent != null) {
+            metadata.put("cq:table_depends_on", parent.getName());
+        }
+        Schema schema = new Schema(asList(fields), metadata);
+        return schema;
     }
 }

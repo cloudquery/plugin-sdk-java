@@ -4,6 +4,10 @@ plugins {
     id "maven-publish"
 }
 
+ext {
+   javaMainClass = "io.cloudquery.MainClass"
+}
+
 group 'io.cloudquery'
 // x-release-please-start-version
 version = '0.0.1'
@@ -34,6 +38,7 @@ dependencies {
     implementation "io.grpc:grpc-services:1.57.1"
     implementation "io.grpc:grpc-testing:1.57.1"
     implementation "io.cloudquery:plugin-pb-java:0.0.5"
+    implementation "org.apache.arrow:arrow-memory-core:12.0.1"
     implementation "org.apache.arrow:arrow-vector:12.0.1"
 
     implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
@@ -44,11 +49,12 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.10.0')
     testImplementation('org.mockito:mockito-core:5.4.0')
     testImplementation('org.mockito:mockito-junit-jupiter:5.4.0')
-    testImplementation('org.apache.arrow:arrow-memory-netty:12.0.1')
     testImplementation('nl.jqno.equalsverifier:equalsverifier:3.15')
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.10.0')
 
     testImplementation 'org.assertj:assertj-core:3.24.2'
+
+    runtimeOnly "org.apache.arrow:arrow-memory-netty:12.0.1"
 }
 
 test {
@@ -82,4 +88,12 @@ publishing {
             from(components.java)
         }
     }
+}
+
+task runMemDBServe(type: JavaExec) {
+    group = "Execution"
+    description = "Start the MemDB plugin server"
+    classpath = sourceSets.main.runtimeClasspath
+    main = javaMainClass
+    args = ["serve"]
 }
