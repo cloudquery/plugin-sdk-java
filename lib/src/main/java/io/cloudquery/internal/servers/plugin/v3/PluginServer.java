@@ -97,7 +97,7 @@ public class PluginServer extends PluginImplBase {
     @Override
     public StreamObserver<Write.Request> write(StreamObserver<Write.Response> responseObserver) {
         plugin.write();
-        return new StreamObserver<Write.Request>() {
+        return new StreamObserver<>() {
             @Override
             public void onNext(Write.Request request) {
             }
