@@ -6,36 +6,36 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.types.pojo.FieldType;
 
 public class InetType extends ArrowType.ExtensionType {
-    public static final InetType INSTANCE = new InetType();
-    public static final String EXTENSION_NAME = "inet";
+  public static final InetType INSTANCE = new InetType();
+  public static final String EXTENSION_NAME = "inet";
 
-    @Override
-    public ArrowType storageType() {
-        return Binary.INSTANCE;
-    }
+  @Override
+  public ArrowType storageType() {
+    return Binary.INSTANCE;
+  }
 
-    @Override
-    public String extensionName() {
-        return EXTENSION_NAME;
-    }
+  @Override
+  public String extensionName() {
+    return EXTENSION_NAME;
+  }
 
-    @Override
-    public boolean extensionEquals(ExtensionType other) {
-        return other instanceof InetType;
-    }
+  @Override
+  public boolean extensionEquals(ExtensionType other) {
+    return other instanceof InetType;
+  }
 
-    @Override
-    public String serialize() {
-        return null;
-    }
+  @Override
+  public String serialize() {
+    return null;
+  }
 
-    @Override
-    public ArrowType deserialize(ArrowType storageType, String serializedData) {
-        return null;
-    }
+  @Override
+  public ArrowType deserialize(ArrowType storageType, String serializedData) {
+    return null;
+  }
 
-    @Override
-    public FieldVector getNewVector(String name, FieldType fieldType, BufferAllocator allocator) {
-        return null;
-    }
+  @Override
+  public FieldVector getNewVector(String name, FieldType fieldType, BufferAllocator allocator) {
+    return null;
+  }
 }
