@@ -83,9 +83,6 @@ public class PluginServer extends PluginImplBase {
           new BackendOptions(
               request.getBackend().getTableName(), request.getBackend().getConnection()),
           responseObserver);
-
-      responseObserver.onNext(io.cloudquery.plugin.v3.Sync.Response.newBuilder().build());
-      responseObserver.onCompleted();
     } catch (Exception e) {
       responseObserver.onError(e);
     }

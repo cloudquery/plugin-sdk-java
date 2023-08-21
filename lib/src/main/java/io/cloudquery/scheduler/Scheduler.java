@@ -30,5 +30,6 @@ public class Scheduler {
         return;
       }
     }
+    syncStream.onCompleted();
   }
 }
