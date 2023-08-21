@@ -57,7 +57,7 @@ public class PluginServer extends PluginImplBase {
               request.getSkipTablesList(),
               request.getSkipDependentTables());
       List<ByteString> byteStrings = new ArrayList<>();
-      for (Table table : tables) {
+      for (Table table : Table.flattenTables(tables)) {
         byteStrings.add(table.encode());
       }
       responseObserver.onNext(
