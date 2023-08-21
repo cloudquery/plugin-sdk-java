@@ -1,7 +1,9 @@
 package io.cloudquery.schema;
 
+import com.google.protobuf.ByteString;
 import io.cloudquery.scalar.Scalar;
 import io.cloudquery.scalar.ValidationException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Builder;
@@ -36,5 +38,10 @@ public class Resource {
   public Scalar<?> get(String columnName) {
     int index = table.indexOfColumn(columnName);
     return this.data.get(index);
+  }
+
+  public ByteString encode() throws IOException {
+    // TODO: Encode data and not only schema
+    return table.encode();
   }
 }

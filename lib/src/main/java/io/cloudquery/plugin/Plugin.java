@@ -1,5 +1,6 @@
 package io.cloudquery.plugin;
 
+import io.cloudquery.schema.ClientMeta;
 import io.cloudquery.schema.SchemaException;
 import io.cloudquery.schema.Table;
 import io.grpc.stub.StreamObserver;
@@ -16,12 +17,17 @@ public abstract class Plugin {
   @NonNull protected final String name;
   @NonNull protected final String version;
   @Setter protected Logger logger;
+  protected ClientMeta client;
 
-  public abstract void init();
+  public void init(String spec, NewClientOptions options) {
+    client = newClient(spec, options);
+  }
+
+  public abstract ClientMeta newClient(String spec, NewClientOptions options);
 
   public abstract List<Table> tables(
       List<String> includeList, List<String> skipList, boolean skipDependentTables)
-      throws SchemaException;
+      throws SchemaException, ClientNotInitializedException;
 
   public abstract void sync(
       List<String> includeList,
@@ -30,7 +36,7 @@ public abstract class Plugin {
       boolean deterministicCqId,
       BackendOptions backendOptions,
       StreamObserver<io.cloudquery.plugin.v3.Sync.Response> syncStream)
-      throws SchemaException;
+      throws SchemaException, ClientNotInitializedException;
 
   public abstract void read();
 

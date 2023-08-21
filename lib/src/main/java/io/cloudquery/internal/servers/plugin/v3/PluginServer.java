@@ -2,6 +2,7 @@ package io.cloudquery.internal.servers.plugin.v3;
 
 import com.google.protobuf.ByteString;
 import io.cloudquery.plugin.BackendOptions;
+import io.cloudquery.plugin.NewClientOptions;
 import io.cloudquery.plugin.Plugin;
 import io.cloudquery.plugin.v3.PluginGrpc.PluginImplBase;
 import io.cloudquery.plugin.v3.Write;
@@ -41,7 +42,9 @@ public class PluginServer extends PluginImplBase {
   public void init(
       io.cloudquery.plugin.v3.Init.Request request,
       StreamObserver<io.cloudquery.plugin.v3.Init.Response> responseObserver) {
-    plugin.init();
+    plugin.init(
+        request.getSpec().toStringUtf8(),
+        NewClientOptions.builder().noConnection(request.getNoConnection()).build());
     responseObserver.onNext(io.cloudquery.plugin.v3.Init.Response.newBuilder().build());
     responseObserver.onCompleted();
   }
