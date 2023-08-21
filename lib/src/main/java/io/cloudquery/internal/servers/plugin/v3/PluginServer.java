@@ -63,7 +63,7 @@ public class PluginServer extends PluginImplBase {
               request.getSkipTablesList(),
               request.getSkipDependentTables());
       List<ByteString> byteStrings = new ArrayList<>();
-      for (Table table : tables) {
+      for (Table table : Table.flattenTables(tables)) {
         try (BufferAllocator bufferAllocator = new RootAllocator()) {
           Schema schema = table.toArrowSchema();
           VectorSchemaRoot schemaRoot = VectorSchemaRoot.create(schema, bufferAllocator);
