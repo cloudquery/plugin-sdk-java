@@ -1,35 +1,36 @@
 package io.cloudquery.server;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import io.cloudquery.server.AddressConverter.Address;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class AddressTest {
 
-    private AddressConverter addressConverter;
+  private AddressConverter addressConverter;
 
-    @BeforeEach
-    public void setUp() {
-        addressConverter = new AddressConverter();
-    }
+  @BeforeEach
+  public void setUp() {
+    addressConverter = new AddressConverter();
+  }
 
-    @Test
-    public void shouldParseAddressFromString() throws Exception {
-        String rawAddress = "127.0.0.1:12345";
+  @Test
+  public void shouldParseAddressFromString() throws Exception {
+    String rawAddress = "127.0.0.1:12345";
 
-        Address address = addressConverter.convert(rawAddress);
+    Address address = addressConverter.convert(rawAddress);
 
-        assertEquals(new Address("127.0.0.1", 12345), address);
-    }
+    assertEquals(new Address("127.0.0.1", 12345), address);
+  }
 
-    @Test
-    public void shouldThrowExceptionIfAddressNotFormattedCorrectly() {
-        String rawAddress = "bad address";
+  @Test
+  public void shouldThrowExceptionIfAddressNotFormattedCorrectly() {
+    String rawAddress = "bad address";
 
-        AddressConverter addressConverter = new AddressConverter();
+    AddressConverter addressConverter = new AddressConverter();
 
-        assertThrows(AddressConverter.AddressParseException.class, () -> addressConverter.convert(rawAddress));
-    }
+    assertThrows(
+        AddressConverter.AddressParseException.class, () -> addressConverter.convert(rawAddress));
+  }
 }
