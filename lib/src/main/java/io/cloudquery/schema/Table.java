@@ -133,6 +133,7 @@ public class Table {
   }
 
   @NonNull private String name;
+  private TableResolver resolver;
   private String title;
   private String description;
   @Setter private Table parent;
