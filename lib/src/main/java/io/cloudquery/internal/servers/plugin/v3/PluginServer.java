@@ -1,6 +1,7 @@
 package io.cloudquery.internal.servers.plugin.v3;
 
 import com.google.protobuf.ByteString;
+import io.cloudquery.helper.ArrowHelper;
 import io.cloudquery.plugin.BackendOptions;
 import io.cloudquery.plugin.NewClientOptions;
 import io.cloudquery.plugin.Plugin;
@@ -65,7 +66,7 @@ public class PluginServer extends PluginImplBase {
               request.getSkipDependentTables());
       List<ByteString> byteStrings = new ArrayList<>();
       for (Table table : Table.flattenTables(tables)) {
-        byteStrings.add(table.encode());
+        byteStrings.add(ArrowHelper.encode(table));
       }
       responseObserver.onNext(
           io.cloudquery.plugin.v3.GetTables.Response.newBuilder()

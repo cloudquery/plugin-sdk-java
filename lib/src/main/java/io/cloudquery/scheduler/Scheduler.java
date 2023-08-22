@@ -1,5 +1,6 @@
 package io.cloudquery.scheduler;
 
+import io.cloudquery.helper.ArrowHelper;
 import io.cloudquery.plugin.v3.Sync;
 import io.cloudquery.schema.ClientMeta;
 import io.cloudquery.schema.Table;
@@ -25,7 +26,7 @@ public class Scheduler {
       try {
         logger.info("sending migrate message for table: {}", table.getName());
         Sync.MessageMigrateTable migrateTable =
-            Sync.MessageMigrateTable.newBuilder().setTable(table.encode()).build();
+            Sync.MessageMigrateTable.newBuilder().setTable(ArrowHelper.encode(table)).build();
         Sync.Response response = Sync.Response.newBuilder().setMigrateTable(migrateTable).build();
         syncStream.onNext(response);
       } catch (IOException e) {
