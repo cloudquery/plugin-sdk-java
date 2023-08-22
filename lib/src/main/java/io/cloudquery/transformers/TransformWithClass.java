@@ -3,7 +3,6 @@ package io.cloudquery.transformers;
 import static io.cloudquery.schema.Table.*;
 import static io.cloudquery.transformers.IgnoreInTestsTransformer.DefaultIgnoreInTestsTransformer;
 import static io.cloudquery.transformers.NameTransformer.DefaultNameTransformer;
-import static io.cloudquery.transformers.ResolverTransformer.DefaulResolverTransformer;
 import static io.cloudquery.transformers.TypeTransformer.DefaultTypeTransformer;
 
 import io.cloudquery.schema.Column;
@@ -21,7 +20,8 @@ public class TransformWithClass implements Transform {
   @Builder.Default private TypeTransformer typeTransformer = new DefaultTypeTransformer();
 
   @Builder.Default
-  private ResolverTransformer resolverTransformer = new DefaulResolverTransformer();
+  private ResolverTransformer resolverTransformer =
+      new ResolverTransformer.DefaultResolverTransformer();
 
   @Builder.Default
   private IgnoreInTestsTransformer ignoreInTestsTransformer = new DefaultIgnoreInTestsTransformer();
