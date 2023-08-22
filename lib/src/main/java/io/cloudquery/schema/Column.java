@@ -10,7 +10,6 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 public class Column {
   private String name;
   private String description;
-  private String constraintName;
   private ArrowType type;
   private ColumnResolver resolver;
   private boolean primaryKey;

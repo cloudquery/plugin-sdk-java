@@ -171,9 +171,6 @@ public class ArrowHelper {
       Map<String, String> metadata = new HashMap<>();
       metadata.put(CQ_EXTENSION_UNIQUE, column.isUnique() ? "true" : "false");
       metadata.put(CQ_EXTENSION_PRIMARY_KEY, column.isPrimaryKey() ? "true" : "false");
-      if (column.getConstraintName() != null) {
-        metadata.put(CQ_EXTENSION_CONSTRAINT_NAME, column.getConstraintName());
-      }
       metadata.put(CQ_EXTENSION_INCREMENTAL, column.isIncrementalKey() ? "true" : "false");
       Field field =
           new Field(
@@ -193,6 +190,7 @@ public class ArrowHelper {
     if (table.getParent() != null) {
       metadata.put(CQ_TABLE_DEPENDS_ON, table.getParent().getName());
     }
+    metadata.put(CQ_EXTENSION_CONSTRAINT_NAME, table.getConstraintName());
     return new Schema(asList(fields), metadata);
   }
 
@@ -201,7 +199,6 @@ public class ArrowHelper {
     for (Field field : schema.getFields()) {
       boolean isUnique = field.getMetadata().get(CQ_EXTENSION_UNIQUE) == "true";
       boolean isPrimaryKey = field.getMetadata().get(CQ_EXTENSION_PRIMARY_KEY) == "true";
-      String constraintName = field.getMetadata().get(CQ_EXTENSION_CONSTRAINT_NAME);
       boolean isIncrementalKey = field.getMetadata().get(CQ_EXTENSION_INCREMENTAL) == "true";
 
       columns.add(
@@ -210,7 +207,6 @@ public class ArrowHelper {
               .unique(isUnique)
               .primaryKey(isPrimaryKey)
               .incrementalKey(isIncrementalKey)
-              .constraintName(constraintName)
               .type(field.getType())
               .build());
     }
@@ -220,8 +216,11 @@ public class ArrowHelper {
     String title = metaData.get(CQ_TABLE_TITLE);
     String description = metaData.get(CQ_TABLE_DESCRIPTION);
     String parent = metaData.get(CQ_TABLE_DEPENDS_ON);
+    String constraintName = metaData.get(CQ_EXTENSION_CONSTRAINT_NAME);
 
-    TableBuilder tableBuilder = Table.builder().name(name).columns(columns);
+    TableBuilder tableBuilder =
+        Table.builder().name(name).constraintName(constraintName).columns(columns);
+
     if (title != null) {
       tableBuilder.title(title);
     }
