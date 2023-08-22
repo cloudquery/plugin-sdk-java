@@ -1,14 +1,8 @@
 package io.cloudquery.schema;
 
-import static java.util.Arrays.asList;
-
-import com.google.protobuf.ByteString;
 import io.cloudquery.glob.Glob;
 import io.cloudquery.schema.Column.ColumnBuilder;
 import io.cloudquery.transformers.TransformerException;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.channels.Channels;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,12 +14,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.apache.arrow.memory.BufferAllocator;
-import org.apache.arrow.memory.RootAllocator;
-import org.apache.arrow.vector.VectorSchemaRoot;
-import org.apache.arrow.vector.ipc.ArrowStreamWriter;
-import org.apache.arrow.vector.types.pojo.Field;
-import org.apache.arrow.vector.types.pojo.Schema;
 
 @Builder(toBuilder = true)
 @Getter
@@ -214,42 +202,5 @@ public class Table {
       }
     }
     return Optional.empty();
-  }
-
-  public Schema toArrowSchema() {
-    Field[] fields = new Field[columns.size()];
-    for (int i = 0; i < columns.size(); i++) {
-      Column column = columns.get(i);
-      Field field = Field.nullable(column.getName(), column.getType());
-      fields[i] = field;
-    }
-    Map<String, String> metadata = new HashMap<>();
-    metadata.put("cq:table_name", name);
-    if (title != null) {
-      metadata.put("cq:table_title", title);
-    }
-    if (description != null) {
-      metadata.put("cq:table_description", description);
-    }
-    if (parent != null) {
-      metadata.put("cq:table_depends_on", parent.getName());
-    }
-    Schema schema = new Schema(asList(fields), metadata);
-    return schema;
-  }
-
-  public ByteString encode() throws IOException {
-    try (BufferAllocator bufferAllocator = new RootAllocator()) {
-      Schema schema = toArrowSchema();
-      VectorSchemaRoot schemaRoot = VectorSchemaRoot.create(schema, bufferAllocator);
-      try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-        try (ArrowStreamWriter writer =
-            new ArrowStreamWriter(schemaRoot, null, Channels.newChannel(out))) {
-          writer.start();
-          writer.end();
-          return ByteString.copyFrom(out.toByteArray());
-        }
-      }
-    }
   }
 }

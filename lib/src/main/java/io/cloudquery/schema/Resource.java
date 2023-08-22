@@ -1,6 +1,7 @@
 package io.cloudquery.schema;
 
 import com.google.protobuf.ByteString;
+import io.cloudquery.helper.ArrowHelper;
 import io.cloudquery.scalar.Scalar;
 import io.cloudquery.scalar.ValidationException;
 import java.io.IOException;
@@ -42,6 +43,6 @@ public class Resource {
 
   public ByteString encode() throws IOException {
     // TODO: Encode data and not only schema
-    return table.encode();
+    return ArrowHelper.encode(table);
   }
 }
