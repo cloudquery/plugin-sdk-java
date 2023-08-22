@@ -1,5 +1,6 @@
 package io.cloudquery.memdb;
 
+import io.cloudquery.messages.WriteMessage;
 import io.cloudquery.plugin.BackendOptions;
 import io.cloudquery.plugin.ClientNotInitializedException;
 import io.cloudquery.plugin.NewClientOptions;
@@ -93,8 +94,8 @@ public class MemDB extends Plugin {
   }
 
   @Override
-  public void write() {
-    throw new UnsupportedOperationException("Unimplemented method 'Write'");
+  public void write(WriteMessage message) {
+    client.write(message);
   }
 
   @Override

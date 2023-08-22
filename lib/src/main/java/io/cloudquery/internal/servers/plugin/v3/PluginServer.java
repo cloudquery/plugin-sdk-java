@@ -2,13 +2,16 @@ package io.cloudquery.internal.servers.plugin.v3;
 
 import com.google.protobuf.ByteString;
 import io.cloudquery.helper.ArrowHelper;
+import io.cloudquery.messages.WriteMigrateTable;
 import io.cloudquery.plugin.BackendOptions;
 import io.cloudquery.plugin.NewClientOptions;
 import io.cloudquery.plugin.Plugin;
 import io.cloudquery.plugin.v3.PluginGrpc.PluginImplBase;
 import io.cloudquery.plugin.v3.Write;
+import io.cloudquery.plugin.v3.Write.MessageMigrateTable;
 import io.cloudquery.schema.Table;
 import io.grpc.stub.StreamObserver;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,13 +110,23 @@ public class PluginServer extends PluginImplBase {
 
   @Override
   public StreamObserver<Write.Request> write(StreamObserver<Write.Response> responseObserver) {
-    plugin.write();
     return new StreamObserver<>() {
       @Override
-      public void onNext(Write.Request request) {}
+      public void onNext(Write.Request request) {
+        Write.Request.MessageCase messageCase = request.getMessageCase();
+        try {
+          if (messageCase == Write.Request.MessageCase.MIGRATE_TABLE) {
+            plugin.write(processMigrateTableRequest(request));
+          }
+        } catch (IOException ex) {
+          onError(ex);
+        }
+      }
 
       @Override
-      public void onError(Throwable t) {}
+      public void onError(Throwable t) {
+        responseObserver.onError(t);
+      }
 
       @Override
       public void onCompleted() {
@@ -130,5 +143,12 @@ public class PluginServer extends PluginImplBase {
     plugin.close();
     responseObserver.onNext(io.cloudquery.plugin.v3.Close.Response.newBuilder().build());
     responseObserver.onCompleted();
+  }
+
+  private WriteMigrateTable processMigrateTableRequest(Write.Request request) throws IOException {
+    MessageMigrateTable migrateTable = request.getMigrateTable();
+    ByteString byteString = migrateTable.getTable();
+    boolean migrateForce = request.getMigrateTable().getMigrateForce();
+    return new WriteMigrateTable(ArrowHelper.decode(byteString), migrateForce);
   }
 }
