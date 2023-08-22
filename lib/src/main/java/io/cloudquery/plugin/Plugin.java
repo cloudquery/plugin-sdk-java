@@ -19,11 +19,11 @@ public abstract class Plugin {
   @Setter protected Logger logger;
   protected ClientMeta client;
 
-  public void init(String spec, NewClientOptions options) {
+  public void init(String spec, NewClientOptions options) throws Exception {
     client = newClient(spec, options);
   }
 
-  public abstract ClientMeta newClient(String spec, NewClientOptions options);
+  public abstract ClientMeta newClient(String spec, NewClientOptions options) throws Exception;
 
   public abstract List<Table> tables(
       List<String> includeList, List<String> skipList, boolean skipDependentTables)

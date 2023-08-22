@@ -105,7 +105,7 @@ public class MemDB extends Plugin {
   }
 
   @Override
-  public ClientMeta newClient(String spec, NewClientOptions options) {
+  public ClientMeta newClient(String spec, NewClientOptions options) throws Exception {
     if (options.isNoConnection()) {
       return null;
     }

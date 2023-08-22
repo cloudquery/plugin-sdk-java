@@ -42,11 +42,15 @@ public class PluginServer extends PluginImplBase {
   public void init(
       io.cloudquery.plugin.v3.Init.Request request,
       StreamObserver<io.cloudquery.plugin.v3.Init.Response> responseObserver) {
-    plugin.init(
-        request.getSpec().toStringUtf8(),
-        NewClientOptions.builder().noConnection(request.getNoConnection()).build());
-    responseObserver.onNext(io.cloudquery.plugin.v3.Init.Response.newBuilder().build());
-    responseObserver.onCompleted();
+    try {
+      plugin.init(
+          request.getSpec().toStringUtf8(),
+          NewClientOptions.builder().noConnection(request.getNoConnection()).build());
+      responseObserver.onNext(io.cloudquery.plugin.v3.Init.Response.newBuilder().build());
+      responseObserver.onCompleted();
+    } catch (Exception e) {
+      responseObserver.onError(e);
+    }
   }
 
   @Override
