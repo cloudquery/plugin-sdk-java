@@ -8,7 +8,7 @@ import static org.mockito.Mockito.when;
 import io.cloudquery.scalar.ValidationException;
 import io.cloudquery.schema.Column;
 import io.cloudquery.schema.Resource;
-import io.cloudquery.transformers.ResolverTransformer.DefaulResolverTransformer;
+import io.cloudquery.transformers.ResolverTransformer.DefaultResolverTransformer;
 import lombok.Builder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,13 +24,13 @@ class DefaultResolverTransformerTest {
     public String myCustomID;
   }
 
-  private DefaulResolverTransformer transformer;
+  private DefaultResolverTransformer transformer;
 
   @Mock private Resource resource;
 
   @BeforeEach
   void setUp() {
-    transformer = new DefaulResolverTransformer();
+    transformer = new DefaultResolverTransformer();
 
     when(resource.getItem()).thenReturn(ResourceItem.builder().myCustomID("1234").build());
   }

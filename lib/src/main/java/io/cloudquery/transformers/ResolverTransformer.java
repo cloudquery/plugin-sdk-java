@@ -10,7 +10,7 @@ public interface ResolverTransformer {
 
   ColumnResolver transform(Field field, String path) throws TransformerException;
 
-  class DefaulResolverTransformer implements ResolverTransformer {
+  class DefaultResolverTransformer implements ResolverTransformer {
     @Override
     public ColumnResolver transform(Field field, String path) throws TransformerException {
       return (meta, resource, column) -> {
