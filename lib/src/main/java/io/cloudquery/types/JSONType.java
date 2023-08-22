@@ -80,12 +80,12 @@ public class JSONType extends ExtensionType {
       return getUnderlyingVector().hashCode(index, hasher);
     }
 
-    public String get(int index) {
-      return new String((byte[]) getObject(index));
+    public byte[] get(int index) {
+      return (byte[]) getObject(index);
     }
 
-    public void set(int index, String value) {
-      getUnderlyingVector().setSafe(index, value.getBytes(), 0, value.getBytes().length);
+    public void setSafe(int index, byte[] bytes) {
+      getUnderlyingVector().setSafe(index, bytes);
     }
   }
 }

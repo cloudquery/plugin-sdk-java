@@ -64,7 +64,7 @@ dependencies {
 test {
     useJUnitPlatform()
     testLogging {
-        events "passed", "skipped", "failed"
+        events  "skipped", "failed"
     }
     jvmArgs("--add-opens=java.base/java.nio=ALL-UNNAMED")
 }
@@ -100,6 +100,7 @@ task runMemDBServe(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = javaMainClass
     args = ["serve"]
+    jvmArgs = ["--add-opens=java.base/java.nio=ALL-UNNAMED"]
 }
 
 spotless {

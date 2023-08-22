@@ -5,7 +5,6 @@ import io.cloudquery.plugin.v3.Sync;
 import io.cloudquery.schema.ClientMeta;
 import io.cloudquery.schema.Table;
 import io.grpc.stub.StreamObserver;
-import java.io.IOException;
 import java.util.List;
 import lombok.Builder;
 import lombok.NonNull;
@@ -29,7 +28,7 @@ public class Scheduler {
             Sync.MessageMigrateTable.newBuilder().setTable(ArrowHelper.encode(table)).build();
         Sync.Response response = Sync.Response.newBuilder().setMigrateTable(migrateTable).build();
         syncStream.onNext(response);
-      } catch (IOException e) {
+      } catch (Exception e) {
         syncStream.onError(e);
         return;
       }
@@ -38,6 +37,10 @@ public class Scheduler {
     for (Table table : tables) {
       try {
         logger.info("resolving table: {}", table.getName());
+        if (table.getResolver() == null) {
+          logger.error("no resolver for table: {}", table.getName());
+          continue;
+        }
         SchedulerTableOutputStream schedulerTableOutputStream =
             SchedulerTableOutputStream.builder()
                 .table(table)

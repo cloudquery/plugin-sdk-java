@@ -8,44 +8,56 @@ import io.cloudquery.plugin.Plugin;
 import io.cloudquery.plugin.TableOutputStream;
 import io.cloudquery.scheduler.Scheduler;
 import io.cloudquery.schema.ClientMeta;
-import io.cloudquery.schema.Column;
 import io.cloudquery.schema.Resource;
 import io.cloudquery.schema.SchemaException;
 import io.cloudquery.schema.Table;
 import io.cloudquery.schema.TableResolver;
+import io.cloudquery.transformers.Tables;
+import io.cloudquery.transformers.TransformWithClass;
 import io.grpc.stub.StreamObserver;
 import java.util.List;
-import org.apache.arrow.vector.types.pojo.ArrowType.Utf8;
+import java.util.UUID;
 
 public class MemDB extends Plugin {
-  private List<Table> allTables =
-      List.of(
-          Table.builder()
-              .name("table1")
-              .resolver(
-                  new TableResolver() {
-                    @Override
-                    public void resolve(
-                        ClientMeta clientMeta, Resource parent, TableOutputStream stream) {
-                      stream.write(Table1Data.builder().name("name1").build());
-                      stream.write(Table1Data.builder().name("name2").build());
-                    }
-                  })
-              .columns(List.of(Column.builder().name("name").type(new Utf8()).build()))
-              .build(),
-          Table.builder()
-              .name("table2")
-              .resolver(
-                  new TableResolver() {
-                    @Override
-                    public void resolve(
-                        ClientMeta clientMeta, Resource parent, TableOutputStream stream) {
-                      stream.write(Table2Data.builder().id("id1").build());
-                      stream.write(Table2Data.builder().id("id2").build());
-                    }
-                  })
-              .columns(List.of(Column.builder().name("id").type(new Utf8()).build()))
-              .build());
+  private static List<Table> getTables() {
+    return List.of(
+        Table.builder()
+            .name("table1")
+            .resolver(
+                new TableResolver() {
+                  @Override
+                  public void resolve(
+                      ClientMeta clientMeta, Resource parent, TableOutputStream stream) {
+                    stream.write(
+                        Table1Data.builder()
+                            .id(UUID.fromString("46b2b6e6-8f3e-4340-a721-4aa0786b1cc0"))
+                            .name("name1")
+                            .build());
+                    stream.write(
+                        Table1Data.builder()
+                            .id(UUID.fromString("e89f95df-a389-4f1b-9ba6-1fab565523d6"))
+                            .name("name2")
+                            .build());
+                  }
+                })
+            .transform(TransformWithClass.builder(Table1Data.class).pkField("id").build())
+            .build(),
+        Table.builder()
+            .name("table2")
+            .resolver(
+                new TableResolver() {
+                  @Override
+                  public void resolve(
+                      ClientMeta clientMeta, Resource parent, TableOutputStream stream) {
+                    stream.write(Table2Data.builder().id(1).name("name1").build());
+                    stream.write(Table2Data.builder().id(2).name("name2").build());
+                  }
+                })
+            .transform(TransformWithClass.builder(Table2Data.class).pkField("id").build())
+            .build());
+  }
+
+  private List<Table> allTables;
 
   private Spec spec;
 
@@ -107,10 +119,9 @@ public class MemDB extends Plugin {
 
   @Override
   public ClientMeta newClient(String spec, NewClientOptions options) throws Exception {
-    if (options.isNoConnection()) {
-      return null;
-    }
     this.spec = Spec.fromJSON(spec);
+    this.allTables = getTables();
+    Tables.transformTables(allTables);
     return new MemDBClient();
   }
 }

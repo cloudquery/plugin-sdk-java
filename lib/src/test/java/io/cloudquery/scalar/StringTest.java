@@ -90,14 +90,14 @@ public class StringTest {
           string.set(-1L);
         });
     assertTrue(string.isValid());
-    assertEquals("-1", string.get());
+    assertEquals("-1", string.get().toString());
 
     assertDoesNotThrow(
         () -> {
           string.set("");
         });
     assertTrue(string.isValid());
-    assertEquals("", string.get());
+    assertEquals("", string.get().toString());
   }
 
   @Test
