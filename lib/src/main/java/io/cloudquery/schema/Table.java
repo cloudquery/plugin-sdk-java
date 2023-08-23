@@ -1,5 +1,9 @@
 package io.cloudquery.schema;
 
+import static io.cloudquery.schema.TableColumnChangeType.ADD;
+import static io.cloudquery.schema.TableColumnChangeType.REMOVE;
+import static io.cloudquery.schema.TableColumnChangeType.UPDATE;
+
 import io.cloudquery.glob.Glob;
 import io.cloudquery.schema.Column.ColumnBuilder;
 import io.cloudquery.transformers.TransformerException;
@@ -18,6 +22,7 @@ import lombok.Setter;
 @Builder(toBuilder = true)
 @Getter
 public class Table {
+
   public interface Transform {
     void transformTable(Table table) throws TransformerException;
   }
@@ -202,5 +207,40 @@ public class Table {
       }
     }
     return Optional.empty();
+  }
+
+  public List<TableColumnChange> getChanges(Table old) {
+    List<TableColumnChange> changes = new ArrayList<>();
+    for (Column currentColumn : columns) {
+      Optional<Column> oldColumn = old.getColumn(currentColumn.getName());
+      if (oldColumn.isEmpty()) {
+        changes.add(new TableColumnChange(ADD, currentColumn.getName(), currentColumn, null));
+        continue;
+      }
+      if (shouldUpdate(currentColumn, oldColumn.get())) {
+        changes.add(
+            new TableColumnChange(UPDATE, currentColumn.getName(), currentColumn, oldColumn.get()));
+      }
+    }
+    for (Column column : old.columns) {
+      Optional<Column> otherColumn = getColumn(column.getName());
+      if (otherColumn.isEmpty()) {
+        changes.add(new TableColumnChange(REMOVE, column.getName(), null, column));
+      }
+    }
+    return changes;
+  }
+
+  private static boolean shouldUpdate(Column currentColumn, Column oldColumn) {
+    if (!oldColumn.getType().equals(currentColumn.getType())) {
+      return true;
+    }
+    if (oldColumn.isPrimaryKey() != currentColumn.isPrimaryKey()) {
+      return true;
+    }
+    if (oldColumn.isNotNull() != currentColumn.isNotNull()) {
+      return true;
+    }
+    return oldColumn.isUnique() != currentColumn.isUnique();
   }
 }
