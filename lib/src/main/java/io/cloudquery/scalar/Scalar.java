@@ -48,7 +48,10 @@ public abstract class Scalar<T> {
   }
 
   public T get() {
-    return this.value;
+    if (this.isValid()) {
+      return this.value;
+    }
+    return null;
   }
 
   public boolean equals(Object other) {

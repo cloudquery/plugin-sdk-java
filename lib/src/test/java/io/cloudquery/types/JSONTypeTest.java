@@ -1,5 +1,6 @@
 package io.cloudquery.types;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,7 +9,6 @@ import io.cloudquery.types.JSONType.JSONVector;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.file.Files;
@@ -45,7 +45,7 @@ public class JSONTypeTest {
   }
 
   private File file;
-  private List<String> jsonData;
+  private List<byte[]> jsonData;
 
   @BeforeAll
   public static void setUpTest() {
@@ -72,16 +72,16 @@ public class JSONTypeTest {
     try (BufferAllocator allocator = new RootAllocator()) {
       ArrowType.ExtensionType jsonType = ExtensionTypeRegistry.lookup("json");
       try (JSONVector vector = (JSONVector) jsonType.getNewVector("vector", null, allocator)) {
-        vector.set(0, jsonData.get(0));
-        vector.setNull(1);
-        vector.set(2, jsonData.get(1));
-        vector.setNull(3);
         vector.setValueCount(4);
+        vector.setSafe(0, jsonData.get(0));
+        vector.setNull(1);
+        vector.setSafe(2, jsonData.get(1));
+        vector.setNull(3);
 
         // Assert that the values were set correctly
-        assertEquals(jsonData.get(0), vector.get(0), "JSON should match");
+        assertArrayEquals(jsonData.get(0), vector.get(0), "JSON should match");
         assertTrue(vector.isNull(1), "Should be null");
-        assertEquals(jsonData.get(1), vector.get(2), "JSON should match");
+        assertArrayEquals(jsonData.get(1), vector.get(2), "JSON should match");
         assertTrue(vector.isNull(3), "Should be null");
 
         // Assert that the value count and null count are correct
@@ -110,7 +110,7 @@ public class JSONTypeTest {
       JSONVector fieldVector = (JSONVector) reader.getVectorSchemaRoot().getVector(FIELD_NAME);
       assertEquals(jsonData.size(), fieldVector.getValueCount(), "Value count should match");
       for (int i = 0; i < jsonData.size(); i++) {
-        assertEquals(jsonData.get(i), fieldVector.get(i), "JSON should match");
+        assertArrayEquals(jsonData.get(i), fieldVector.get(i), "JSON should match");
       }
     }
   }
@@ -128,7 +128,7 @@ public class JSONTypeTest {
     // Generate some JSON data
     vector.setValueCount(jsonData.size());
     for (int i = 0; i < jsonData.size(); i++) {
-      vector.set(i, jsonData.get(i));
+      vector.setSafe(i, jsonData.get(i));
     }
     root.setRowCount(jsonData.size());
 
@@ -142,10 +142,10 @@ public class JSONTypeTest {
     }
   }
 
-  private static String toJSON(Object object) throws IOException {
-    try (OutputStream outputStream = new ByteArrayOutputStream()) {
+  private static byte[] toJSON(Object object) throws IOException {
+    try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
       OBJECT_MAPPER.writeValue(outputStream, object);
-      return outputStream.toString();
+      return outputStream.toByteArray();
     }
   }
 }

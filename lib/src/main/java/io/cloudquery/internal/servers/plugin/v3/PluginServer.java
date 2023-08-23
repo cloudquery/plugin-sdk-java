@@ -53,6 +53,7 @@ public class PluginServer extends PluginImplBase {
       responseObserver.onNext(io.cloudquery.plugin.v3.Init.Response.newBuilder().build());
       responseObserver.onCompleted();
     } catch (Exception e) {
+      plugin.getLogger().error("Error initializing plugin", e);
       responseObserver.onError(e);
     }
   }
@@ -77,6 +78,7 @@ public class PluginServer extends PluginImplBase {
               .build());
       responseObserver.onCompleted();
     } catch (Exception e) {
+      plugin.getLogger().error("Error getting tables", e);
       responseObserver.onError(e);
     }
   }
@@ -95,6 +97,7 @@ public class PluginServer extends PluginImplBase {
               request.getBackend().getTableName(), request.getBackend().getConnection()),
           responseObserver);
     } catch (Exception e) {
+      plugin.getLogger().error("Error syncing tables", e);
       responseObserver.onError(e);
     }
   }

@@ -49,9 +49,13 @@ public class TimestampTest {
         () -> {
           timestamp.set(1);
         });
-    assertEquals("1970-01-01T00:00:00.001Z", timestamp.toString());
+    assertEquals("1970-01-01T00:00Z", timestamp.toString());
 
-    java.lang.String ts = ZonedDateTime.now(ZoneOffset.UTC).toString();
+    java.lang.String ts =
+        ZonedDateTime.ofInstant(
+                Instant.ofEpochSecond(ZonedDateTime.now(ZoneOffset.UTC).toEpochSecond()),
+                ZoneOffset.UTC)
+            .toString();
     assertDoesNotThrow(
         () -> {
           timestamp.set(ts);
@@ -62,7 +66,7 @@ public class TimestampTest {
   @Test
   public void testDataType() {
     Timestamp timestamp = new Timestamp();
-    assertEquals(new ArrowType.Timestamp(TimeUnit.MILLISECOND, "Z"), timestamp.dataType());
+    assertEquals(new ArrowType.Timestamp(TimeUnit.SECOND, "Z"), timestamp.dataType());
   }
 
   @Test
@@ -114,14 +118,14 @@ public class TimestampTest {
           timestamp.set(ts);
         });
     assertTrue(timestamp.isValid());
-    assertEquals(ts, timestamp.get());
+    assertEquals(ts.toEpochSecond(), timestamp.get());
 
     assertDoesNotThrow(
         () -> {
           timestamp.set(0);
         });
     assertTrue(timestamp.isValid());
-    assertEquals(Instant.EPOCH.atZone(ZoneOffset.UTC), timestamp.get());
+    assertEquals(Instant.EPOCH.atZone(ZoneOffset.UTC).toEpochSecond(), timestamp.get());
   }
 
   @Test

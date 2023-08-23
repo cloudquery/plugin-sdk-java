@@ -1,5 +1,6 @@
 package io.cloudquery.scheduler;
 
+import com.google.protobuf.ByteString;
 import io.cloudquery.plugin.TableOutputStream;
 import io.cloudquery.plugin.v3.Sync;
 import io.cloudquery.schema.ClientMeta;
@@ -8,7 +9,6 @@ import io.cloudquery.schema.Resource;
 import io.cloudquery.schema.Table;
 import io.cloudquery.transformers.TransformerException;
 import io.grpc.stub.StreamObserver;
-import java.io.IOException;
 import lombok.Builder;
 import lombok.NonNull;
 import org.apache.logging.log4j.Logger;
@@ -28,7 +28,7 @@ public class SchedulerTableOutputStream implements TableOutputStream {
       try {
         logger.info("resolving column: {}", column.getName());
         if (column.getResolver() == null) {
-          // TODO: Fall back to path resolver
+          logger.error("no resolver for column: {}", column.getName());
           continue;
         }
         column.getResolver().resolve(client, resource, column);
@@ -40,11 +40,11 @@ public class SchedulerTableOutputStream implements TableOutputStream {
     }
 
     try {
-      Sync.MessageInsert insert =
-          Sync.MessageInsert.newBuilder().setRecord(resource.encode()).build();
+      ByteString record = resource.encode();
+      Sync.MessageInsert insert = Sync.MessageInsert.newBuilder().setRecord(record).build();
       Sync.Response response = Sync.Response.newBuilder().setInsert(insert).build();
       syncStream.onNext(response);
-    } catch (IOException e) {
+    } catch (Exception e) {
       logger.error("Failed to encode resource: {}", resource, e);
       return;
     }

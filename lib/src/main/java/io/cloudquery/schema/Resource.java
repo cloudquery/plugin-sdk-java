@@ -42,7 +42,6 @@ public class Resource {
   }
 
   public ByteString encode() throws IOException {
-    // TODO: Encode data and not only schema
-    return ArrowHelper.encode(table);
+    return ArrowHelper.encode(this);
   }
 }

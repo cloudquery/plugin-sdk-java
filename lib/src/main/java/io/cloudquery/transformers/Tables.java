@@ -5,7 +5,7 @@ import static io.cloudquery.schema.Table.*;
 import io.cloudquery.schema.Table;
 import java.util.List;
 
-class Tables {
+public class Tables {
   public static void setParents(List<Table> tables, Table parent) {
     for (Table table : tables) {
       table.setParent(parent);

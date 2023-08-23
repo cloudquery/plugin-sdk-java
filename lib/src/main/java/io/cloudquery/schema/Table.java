@@ -126,6 +126,7 @@ public class Table {
   }
 
   @NonNull private String name;
+  @Builder.Default private String constraintName = "";
   private TableResolver resolver;
   private String title;
   private String description;

@@ -1,9 +1,9 @@
 package io.cloudquery.scalar;
 
 import org.apache.arrow.vector.types.pojo.ArrowType;
+import org.apache.arrow.vector.util.Text;
 
-public class String extends Scalar<java.lang.String> {
-
+public class String extends Scalar<Text> {
   public String() {
     super();
   }
@@ -19,6 +19,6 @@ public class String extends Scalar<java.lang.String> {
 
   @Override
   public void setValue(Object value) throws ValidationException {
-    this.value = value.toString();
+    this.value = new Text(value.toString());
   }
 }

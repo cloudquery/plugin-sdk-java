@@ -1,5 +1,9 @@
 package io.cloudquery.helper;
 
+import static io.cloudquery.helper.ArrowHelper.CQ_EXTENSION_CONSTRAINT_NAME;
+import static io.cloudquery.helper.ArrowHelper.CQ_EXTENSION_INCREMENTAL;
+import static io.cloudquery.helper.ArrowHelper.CQ_EXTENSION_PRIMARY_KEY;
+import static io.cloudquery.helper.ArrowHelper.CQ_EXTENSION_UNIQUE;
 import static io.cloudquery.helper.ArrowHelper.CQ_TABLE_DEPENDS_ON;
 import static io.cloudquery.helper.ArrowHelper.CQ_TABLE_DESCRIPTION;
 import static io.cloudquery.helper.ArrowHelper.CQ_TABLE_NAME;
@@ -27,7 +31,13 @@ public class ArrowHelperTest {
           .parent(Table.builder().name("parent").build())
           .columns(
               List.of(
-                  Column.builder().name("column1").type(ArrowType.Utf8.INSTANCE).build(),
+                  Column.builder()
+                      .name("column1")
+                      .type(ArrowType.Utf8.INSTANCE)
+                      .unique(true)
+                      .incrementalKey(true)
+                      .primaryKey(true)
+                      .build(),
                   Column.builder().name("column2").type(ArrowType.Utf8.INSTANCE).build()))
           .build();
 
@@ -36,7 +46,25 @@ public class ArrowHelperTest {
     Schema arrowSchema = ArrowHelper.toArrowSchema(TEST_TABLE);
 
     assertEquals(arrowSchema.getFields().get(0).getName(), "column1");
+    assertEquals(
+        arrowSchema.getFields().get(0).getMetadata(),
+        Map.of(
+            CQ_EXTENSION_UNIQUE,
+            "true",
+            CQ_EXTENSION_INCREMENTAL,
+            "true",
+            CQ_EXTENSION_PRIMARY_KEY,
+            "true"));
     assertEquals(arrowSchema.getFields().get(1).getName(), "column2");
+    assertEquals(
+        arrowSchema.getFields().get(1).getMetadata(),
+        Map.of(
+            CQ_EXTENSION_UNIQUE,
+            "false",
+            CQ_EXTENSION_INCREMENTAL,
+            "false",
+            CQ_EXTENSION_PRIMARY_KEY,
+            "false"));
 
     assertEquals(
         arrowSchema.getCustomMetadata(),
@@ -44,7 +72,8 @@ public class ArrowHelperTest {
             CQ_TABLE_NAME, "table1",
             CQ_TABLE_DESCRIPTION, "A simple test table",
             CQ_TABLE_TITLE, "Test table title",
-            CQ_TABLE_DEPENDS_ON, "parent"));
+            CQ_TABLE_DEPENDS_ON, "parent",
+            CQ_EXTENSION_CONSTRAINT_NAME, ""));
   }
 
   @Test
