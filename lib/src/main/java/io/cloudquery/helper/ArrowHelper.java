@@ -57,7 +57,6 @@ public class ArrowHelper {
 
   private static void setVectorData(FieldVector vector, Object data) {
     vector.allocateNew();
-    vector.setValueCount(1);
     if (vector instanceof BigIntVector) {
       ((BigIntVector) vector).set(0, (long) data);
       return;
@@ -238,13 +237,17 @@ public class ArrowHelper {
     try (BufferAllocator bufferAllocator = new RootAllocator()) {
       Table table = resource.getTable();
       Schema schema = toArrowSchema(table);
-      try (VectorSchemaRoot schemaRoot = VectorSchemaRoot.create(schema, bufferAllocator)) {
+      try (VectorSchemaRoot vectorRoot = VectorSchemaRoot.create(schema, bufferAllocator)) {
         for (int i = 0; i < table.getColumns().size(); i++) {
-          setVectorData(schemaRoot.getVector(i), resource.getData().get(i).get());
+          FieldVector vector = vectorRoot.getVector(i);
+          Object data = resource.getData().get(i).get();
+          setVectorData(vector, data);
         }
+        // TODO: Support encoding multiple resources
+        vectorRoot.setRowCount(1);
         try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
           try (ArrowStreamWriter writer =
-              new ArrowStreamWriter(schemaRoot, null, Channels.newChannel(out))) {
+              new ArrowStreamWriter(vectorRoot, null, Channels.newChannel(out))) {
             writer.start();
             writer.writeBatch();
             writer.end();
