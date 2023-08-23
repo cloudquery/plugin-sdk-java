@@ -210,6 +210,10 @@ public class Table {
     return Optional.empty();
   }
 
+  public Optional<TableResolver> getResolver() {
+    return Optional.ofNullable(resolver);
+  }
+
   public List<TableColumnChange> getChanges(Table old) {
     List<TableColumnChange> changes = new ArrayList<>();
     for (Column currentColumn : columns) {

@@ -37,7 +37,7 @@ public class Scheduler {
     for (Table table : tables) {
       try {
         logger.info("resolving table: {}", table.getName());
-        if (table.getResolver() == null) {
+        if (!table.getResolver().isPresent()) {
           logger.error("no resolver for table: {}", table.getName());
           continue;
         }
@@ -48,7 +48,7 @@ public class Scheduler {
                 .logger(logger)
                 .syncStream(syncStream)
                 .build();
-        table.getResolver().resolve(client, null, schedulerTableOutputStream);
+        table.getResolver().get().resolve(client, null, schedulerTableOutputStream);
         logger.info("resolved table: {}", table.getName());
       } catch (Exception e) {
         syncStream.onError(e);

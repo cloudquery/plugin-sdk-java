@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.BigIntVector;
@@ -57,80 +58,80 @@ public class ArrowHelper {
 
   private static void setVectorData(FieldVector vector, Object data) {
     vector.allocateNew();
-    if (vector instanceof BigIntVector) {
-      ((BigIntVector) vector).set(0, (long) data);
+    if (vector instanceof BigIntVector bigIntVector) {
+      bigIntVector.set(0, (long) data);
       return;
     }
-    if (vector instanceof BitVector) {
-      ((BitVector) vector).set(0, (int) data);
+    if (vector instanceof BitVector bitVector) {
+      bitVector.set(0, (int) data);
       return;
     }
-    if (vector instanceof FixedSizeBinaryVector) {
-      ((FixedSizeBinaryVector) vector).set(0, (byte[]) data);
+    if (vector instanceof FixedSizeBinaryVector fixedSizeBinaryVector) {
+      fixedSizeBinaryVector.set(0, (byte[]) data);
       return;
     }
-    if (vector instanceof Float4Vector) {
-      ((Float4Vector) vector).set(0, (float) data);
+    if (vector instanceof Float4Vector float4Vector) {
+      float4Vector.set(0, (float) data);
       return;
     }
-    if (vector instanceof Float8Vector) {
-      ((Float8Vector) vector).set(0, (double) data);
+    if (vector instanceof Float8Vector float8Vector) {
+      float8Vector.set(0, (double) data);
       return;
     }
-    if (vector instanceof IntVector) {
-      ((IntVector) vector).set(0, (int) data);
+    if (vector instanceof IntVector intVector) {
+      intVector.set(0, (int) data);
       return;
     }
-    if (vector instanceof LargeVarBinaryVector) {
-      ((LargeVarBinaryVector) vector).set(0, (byte[]) data);
+    if (vector instanceof LargeVarBinaryVector largeVarBinaryVector) {
+      largeVarBinaryVector.set(0, (byte[]) data);
       return;
     }
-    if (vector instanceof LargeVarCharVector) {
-      ((LargeVarCharVector) vector).set(0, (Text) data);
+    if (vector instanceof LargeVarCharVector largeVarCharVector) {
+      largeVarCharVector.set(0, (Text) data);
       return;
     }
-    if (vector instanceof SmallIntVector) {
-      ((SmallIntVector) vector).set(0, (short) data);
+    if (vector instanceof SmallIntVector smallIntVector) {
+      smallIntVector.set(0, (short) data);
       return;
     }
-    if (vector instanceof TimeStampVector) {
-      ((TimeStampVector) vector).set(0, (long) data);
+    if (vector instanceof TimeStampVector timeStampVector) {
+      timeStampVector.set(0, (long) data);
       return;
     }
-    if (vector instanceof TinyIntVector) {
-      ((TinyIntVector) vector).set(0, (byte) data);
+    if (vector instanceof TinyIntVector tinyIntVector) {
+      tinyIntVector.set(0, (byte) data);
       return;
     }
-    if (vector instanceof UInt1Vector) {
-      ((UInt1Vector) vector).set(0, (byte) data);
+    if (vector instanceof UInt1Vector uInt1Vector) {
+      uInt1Vector.set(0, (byte) data);
       return;
     }
-    if (vector instanceof UInt2Vector) {
-      ((UInt2Vector) vector).set(0, (short) data);
+    if (vector instanceof UInt2Vector uInt2Vector) {
+      uInt2Vector.set(0, (short) data);
       return;
     }
-    if (vector instanceof UInt4Vector) {
-      ((UInt4Vector) vector).set(0, (int) data);
+    if (vector instanceof UInt4Vector uInt4Vector) {
+      uInt4Vector.set(0, (int) data);
       return;
     }
-    if (vector instanceof UInt8Vector) {
-      ((UInt8Vector) vector).set(0, (long) data);
+    if (vector instanceof UInt8Vector uInt8Vector) {
+      uInt8Vector.set(0, (long) data);
       return;
     }
-    if (vector instanceof VarBinaryVector) {
-      ((VarBinaryVector) vector).set(0, (byte[]) data);
+    if (vector instanceof VarBinaryVector varBinaryVector) {
+      varBinaryVector.set(0, (byte[]) data);
       return;
     }
-    if (vector instanceof VarCharVector) {
-      ((VarCharVector) vector).set(0, (Text) data);
+    if (vector instanceof VarCharVector vectorCharVector) {
+      vectorCharVector.set(0, (Text) data);
       return;
     }
-    if (vector instanceof UUIDVector) {
-      ((UUIDVector) vector).set(0, (java.util.UUID) data);
+    if (vector instanceof UUIDVector uuidVector) {
+      uuidVector.set(0, (java.util.UUID) data);
       return;
     }
-    if (vector instanceof JSONVector) {
-      ((JSONVector) vector).setSafe(0, (byte[]) data);
+    if (vector instanceof JSONVector jsonVector) {
+      jsonVector.setSafe(0, (byte[]) data);
       return;
     }
 
@@ -168,9 +169,9 @@ public class ArrowHelper {
     for (int i = 0; i < columns.size(); i++) {
       Column column = columns.get(i);
       Map<String, String> metadata = new HashMap<>();
-      metadata.put(CQ_EXTENSION_UNIQUE, column.isUnique() ? "true" : "false");
-      metadata.put(CQ_EXTENSION_PRIMARY_KEY, column.isPrimaryKey() ? "true" : "false");
-      metadata.put(CQ_EXTENSION_INCREMENTAL, column.isIncrementalKey() ? "true" : "false");
+      metadata.put(CQ_EXTENSION_UNIQUE, Boolean.toString(column.isUnique()));
+      metadata.put(CQ_EXTENSION_PRIMARY_KEY, Boolean.toString(column.isPrimaryKey()));
+      metadata.put(CQ_EXTENSION_INCREMENTAL, Boolean.toString(column.isIncrementalKey()));
       Field field =
           new Field(
               column.getName(),
@@ -196,9 +197,11 @@ public class ArrowHelper {
   public static Table fromArrowSchema(Schema schema) {
     List<Column> columns = new ArrayList<>();
     for (Field field : schema.getFields()) {
-      boolean isUnique = field.getMetadata().get(CQ_EXTENSION_UNIQUE) == "true";
-      boolean isPrimaryKey = field.getMetadata().get(CQ_EXTENSION_PRIMARY_KEY) == "true";
-      boolean isIncrementalKey = field.getMetadata().get(CQ_EXTENSION_INCREMENTAL) == "true";
+      boolean isUnique = Objects.equals(field.getMetadata().get(CQ_EXTENSION_UNIQUE), "true");
+      boolean isPrimaryKey =
+          Objects.equals(field.getMetadata().get(CQ_EXTENSION_PRIMARY_KEY), "true");
+      boolean isIncrementalKey =
+          Objects.equals(field.getMetadata().get(CQ_EXTENSION_INCREMENTAL), "true");
 
       columns.add(
           Column.builder()
