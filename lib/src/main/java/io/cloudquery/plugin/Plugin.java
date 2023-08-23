@@ -1,5 +1,6 @@
 package io.cloudquery.plugin;
 
+import io.cloudquery.messages.WriteMessage;
 import io.cloudquery.schema.ClientMeta;
 import io.cloudquery.schema.SchemaException;
 import io.cloudquery.schema.Table;
@@ -40,7 +41,7 @@ public abstract class Plugin {
 
   public abstract void read();
 
-  public abstract void write();
+  public abstract void write(WriteMessage message);
 
   public abstract void close();
 }
