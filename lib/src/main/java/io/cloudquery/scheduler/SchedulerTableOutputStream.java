@@ -63,8 +63,7 @@ public class SchedulerTableOutputStream implements TableOutputStream {
   }
 
   public List<Resource> getResources() throws InterruptedException {
-    // TODO: Optimize this to not wait for all futures to complete and return resolved resources
-    // first
+    // TODO: Optimize this to not wait for all resources to complete
     executor.shutdown();
     executor.awaitTermination(RESOURCE_RESOLVE_TIMEOUT_MINUTES, TimeUnit.MINUTES);
     return this.resources;
