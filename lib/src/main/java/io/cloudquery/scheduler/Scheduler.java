@@ -20,20 +20,7 @@ public class Scheduler {
   private int concurrency;
   private boolean deterministicCqId;
 
-  public void sync() {
-    for (Table table : tables) {
-      try {
-        logger.info("sending migrate message for table: {}", table.getName());
-        Sync.MessageMigrateTable migrateTable =
-            Sync.MessageMigrateTable.newBuilder().setTable(ArrowHelper.encode(table)).build();
-        Sync.Response response = Sync.Response.newBuilder().setMigrateTable(migrateTable).build();
-        syncStream.onNext(response);
-      } catch (Exception e) {
-        syncStream.onError(e);
-        return;
-      }
-    }
-
+  private void resolveTables(List<Table> tables, int concurrency) {
     for (Table table : tables) {
       try {
         logger.info("resolving table: {}", table.getName());
@@ -49,12 +36,30 @@ public class Scheduler {
                 .syncStream(syncStream)
                 .build();
         table.getResolver().get().resolve(client, null, schedulerTableOutputStream);
+        resolveTables(table.getRelations(), concurrency / 2);
         logger.info("resolved table: {}", table.getName());
       } catch (Exception e) {
         syncStream.onError(e);
         return;
       }
     }
+  }
+
+  public void sync() {
+    for (Table table : Table.flattenTables(tables)) {
+      try {
+        logger.info("sending migrate message for table: {}", table.getName());
+        Sync.MessageMigrateTable migrateTable =
+            Sync.MessageMigrateTable.newBuilder().setTable(ArrowHelper.encode(table)).build();
+        Sync.Response response = Sync.Response.newBuilder().setMigrateTable(migrateTable).build();
+        syncStream.onNext(response);
+      } catch (Exception e) {
+        syncStream.onError(e);
+        return;
+      }
+    }
+
+    resolveTables(this.tables, this.concurrency);
 
     syncStream.onCompleted();
   }
