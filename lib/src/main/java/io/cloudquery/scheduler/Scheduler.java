@@ -32,7 +32,7 @@ public class Scheduler {
     }
     ExecutorService executor = Executors.newFixedThreadPool(Math.min(tables.size(), concurrency));
     for (Table table : tables) {
-      final int nextLevelConcurrency = Math.max(1, concurrency / tables.size());
+      final int nextLevelConcurrency = Math.max(1, concurrency / 2);
       executor.submit(
           new Runnable() {
             @Override
