@@ -8,6 +8,8 @@ import org.apache.arrow.vector.types.pojo.ArrowType;
 @Builder(toBuilder = true)
 @Getter
 public class Column {
+  public static final String CQ_SOURCE_NAME = "_cq_source_name";
+  public static final String CQ_SYNC_TIME = "_cq_sync_time";
   private String name;
   private String description;
   private ArrowType type;

@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 
 import com.google.protobuf.ByteString;
 import io.cloudquery.helper.ArrowHelper;
+import io.cloudquery.messages.WriteDeleteStale;
 import io.cloudquery.messages.WriteInsert;
 import io.cloudquery.messages.WriteMigrateTable;
 import io.cloudquery.plugin.Plugin;
@@ -78,6 +79,18 @@ public class PluginServerTest {
     verify(plugin).write(any(WriteInsert.class));
   }
 
+  @Test
+  public void shouldSendWriteDeleteStaleMessage() throws Exception {
+    NullResponseStream<Write.Response> responseObserver = new NullResponseStream<>();
+
+    StreamObserver<Write.Request> writeService = pluginStub.write(responseObserver);
+    writeService.onNext(generateDeleteStaleMessage());
+    writeService.onCompleted();
+    responseObserver.await();
+
+    verify(plugin).write(any(WriteDeleteStale.class));
+  }
+
   private static Write.Request generateMigrateTableMessage() throws IOException {
     Table table = Table.builder().name("test").build();
     return Write.Request.newBuilder()
@@ -94,6 +107,11 @@ public class PluginServerTest {
     ByteString byteString = ArrowHelper.encode(resource);
     MessageInsert messageInsert = MessageInsert.newBuilder().setRecord(byteString).build();
     return Write.Request.newBuilder().setInsert(messageInsert).build();
+  }
+
+  private Write.Request generateDeleteStaleMessage() {
+    Write.MessageDeleteStale messageDeleteStale = Write.MessageDeleteStale.newBuilder().build();
+    return Write.Request.newBuilder().setDelete(messageDeleteStale).build();
   }
 
   private static class NullResponseStream<T> implements StreamObserver<T> {
