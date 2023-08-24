@@ -2,6 +2,7 @@ package io.cloudquery.internal.servers.plugin.v3;
 
 import com.google.protobuf.ByteString;
 import io.cloudquery.helper.ArrowHelper;
+import io.cloudquery.messages.WriteDeleteStale;
 import io.cloudquery.messages.WriteInsert;
 import io.cloudquery.messages.WriteMessage;
 import io.cloudquery.messages.WriteMigrateTable;
@@ -16,6 +17,7 @@ import io.cloudquery.schema.Table;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PluginServer extends PluginImplBase {
@@ -125,6 +127,10 @@ public class PluginServer extends PluginImplBase {
             plugin.write(processMigrateTableRequest(request));
           } else if (messageCase == Write.Request.MessageCase.INSERT) {
             plugin.write(processInsertRequest(request));
+          } else if (messageCase == Write.Request.MessageCase.DELETE) {
+            plugin.write(processDeleteStaleRequest(request));
+          } else {
+            throw new IllegalArgumentException("Unknown message type: " + messageCase);
           }
         } catch (IOException | ValidationException ex) {
           onError(ex);
@@ -165,5 +171,14 @@ public class PluginServer extends PluginImplBase {
     Write.MessageInsert insert = request.getInsert();
     ByteString record = insert.getRecord();
     return new WriteInsert(ArrowHelper.decodeResource(record));
+  }
+
+  private WriteMessage processDeleteStaleRequest(Write.Request request)
+      throws IOException, ValidationException {
+    Write.MessageDeleteStale messageDeleteStale = request.getDelete();
+    return new WriteDeleteStale(
+        messageDeleteStale.getTableName(),
+        messageDeleteStale.getSourceName(),
+        new Date(messageDeleteStale.getSyncTime().getSeconds() * 1000));
   }
 }
