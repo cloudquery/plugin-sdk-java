@@ -3,6 +3,7 @@ package io.cloudquery.schema;
 import static io.cloudquery.schema.TableColumnChangeType.ADD;
 import static io.cloudquery.schema.TableColumnChangeType.REMOVE;
 import static io.cloudquery.schema.TableColumnChangeType.UPDATE;
+import static java.util.stream.Collectors.toList;
 
 import io.cloudquery.glob.Glob;
 import io.cloudquery.schema.Column.ColumnBuilder;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
@@ -171,6 +173,13 @@ public class Table {
 
   public List<String> primaryKeys() {
     return columns.stream().filter(Column::isPrimaryKey).map(Column::getName).toList();
+  }
+
+  public List<Integer> primaryKeyIndexes() {
+    return IntStream.range(0, columns.size())
+        .filter(i -> columns.get(i).isPrimaryKey())
+        .boxed()
+        .collect(toList());
   }
 
   private Optional<Table> filterDfs(

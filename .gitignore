@@ -31,3 +31,4 @@ build
 
 # Intellij
 .idea
+.cq

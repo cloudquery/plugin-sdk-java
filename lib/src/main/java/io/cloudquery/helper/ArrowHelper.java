@@ -3,6 +3,7 @@ package io.cloudquery.helper;
 import static java.util.Arrays.asList;
 
 import com.google.protobuf.ByteString;
+import io.cloudquery.scalar.ValidationException;
 import io.cloudquery.schema.Column;
 import io.cloudquery.schema.Resource;
 import io.cloudquery.schema.Table;
@@ -221,14 +222,12 @@ public class ArrowHelper {
     String constraintName = metaData.get(CQ_EXTENSION_CONSTRAINT_NAME);
 
     TableBuilder tableBuilder =
-        Table.builder().name(name).constraintName(constraintName).columns(columns);
-
-    if (title != null) {
-      tableBuilder.title(title);
-    }
-    if (description != null) {
-      tableBuilder.description(description);
-    }
+        Table.builder()
+            .name(name)
+            .constraintName(constraintName)
+            .columns(columns)
+            .title(title)
+            .description(description);
     if (parent != null) {
       tableBuilder.parent(Table.builder().name(parent).build());
     }
@@ -257,6 +256,25 @@ public class ArrowHelper {
             return ByteString.copyFrom(out.toByteArray());
           }
         }
+      }
+    }
+  }
+
+  public static Resource decodeResource(ByteString byteString)
+      throws IOException, ValidationException {
+    try (BufferAllocator bufferAllocator = new RootAllocator()) {
+      try (ArrowStreamReader reader =
+          new ArrowStreamReader(byteString.newInput(), bufferAllocator)) {
+        VectorSchemaRoot vectorSchemaRoot = reader.getVectorSchemaRoot();
+        reader.loadNextBatch();
+        Resource resource =
+            Resource.builder().table(fromArrowSchema(vectorSchemaRoot.getSchema())).build();
+        for (int i = 0; i < vectorSchemaRoot.getSchema().getFields().size(); i++) {
+          FieldVector vector = vectorSchemaRoot.getVector(i);
+          // TODO: We currently only support a single row
+          resource.set(vector.getName(), vector.getObject(0));
+        }
+        return resource;
       }
     }
   }
