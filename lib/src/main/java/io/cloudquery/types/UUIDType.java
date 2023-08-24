@@ -1,7 +1,5 @@
 package io.cloudquery.types;
 
-import static org.apache.arrow.vector.types.pojo.ArrowType.ExtensionType;
-
 import java.nio.ByteBuffer;
 import java.util.UUID;
 import org.apache.arrow.memory.BufferAllocator;
@@ -61,6 +59,9 @@ public class UUIDType extends ExtensionType {
 
     @Override
     public Object getObject(int index) {
+      if (getUnderlyingVector().isSet(index) == 0) {
+        return null;
+      }
       final ByteBuffer bb = ByteBuffer.wrap(getUnderlyingVector().getObject(index));
       return new UUID(bb.getLong(), bb.getLong());
     }

@@ -1,6 +1,7 @@
 package io.cloudquery.server;
 
 import io.cloudquery.plugin.Plugin;
+import io.cloudquery.types.Extensions;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NonNull;
@@ -12,6 +13,7 @@ public class PluginServe {
   @Builder.Default private String[] args = new String[] {};
 
   public int Serve() {
+    Extensions.registerExtensions();
     return new CommandLine(new RootCommand()).addSubcommand(new ServeCommand(plugin)).execute(args);
   }
 }

@@ -105,6 +105,9 @@ public abstract class Scalar<T> {
       case Duration -> {
         return new Duration();
       }
+      case List -> {
+        return new JSON();
+      }
     }
 
     if (arrowType instanceof ArrowType.ExtensionType extensionType) {
