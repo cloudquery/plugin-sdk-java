@@ -9,7 +9,7 @@ ext {
    javaMainClass = "io.cloudquery.MainClass"
 }
 
-group 'io.cloudquery'
+group 'io.cloudquery.plugin.sdk'
 // x-release-please-start-version
 version = '0.0.1'
 // x-release-please-end
