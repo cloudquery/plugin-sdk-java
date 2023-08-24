@@ -59,6 +59,10 @@ public class ArrowHelper {
 
   private static void setVectorData(FieldVector vector, Object data) {
     vector.allocateNew();
+    if (data == null) {
+      vector.setNull(0);
+      return;
+    }
     if (vector instanceof BigIntVector bigIntVector) {
       bigIntVector.set(0, (long) data);
       return;

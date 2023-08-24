@@ -54,6 +54,7 @@ public class Scheduler {
                 table.getResolver().get().resolve(client, parent, schedulerTableOutputStream);
 
                 for (Resource resource : schedulerTableOutputStream.getResources()) {
+                  resource.resolveCQId(deterministicCqId);
                   ByteString record = resource.encode();
                   Sync.MessageInsert insert =
                       Sync.MessageInsert.newBuilder().setRecord(record).build();
