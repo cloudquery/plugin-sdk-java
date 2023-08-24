@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.2...v0.0.3) (2023-08-24)
+
+
+### Features
+
+* Add write delete stale logic ([8b1bb1b](https://github.com/cloudquery/plugin-sdk-java/commit/8b1bb1b597af67bcece71dd6b0a1bba5f13908ee))
+
 ## [0.0.2](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.1...v0.0.2) (2023-08-24)
 
 
