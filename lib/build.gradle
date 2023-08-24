@@ -71,6 +71,7 @@ test {
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
+    withSourcesJar()
     toolchain {
         languageVersion = JavaLanguageVersion.of(20)
     }
