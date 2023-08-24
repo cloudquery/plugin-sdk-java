@@ -13,7 +13,7 @@ public class Spec {
     ObjectMapper objectMapper = new ObjectMapper();
     Spec spec = objectMapper.readValue(json, Spec.class);
     if (spec.getConcurrency() == 0) {
-      spec.setConcurrency(10000);
+      spec.setConcurrency(100);
     }
     return spec;
   }

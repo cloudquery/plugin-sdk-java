@@ -54,6 +54,27 @@ public class MemDB extends Plugin {
                   }
                 })
             .transform(TransformWithClass.builder(Table2Data.class).pkField("id").build())
+            .relations(
+                List.of(
+                    Table.builder()
+                        .name("table2_child")
+                        .resolver(
+                            new TableResolver() {
+
+                              @Override
+                              public void resolve(
+                                  ClientMeta clientMeta,
+                                  Resource parent,
+                                  TableOutputStream stream) {
+                                String parentName = parent.get("name").toString();
+                                stream.write(
+                                    Table2ChildData.builder().name(parentName + "_name1").build());
+                                stream.write(
+                                    Table2ChildData.builder().name(parentName + "_name2").build());
+                              }
+                            })
+                        .transform(TransformWithClass.builder(Table2ChildData.class).build())
+                        .build()))
             .build());
   }
 
