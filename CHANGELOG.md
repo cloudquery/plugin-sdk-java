@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.3...v0.0.4) (2023-08-24)
+
+
+### Features
+
+* Add source jar to published artifacts ([616b561](https://github.com/cloudquery/plugin-sdk-java/commit/616b5615ad22c3f871f14b6d8f63989364a10e1e))
+
 ## [0.0.3](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.2...v0.0.3) (2023-08-24)
 
 
