@@ -142,7 +142,10 @@ public class MemDB extends Plugin {
   public ClientMeta newClient(String spec, NewClientOptions options) throws Exception {
     this.spec = Spec.fromJSON(spec);
     this.allTables = getTables();
-    Tables.transformTables(allTables);
+    Tables.transformTables(this.allTables);
+    for (Table table : this.allTables) {
+      table.addCQIDs();
+    }
     return new MemDBClient();
   }
 }
