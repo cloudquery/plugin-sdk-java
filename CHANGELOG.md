@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.2](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.1...v0.0.2) (2023-08-24)
+
+
+### Bug Fixes
+
+* Package group ([#96](https://github.com/cloudquery/plugin-sdk-java/issues/96)) ([274339d](https://github.com/cloudquery/plugin-sdk-java/commit/274339d74c3b9928ddbf1efd0429d425ae1ad268))
+
 ## 0.0.1 (2023-08-24)
 
 
