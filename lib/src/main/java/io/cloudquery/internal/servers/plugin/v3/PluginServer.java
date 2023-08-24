@@ -2,6 +2,8 @@ package io.cloudquery.internal.servers.plugin.v3;
 
 import com.google.protobuf.ByteString;
 import io.cloudquery.helper.ArrowHelper;
+import io.cloudquery.messages.WriteInsert;
+import io.cloudquery.messages.WriteMessage;
 import io.cloudquery.messages.WriteMigrateTable;
 import io.cloudquery.plugin.BackendOptions;
 import io.cloudquery.plugin.NewClientOptions;
@@ -9,6 +11,7 @@ import io.cloudquery.plugin.Plugin;
 import io.cloudquery.plugin.v3.PluginGrpc.PluginImplBase;
 import io.cloudquery.plugin.v3.Write;
 import io.cloudquery.plugin.v3.Write.MessageMigrateTable;
+import io.cloudquery.scalar.ValidationException;
 import io.cloudquery.schema.Table;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
@@ -120,8 +123,10 @@ public class PluginServer extends PluginImplBase {
         try {
           if (messageCase == Write.Request.MessageCase.MIGRATE_TABLE) {
             plugin.write(processMigrateTableRequest(request));
+          } else if (messageCase == Write.Request.MessageCase.INSERT) {
+            plugin.write(processInsertRequest(request));
           }
-        } catch (IOException ex) {
+        } catch (IOException | ValidationException ex) {
           onError(ex);
         }
       }
@@ -153,5 +158,12 @@ public class PluginServer extends PluginImplBase {
     ByteString byteString = migrateTable.getTable();
     boolean migrateForce = request.getMigrateTable().getMigrateForce();
     return new WriteMigrateTable(ArrowHelper.decode(byteString), migrateForce);
+  }
+
+  private WriteMessage processInsertRequest(Write.Request request)
+      throws IOException, ValidationException {
+    Write.MessageInsert insert = request.getInsert();
+    ByteString record = insert.getRecord();
+    return new WriteInsert(ArrowHelper.decodeResource(record));
   }
 }

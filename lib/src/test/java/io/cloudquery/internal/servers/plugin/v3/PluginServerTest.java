@@ -3,12 +3,18 @@ package io.cloudquery.internal.servers.plugin.v3;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
+import com.google.protobuf.ByteString;
 import io.cloudquery.helper.ArrowHelper;
+import io.cloudquery.messages.WriteInsert;
 import io.cloudquery.messages.WriteMigrateTable;
 import io.cloudquery.plugin.Plugin;
 import io.cloudquery.plugin.v3.PluginGrpc;
 import io.cloudquery.plugin.v3.PluginGrpc.PluginStub;
 import io.cloudquery.plugin.v3.Write;
+import io.cloudquery.plugin.v3.Write.MessageInsert;
+import io.cloudquery.scalar.ValidationException;
+import io.cloudquery.schema.Column;
+import io.cloudquery.schema.Resource;
 import io.cloudquery.schema.Table;
 import io.grpc.Server;
 import io.grpc.inprocess.InProcessChannelBuilder;
@@ -16,7 +22,9 @@ import io.grpc.inprocess.InProcessServerBuilder;
 import io.grpc.stub.StreamObserver;
 import io.grpc.testing.GrpcCleanupRule;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,7 +55,7 @@ public class PluginServerTest {
   }
 
   @Test
-  public void shouldSendWriteMigrateTableMessage() throws IOException, InterruptedException {
+  public void shouldSendWriteMigrateTableMessage() throws Exception {
     NullResponseStream<Write.Response> responseObserver = new NullResponseStream<>();
 
     StreamObserver<Write.Request> writeService = pluginStub.write(responseObserver);
@@ -58,12 +66,34 @@ public class PluginServerTest {
     verify(plugin).write(any(WriteMigrateTable.class));
   }
 
+  @Test
+  public void shouldSendWriteInsertMessage() throws Exception {
+    NullResponseStream<Write.Response> responseObserver = new NullResponseStream<>();
+
+    StreamObserver<Write.Request> writeService = pluginStub.write(responseObserver);
+    writeService.onNext(generateInsertMessage());
+    writeService.onCompleted();
+    responseObserver.await();
+
+    verify(plugin).write(any(WriteInsert.class));
+  }
+
   private static Write.Request generateMigrateTableMessage() throws IOException {
     Table table = Table.builder().name("test").build();
     return Write.Request.newBuilder()
         .setMigrateTable(
             Write.MessageMigrateTable.newBuilder().setTable(ArrowHelper.encode(table)).build())
         .build();
+  }
+
+  private Write.Request generateInsertMessage() throws IOException, ValidationException {
+    Column column = Column.builder().name("test_column").type(ArrowType.Utf8.INSTANCE).build();
+    Table table = Table.builder().name("test").columns(List.of(column)).build();
+    Resource resource = Resource.builder().table(table).build();
+    resource.set("test_column", "test_data");
+    ByteString byteString = ArrowHelper.encode(resource);
+    MessageInsert messageInsert = MessageInsert.newBuilder().setRecord(byteString).build();
+    return Write.Request.newBuilder().setInsert(messageInsert).build();
   }
 
   private static class NullResponseStream<T> implements StreamObserver<T> {
