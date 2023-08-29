@@ -68,7 +68,7 @@ public class ArrowHelper {
       return;
     }
     if (vector instanceof BitVector bitVector) {
-      bitVector.set(0, (int) data);
+      bitVector.set(0, (boolean) data ? 1 : 0);
       return;
     }
     if (vector instanceof FixedSizeBinaryVector fixedSizeBinaryVector) {
