@@ -1,6 +1,12 @@
 package io.cloudquery.scalar;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
@@ -66,7 +72,7 @@ public class TimestampTest {
   @Test
   public void testDataType() {
     Timestamp timestamp = new Timestamp();
-    assertEquals(new ArrowType.Timestamp(TimeUnit.SECOND, "Z"), timestamp.dataType());
+    assertEquals(new ArrowType.Timestamp(TimeUnit.MILLISECOND, "Z"), timestamp.dataType());
   }
 
   @Test
@@ -118,7 +124,7 @@ public class TimestampTest {
           timestamp.set(ts);
         });
     assertTrue(timestamp.isValid());
-    assertEquals(ts.toEpochSecond(), timestamp.get());
+    assertEquals(ts.toEpochSecond() * 1000, timestamp.get());
 
     assertDoesNotThrow(
         () -> {
