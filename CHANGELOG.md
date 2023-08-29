@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.5...v0.0.6) (2023-08-29)
+
+
+### Bug Fixes
+
+* make the underlying timestamp consistent ([#105](https://github.com/cloudquery/plugin-sdk-java/issues/105)) ([d97dabd](https://github.com/cloudquery/plugin-sdk-java/commit/d97dabd95e0a91d43dd921d9c646290b1a3b13c9))
+
 ## [0.0.5](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.4...v0.0.5) (2023-08-29)
 
 
