@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.4...v0.0.5) (2023-08-29)
+
+
+### Bug Fixes
+
+* convert a boolean to a bit vector ([#102](https://github.com/cloudquery/plugin-sdk-java/issues/102)) ([d35f9be](https://github.com/cloudquery/plugin-sdk-java/commit/d35f9be408db7a9510348b0bcce2ba2dc1be28d5))
+
 ## [0.0.4](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.3...v0.0.4) (2023-08-24)
 
 
