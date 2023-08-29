@@ -8,6 +8,7 @@ import io.cloudquery.types.JSONType;
 import io.cloudquery.types.ListType;
 import java.net.InetAddress;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.stream.Stream;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
@@ -102,7 +103,8 @@ class TypeTransformerTest {
         Arguments.of("stringArrayField", ListType.listOf(ArrowType.Utf8.INSTANCE)),
 
         // Time
-        Arguments.of("timeField", new ArrowType.Timestamp(TimeUnit.MICROSECOND, null)),
+        Arguments.of(
+            "timeField", new ArrowType.Timestamp(TimeUnit.MILLISECOND, ZoneOffset.UTC.getId())),
 
         // Byte
         Arguments.of("byteArrayField", ArrowType.Binary.INSTANCE),
