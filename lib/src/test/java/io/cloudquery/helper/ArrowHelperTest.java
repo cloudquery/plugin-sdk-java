@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.google.protobuf.ByteString;
 import io.cloudquery.schema.Column;
+import io.cloudquery.schema.Resource;
 import io.cloudquery.schema.Table;
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.Map;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.types.pojo.Field;
 import org.apache.arrow.vector.types.pojo.Schema;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ArrowHelperTest {
@@ -32,20 +34,21 @@ public class ArrowHelperTest {
           .columns(
               List.of(
                   Column.builder()
-                      .name("column1")
+                      .name("string_column1")
                       .type(ArrowType.Utf8.INSTANCE)
                       .unique(true)
                       .incrementalKey(true)
                       .primaryKey(true)
                       .build(),
-                  Column.builder().name("column2").type(ArrowType.Utf8.INSTANCE).build()))
+                  Column.builder().name("string_column2").type(ArrowType.Utf8.INSTANCE).build(),
+                  Column.builder().name("boolean_column").type(ArrowType.Bool.INSTANCE).build()))
           .build();
 
   @Test
   public void testToArrowSchema() {
     Schema arrowSchema = ArrowHelper.toArrowSchema(TEST_TABLE);
 
-    assertEquals(arrowSchema.getFields().get(0).getName(), "column1");
+    assertEquals(arrowSchema.getFields().get(0).getName(), "string_column1");
     assertEquals(
         arrowSchema.getFields().get(0).getMetadata(),
         Map.of(
@@ -55,7 +58,7 @@ public class ArrowHelperTest {
             "true",
             CQ_EXTENSION_PRIMARY_KEY,
             "true"));
-    assertEquals(arrowSchema.getFields().get(1).getName(), "column2");
+    assertEquals(arrowSchema.getFields().get(1).getName(), "string_column2");
     assertEquals(
         arrowSchema.getFields().get(1).getMetadata(),
         Map.of(
@@ -80,8 +83,8 @@ public class ArrowHelperTest {
   public void testFromArrowSchema() {
     List<Field> fields =
         List.of(
-            Field.nullable("column1", ArrowType.Utf8.INSTANCE),
-            Field.nullable("column2", ArrowType.Utf8.INSTANCE));
+            Field.nullable("string_column1", ArrowType.Utf8.INSTANCE),
+            Field.nullable("string_column2", ArrowType.Utf8.INSTANCE));
 
     Schema schema = new Schema(fields, Map.of(CQ_TABLE_NAME, "table1"));
 
@@ -97,7 +100,7 @@ public class ArrowHelperTest {
   }
 
   @Test
-  public void testRoundTrip() throws IOException {
+  public void testRoundTripTableEncoding() throws IOException {
     ByteString byteString = ArrowHelper.encode(TEST_TABLE);
     Table table = ArrowHelper.decode(byteString);
 
@@ -110,5 +113,19 @@ public class ArrowHelperTest {
       assertEquals(TEST_TABLE.getColumns().get(i).getName(), table.getColumns().get(i).getName());
       assertEquals(TEST_TABLE.getColumns().get(i).getType(), table.getColumns().get(i).getType());
     }
+  }
+
+  @Test
+  public void testRoundTripResourceEncoding() throws Exception {
+    Resource resource = Resource.builder().table(TEST_TABLE).build();
+    resource.set("string_column1", "test_data");
+    resource.set("string_column2", "test_data2");
+    resource.set("boolean_column", true);
+
+    Assertions.assertDoesNotThrow(
+        () -> {
+          ByteString byteString = ArrowHelper.encode(resource);
+          ArrowHelper.decodeResource(byteString);
+        });
   }
 }

@@ -100,10 +100,15 @@ public class PluginServerTest {
   }
 
   private Write.Request generateInsertMessage() throws IOException, ValidationException {
-    Column column = Column.builder().name("test_column").type(ArrowType.Utf8.INSTANCE).build();
-    Table table = Table.builder().name("test").columns(List.of(column)).build();
+    Column stringColumn =
+        Column.builder().name("test_column").type(ArrowType.Utf8.INSTANCE).build();
+    Column booleanColumn =
+        Column.builder().name("boolean_column").type(ArrowType.Bool.INSTANCE).build();
+    Table table =
+        Table.builder().name("test").columns(List.of(stringColumn, booleanColumn)).build();
     Resource resource = Resource.builder().table(table).build();
     resource.set("test_column", "test_data");
+    resource.set("boolean_column", true);
     ByteString byteString = ArrowHelper.encode(resource);
     MessageInsert messageInsert = MessageInsert.newBuilder().setRecord(byteString).build();
     return Write.Request.newBuilder().setInsert(messageInsert).build();
