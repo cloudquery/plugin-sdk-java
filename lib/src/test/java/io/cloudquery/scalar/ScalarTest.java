@@ -2,6 +2,7 @@ package io.cloudquery.scalar;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
+import io.cloudquery.types.JSONType;
 import io.cloudquery.types.UUIDType;
 import java.time.ZoneOffset;
 import java.util.stream.Stream;
@@ -64,6 +65,7 @@ public class ScalarTest {
 
         // Extension
         Arguments.of(new UUIDType(), UUID.class),
+        Arguments.of(new JSONType(), JSON.class),
 
         // Date
         Arguments.of(new ArrowType.Date(DateUnit.DAY), DateDay.class),

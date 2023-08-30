@@ -1,5 +1,6 @@
 package io.cloudquery.scalar;
 
+import io.cloudquery.types.JSONType;
 import io.cloudquery.types.UUIDType;
 import java.util.Objects;
 import org.apache.arrow.vector.types.pojo.ArrowType;
@@ -77,6 +78,21 @@ public abstract class Scalar<T> {
   public static final java.lang.String NULL_VALUE_STRING = "(null)";
 
   public static Scalar<?> fromArrowType(ArrowType arrowType) {
+    if (arrowType instanceof ArrowType.ExtensionType extensionType) {
+      switch (extensionType.extensionName()) {
+        case UUIDType.EXTENSION_NAME -> {
+          return new UUID();
+        }
+        case JSONType.EXTENSION_NAME -> {
+          return new JSON();
+        }
+          // TODO: Add support for these types when scalar available
+          // case INETType.EXTENSION_NAME -> {
+          //     return new INET();
+          // }
+      }
+    }
+
     switch (arrowType.getTypeID()) {
       case Timestamp -> {
         return new Timestamp();
@@ -107,22 +123,6 @@ public abstract class Scalar<T> {
       }
       case List -> {
         return new JSON();
-      }
-    }
-
-    if (arrowType instanceof ArrowType.ExtensionType extensionType) {
-      //noinspection SwitchStatementWithTooFewBranches
-      switch (extensionType.extensionName()) {
-        case UUIDType.EXTENSION_NAME -> {
-          return new UUID();
-        }
-          // TODO: Add support for these types when scalar available
-          // case JSONType.EXTENSION_NAME -> {
-          //     return new JSON();
-          // }
-          // case INETType.EXTENSION_NAME -> {
-          //     return new INET();
-          // }
       }
     }
 
