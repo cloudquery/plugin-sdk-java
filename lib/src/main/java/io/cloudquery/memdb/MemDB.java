@@ -15,7 +15,9 @@ import io.cloudquery.schema.TableResolver;
 import io.cloudquery.transformers.Tables;
 import io.cloudquery.transformers.TransformWithClass;
 import io.grpc.stub.StreamObserver;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class MemDB extends Plugin {
@@ -32,6 +34,8 @@ public class MemDB extends Plugin {
                         Table1Data.builder()
                             .id(UUID.fromString("46b2b6e6-8f3e-4340-a721-4aa0786b1cc0"))
                             .name("name1")
+                            .timestamp(LocalDateTime.now())
+                            .json(Map.of("key1", "value1", "key2", "value2"))
                             .build());
                     stream.write(
                         Table1Data.builder()
