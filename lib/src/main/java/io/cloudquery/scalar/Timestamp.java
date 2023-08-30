@@ -13,7 +13,7 @@ public class Timestamp extends Scalar<Long> {
   public static final ZoneId zoneID = ZoneOffset.UTC;
 
   // TODO: add more units support later
-  private static final ArrowType dt =
+  public static final ArrowType dt =
       new ArrowType.Timestamp(TimeUnit.MILLISECOND, zoneID.toString());
 
   public Timestamp() {

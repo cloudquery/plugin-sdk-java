@@ -17,6 +17,7 @@ import io.cloudquery.types.JSONType;
 import io.cloudquery.types.ListType;
 import java.net.InetAddress;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
@@ -97,7 +98,7 @@ class TransformWithClassTest {
           Column.builder().name("any_array_col").type(JSONType.INSTANCE).build(),
           Column.builder()
               .name("time_col")
-              .type(new Timestamp(TimeUnit.MICROSECOND, null))
+              .type(new Timestamp(TimeUnit.MILLISECOND, ZoneOffset.UTC.getId()))
               .build());
 
   public static final List<Column> expectedColumnsSimpleClass =

@@ -1,12 +1,12 @@
 package io.cloudquery.transformers;
 
+import io.cloudquery.scalar.Timestamp;
 import io.cloudquery.types.InetType;
 import io.cloudquery.types.JSONType;
 import io.cloudquery.types.ListType;
 import io.cloudquery.types.UUIDType;
 import java.lang.reflect.Field;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
-import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 
 public interface TypeTransformer {
@@ -41,7 +41,7 @@ public interface TypeTransformer {
           return InetType.INSTANCE;
         }
         case "java.time.LocalDateTime" -> {
-          return new ArrowType.Timestamp(TimeUnit.MICROSECOND, null);
+          return Timestamp.dt;
         }
         case "java.util.UUID" -> {
           return new UUIDType();
