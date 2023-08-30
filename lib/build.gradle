@@ -11,7 +11,7 @@ ext {
 
 group 'io.cloudquery.plugin.sdk'
 // x-release-please-start-version
-version = '0.0.7'
+version = '0.0.8'
 // x-release-please-end
 
 repositories {
