@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.8](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.7...v0.0.8) (2023-08-30)
+
+
+### Bug Fixes
+
+* check for extension type before built-in arrow types ([#109](https://github.com/cloudquery/plugin-sdk-java/issues/109)) ([5484316](https://github.com/cloudquery/plugin-sdk-java/commit/5484316f61b9fe0d978b5d212aeb6443e977abb7))
+
 ## [0.0.7](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.6...v0.0.7) (2023-08-30)
 
 
