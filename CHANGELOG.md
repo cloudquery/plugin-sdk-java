@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.7](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.6...v0.0.7) (2023-08-30)
+
+
+### Bug Fixes
+
+* make the type transformer consistent with scalar units ([#107](https://github.com/cloudquery/plugin-sdk-java/issues/107)) ([0428c7d](https://github.com/cloudquery/plugin-sdk-java/commit/0428c7d271e2d44238368b11814c0b1f7da67a06))
+
 ## [0.0.6](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.5...v0.0.6) (2023-08-29)
 
 
