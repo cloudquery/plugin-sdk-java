@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.9](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.8...v0.0.9) (2023-08-31)
+
+
+### Features
+
+* Add `null` client ([3896982](https://github.com/cloudquery/plugin-sdk-java/commit/3896982b5e5b6eda9e529468195a413f60a8d454))
+
 ## [0.0.8](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.7...v0.0.8) (2023-08-30)
 
 
