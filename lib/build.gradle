@@ -35,7 +35,7 @@ dependencies {
     implementation 'info.picocli:picocli:4.7.5'
     implementation 'com.google.guava:guava:32.1.2-jre'
     implementation "io.grpc:grpc-protobuf:1.57.2"
-    implementation "io.grpc:grpc-stub:1.57.1"
+    implementation "io.grpc:grpc-stub:1.57.2"
     implementation "io.grpc:grpc-services:1.57.2"
     implementation "io.grpc:grpc-testing:1.57.1"
     implementation "io.cloudquery:plugin-pb-java:0.0.6"
