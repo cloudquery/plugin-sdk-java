@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.10](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.9...v0.0.10) (2023-09-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-annotations to v2.15.2 ([#114](https://github.com/cloudquery/plugin-sdk-java/issues/114)) ([9784f43](https://github.com/cloudquery/plugin-sdk-java/commit/9784f43df5c53dcc36b1fd48354537d68ac137b3))
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-core to v2.15.2 ([#116](https://github.com/cloudquery/plugin-sdk-java/issues/116)) ([ba041d9](https://github.com/cloudquery/plugin-sdk-java/commit/ba041d9e79b87671dc38e238b6e5dcd7dffe64e8))
+* **deps:** Update dependency info.picocli:picocli to v4.7.5 ([#117](https://github.com/cloudquery/plugin-sdk-java/issues/117)) ([e6ebb84](https://github.com/cloudquery/plugin-sdk-java/commit/e6ebb84d33842517e9f9709a648d014ddb1d3d91))
+* **deps:** Update dependency io.grpc:grpc-protobuf to v1.57.2 ([#118](https://github.com/cloudquery/plugin-sdk-java/issues/118)) ([59687cd](https://github.com/cloudquery/plugin-sdk-java/commit/59687cd98bffce0b7396babcede5ae07f426ee03))
+* **deps:** Update dependency io.grpc:grpc-services to v1.57.2 ([#119](https://github.com/cloudquery/plugin-sdk-java/issues/119)) ([83ac40b](https://github.com/cloudquery/plugin-sdk-java/commit/83ac40bcb307cb671279db0a600b5aaa66c0a5fb))
+* **deps:** Update dependency io.grpc:grpc-stub to v1.57.2 ([#120](https://github.com/cloudquery/plugin-sdk-java/issues/120)) ([a3bb02c](https://github.com/cloudquery/plugin-sdk-java/commit/a3bb02c24c4dc7978554a4e95131a8194286003d))
+* **deps:** Update dependency io.grpc:grpc-testing to v1.57.2 ([#121](https://github.com/cloudquery/plugin-sdk-java/issues/121)) ([0df4a4f](https://github.com/cloudquery/plugin-sdk-java/commit/0df4a4f4c17ae3bf963c92d7fe5861889f0cdf26))
+
 ## [0.0.9](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.8...v0.0.9) (2023-08-31)
 
 
