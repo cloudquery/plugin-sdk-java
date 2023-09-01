@@ -12,10 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.cloudquery.schema.Column;
 import io.cloudquery.schema.Table;
-import io.cloudquery.types.InetType;
 import io.cloudquery.types.JSONType;
-import io.cloudquery.types.ListType;
-import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -57,7 +54,6 @@ class TransformWithClassTest {
     private List<Integer> intListCol;
     private String[] stringArrayCol;
     private List<String> stringListCol;
-    private InetAddress inetAddressCol;
     private byte[] byteArrayCol;
     private Object[] anyArrayCol;
     private LocalDateTime timeCol;
@@ -89,11 +85,10 @@ class TransformWithClassTest {
           Column.builder().name("boolean_col").type(Bool.INSTANCE).build(),
           Column.builder().name("boolean_object_col").type(Bool.INSTANCE).build(),
           Column.builder().name("json_col").type(JSONType.INSTANCE).build(),
-          Column.builder().name("int_array_col").type(ListType.listOf(new Int(64, true))).build(),
+          Column.builder().name("int_array_col").type(JSONType.INSTANCE).build(),
           Column.builder().name("int_list_col").type(JSONType.INSTANCE).build(),
-          Column.builder().name("string_array_col").type(ListType.listOf(Utf8.INSTANCE)).build(),
+          Column.builder().name("string_array_col").type(JSONType.INSTANCE).build(),
           Column.builder().name("string_list_col").type(JSONType.INSTANCE).build(),
-          Column.builder().name("inet_address_col").type(InetType.INSTANCE).build(),
           Column.builder().name("byte_array_col").type(Binary.INSTANCE).build(),
           Column.builder().name("any_array_col").type(JSONType.INSTANCE).build(),
           Column.builder()

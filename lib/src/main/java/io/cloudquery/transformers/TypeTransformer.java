@@ -1,9 +1,7 @@
 package io.cloudquery.transformers;
 
 import io.cloudquery.scalar.Timestamp;
-import io.cloudquery.types.InetType;
 import io.cloudquery.types.JSONType;
-import io.cloudquery.types.ListType;
 import io.cloudquery.types.UUIDType;
 import java.lang.reflect.Field;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
@@ -37,9 +35,6 @@ public interface TypeTransformer {
         case "java.util.Map" -> {
           return JSONType.INSTANCE;
         }
-        case "java.net.InetAddress" -> {
-          return InetType.INSTANCE;
-        }
         case "java.time.LocalDateTime" -> {
           return Timestamp.dt;
         }
@@ -52,9 +47,7 @@ public interface TypeTransformer {
             if (componentType.getName().equals("byte")) {
               return ArrowType.Binary.INSTANCE;
             }
-            // if element type is already json just return JSON rather than a list of JSON
-            ArrowType elementType = transformArrowType(name, componentType);
-            return elementType == JSONType.INSTANCE ? elementType : ListType.listOf(elementType);
+            return JSONType.INSTANCE;
           }
           if (!type.isPrimitive()) {
             return JSONType.INSTANCE;

@@ -3,9 +3,7 @@ package io.cloudquery.transformers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.cloudquery.transformers.TypeTransformer.DefaultTypeTransformer;
-import io.cloudquery.types.InetType;
 import io.cloudquery.types.JSONType;
-import io.cloudquery.types.ListType;
 import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -98,19 +96,12 @@ class TypeTransformerTest {
         // Inner class
         Arguments.of("innerClassObjectField", JSONType.INSTANCE),
 
-        // Array field
-        Arguments.of("intArrayField", ListType.listOf(new ArrowType.Int(64, true))),
-        Arguments.of("stringArrayField", ListType.listOf(ArrowType.Utf8.INSTANCE)),
-
         // Time
         Arguments.of(
             "timeField", new ArrowType.Timestamp(TimeUnit.MILLISECOND, ZoneOffset.UTC.getId())),
 
         // Byte
         Arguments.of("byteArrayField", ArrowType.Binary.INSTANCE),
-
-        // Inet
-        Arguments.of("inetField", InetType.INSTANCE),
 
         // Object array
         Arguments.of("objectArrayField", JSONType.INSTANCE));
