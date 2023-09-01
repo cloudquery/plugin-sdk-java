@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.11](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.10...v0.0.11) (2023-09-01)
+
+
+### Bug Fixes
+
+* remove unused data types ([#122](https://github.com/cloudquery/plugin-sdk-java/issues/122)) ([acbceda](https://github.com/cloudquery/plugin-sdk-java/commit/acbcedab5f3c1ffa00c648fd1ff5f5542c372466))
+
 ## [0.0.10](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.9...v0.0.10) (2023-09-01)
 
 
