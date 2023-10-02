@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.12](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.11...v0.0.12) (2023-10-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency gradle to v8.3 ([#128](https://github.com/cloudquery/plugin-sdk-java/issues/128)) ([567a6f3](https://github.com/cloudquery/plugin-sdk-java/commit/567a6f3ee3cc14af2417c2f2ca64c701eb69d3fa))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.7 ([#125](https://github.com/cloudquery/plugin-sdk-java/issues/125)) ([9307c76](https://github.com/cloudquery/plugin-sdk-java/commit/9307c76e0a1bd0ae0b965ecb72b82ad72d76ebc3))
+* **deps:** Update dependency io.grpc:grpc-protobuf to v1.58.0 ([#129](https://github.com/cloudquery/plugin-sdk-java/issues/129)) ([674b9b8](https://github.com/cloudquery/plugin-sdk-java/commit/674b9b81f92d8b847e43f6049adb7c285dafb966))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.15.2 ([#127](https://github.com/cloudquery/plugin-sdk-java/issues/127)) ([4050638](https://github.com/cloudquery/plugin-sdk-java/commit/405063845f83017b6adea4cbc7997ec4ec6d5441))
+
 ## [0.0.11](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.10...v0.0.11) (2023-09-01)
 
 
