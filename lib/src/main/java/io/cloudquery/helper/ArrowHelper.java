@@ -20,25 +20,7 @@ import java.util.Map;
 import java.util.Objects;
 import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
-import org.apache.arrow.vector.BigIntVector;
-import org.apache.arrow.vector.BitVector;
-import org.apache.arrow.vector.FieldVector;
-import org.apache.arrow.vector.FixedSizeBinaryVector;
-import org.apache.arrow.vector.Float4Vector;
-import org.apache.arrow.vector.Float8Vector;
-import org.apache.arrow.vector.IntVector;
-import org.apache.arrow.vector.LargeVarBinaryVector;
-import org.apache.arrow.vector.LargeVarCharVector;
-import org.apache.arrow.vector.SmallIntVector;
-import org.apache.arrow.vector.TimeStampVector;
-import org.apache.arrow.vector.TinyIntVector;
-import org.apache.arrow.vector.UInt1Vector;
-import org.apache.arrow.vector.UInt2Vector;
-import org.apache.arrow.vector.UInt4Vector;
-import org.apache.arrow.vector.UInt8Vector;
-import org.apache.arrow.vector.VarBinaryVector;
-import org.apache.arrow.vector.VarCharVector;
-import org.apache.arrow.vector.VectorSchemaRoot;
+import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.ipc.ArrowReader;
 import org.apache.arrow.vector.ipc.ArrowStreamReader;
 import org.apache.arrow.vector.ipc.ArrowStreamWriter;
@@ -137,6 +119,14 @@ public class ArrowHelper {
     }
     if (vector instanceof JSONVector jsonVector) {
       jsonVector.setSafe(0, (byte[]) data);
+      return;
+    }
+    if (vector instanceof DateDayVector dayDateVector) {
+      dayDateVector.set(0, (int) data);
+      return;
+    }
+    if (vector instanceof DateMilliVector dateMilliVector) {
+      dateMilliVector.set(0, (long) data);
       return;
     }
 
