@@ -145,10 +145,6 @@ public class ArrowHelper {
       dayDateVector.set(0, (int) data);
       return;
     }
-    if (vector instanceof DateMilliVector dateMilliVector) {
-      dateMilliVector.set(0, (long) data);
-      return;
-    }
 
     throw new IllegalArgumentException("Unsupported vector type: " + vector.getClass());
   }
