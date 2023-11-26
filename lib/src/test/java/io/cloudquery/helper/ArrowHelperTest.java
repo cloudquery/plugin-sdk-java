@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.types.pojo.Field;
@@ -45,7 +44,10 @@ public class ArrowHelperTest {
                       .build(),
                   Column.builder().name("string_column2").type(ArrowType.Utf8.INSTANCE).build(),
                   Column.builder().name("boolean_column").type(ArrowType.Bool.INSTANCE).build(),
-                  Column.builder().name("date_days_column").type(new ArrowType.Date(DateUnit.DAY)).build()))
+                  Column.builder()
+                      .name("date_days_column")
+                      .type(new ArrowType.Date(DateUnit.DAY))
+                      .build()))
           .build();
 
   @Test
