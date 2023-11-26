@@ -15,8 +15,10 @@ import io.cloudquery.schema.Column;
 import io.cloudquery.schema.Resource;
 import io.cloudquery.schema.Table;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.types.pojo.Field;
 import org.apache.arrow.vector.types.pojo.Schema;
@@ -41,7 +43,11 @@ public class ArrowHelperTest {
                       .primaryKey(true)
                       .build(),
                   Column.builder().name("string_column2").type(ArrowType.Utf8.INSTANCE).build(),
-                  Column.builder().name("boolean_column").type(ArrowType.Bool.INSTANCE).build()))
+                  Column.builder().name("boolean_column").type(ArrowType.Bool.INSTANCE).build(),
+                  Column.builder()
+                      .name("date_days_column")
+                      .type(new ArrowType.Date(DateUnit.DAY))
+                      .build()))
           .build();
 
   @Test
@@ -69,6 +75,9 @@ public class ArrowHelperTest {
             CQ_EXTENSION_PRIMARY_KEY,
             "false"));
 
+    assertEquals(arrowSchema.getFields().get(2).getName(), "boolean_column");
+    assertEquals(arrowSchema.getFields().get(3).getName(), "date_days_column");
+
     assertEquals(
         arrowSchema.getCustomMetadata(),
         Map.of(
@@ -84,7 +93,8 @@ public class ArrowHelperTest {
     List<Field> fields =
         List.of(
             Field.nullable("string_column1", ArrowType.Utf8.INSTANCE),
-            Field.nullable("string_column2", ArrowType.Utf8.INSTANCE));
+            Field.nullable("string_column2", ArrowType.Utf8.INSTANCE),
+            Field.nullable("date_days_column", new ArrowType.Date(DateUnit.DAY)));
 
     Schema schema = new Schema(fields, Map.of(CQ_TABLE_NAME, "table1"));
 
@@ -120,6 +130,7 @@ public class ArrowHelperTest {
     Resource resource = Resource.builder().table(TEST_TABLE).build();
     resource.set("string_column1", "test_data");
     resource.set("string_column2", "test_data2");
+    resource.set("date_days_column", (int) LocalDate.parse("2023-11-24").toEpochDay());
     resource.set("boolean_column", true);
 
     Assertions.assertDoesNotThrow(
