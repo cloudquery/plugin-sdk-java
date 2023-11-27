@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.14](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.13...v0.0.14) (2023-11-27)
+
+
+### Features
+
+* Add better roundtrip support ([#142](https://github.com/cloudquery/plugin-sdk-java/issues/142)) ([d59f91a](https://github.com/cloudquery/plugin-sdk-java/commit/d59f91a76b33c8a311bbc6584ca9d4dd43d627bf))
+
 ## [0.0.13](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.12...v0.0.13) (2023-11-26)
 
 
