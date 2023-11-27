@@ -1,7 +1,5 @@
 package io.cloudquery.helper;
 
-import static java.util.Arrays.asList;
-
 import com.google.protobuf.ByteString;
 import io.cloudquery.scalar.ValidationException;
 import io.cloudquery.schema.Column;
@@ -10,36 +8,9 @@ import io.cloudquery.schema.Table;
 import io.cloudquery.schema.Table.TableBuilder;
 import io.cloudquery.types.JSONType.JSONVector;
 import io.cloudquery.types.UUIDType.UUIDVector;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.channels.Channels;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
-import org.apache.arrow.vector.BigIntVector;
-import org.apache.arrow.vector.BitVector;
-import org.apache.arrow.vector.DateDayVector;
-import org.apache.arrow.vector.FieldVector;
-import org.apache.arrow.vector.FixedSizeBinaryVector;
-import org.apache.arrow.vector.Float4Vector;
-import org.apache.arrow.vector.Float8Vector;
-import org.apache.arrow.vector.IntVector;
-import org.apache.arrow.vector.LargeVarBinaryVector;
-import org.apache.arrow.vector.LargeVarCharVector;
-import org.apache.arrow.vector.SmallIntVector;
-import org.apache.arrow.vector.TimeStampVector;
-import org.apache.arrow.vector.TinyIntVector;
-import org.apache.arrow.vector.UInt1Vector;
-import org.apache.arrow.vector.UInt2Vector;
-import org.apache.arrow.vector.UInt4Vector;
-import org.apache.arrow.vector.UInt8Vector;
-import org.apache.arrow.vector.VarBinaryVector;
-import org.apache.arrow.vector.VarCharVector;
-import org.apache.arrow.vector.VectorSchemaRoot;
+import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.ipc.ArrowReader;
 import org.apache.arrow.vector.ipc.ArrowStreamReader;
 import org.apache.arrow.vector.ipc.ArrowStreamWriter;
@@ -47,6 +18,13 @@ import org.apache.arrow.vector.types.pojo.Field;
 import org.apache.arrow.vector.types.pojo.FieldType;
 import org.apache.arrow.vector.types.pojo.Schema;
 import org.apache.arrow.vector.util.Text;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.channels.Channels;
+import java.util.*;
+
+import static java.util.Arrays.asList;
 
 public class ArrowHelper {
   public static final String CQ_EXTENSION_INCREMENTAL = "cq:extension:incremental";
@@ -70,6 +48,18 @@ public class ArrowHelper {
     }
     if (vector instanceof BitVector bitVector) {
       bitVector.set(0, (boolean) data ? 1 : 0);
+      return;
+    }
+    if (vector instanceof DateDayVector dayDateVector) {
+      dayDateVector.set(0, (int) data);
+      return;
+    }
+    if (vector instanceof DateMilliVector dateMilliVector) {
+      dateMilliVector.set(0, (long) data);
+      return;
+    }
+    if (vector instanceof DurationVector durationVector) {
+      durationVector.set(0, (long) data);
       return;
     }
     if (vector instanceof FixedSizeBinaryVector fixedSizeBinaryVector) {
@@ -98,6 +88,22 @@ public class ArrowHelper {
     }
     if (vector instanceof SmallIntVector smallIntVector) {
       smallIntVector.set(0, (short) data);
+      return;
+    }
+    if (vector instanceof TimeMicroVector timeMicroVector) {
+      timeMicroVector.set(0, (long) data);
+      return;
+    }
+    if (vector instanceof TimeMilliVector timeMilliVector) {
+      timeMilliVector.set(0, (int) data);
+      return;
+    }
+    if (vector instanceof TimeNanoVector timeNanoVector) {
+      timeNanoVector.set(0, (long) data);
+      return;
+    }
+    if (vector instanceof TimeSecVector timeSecVector) {
+      timeSecVector.set(0, (int) data);
       return;
     }
     if (vector instanceof TimeStampVector timeStampVector) {
@@ -138,10 +144,6 @@ public class ArrowHelper {
     }
     if (vector instanceof JSONVector jsonVector) {
       jsonVector.setSafe(0, (byte[]) data);
-      return;
-    }
-    if (vector instanceof DateDayVector dayDateVector) {
-      dayDateVector.set(0, (int) data);
       return;
     }
 
