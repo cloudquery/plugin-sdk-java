@@ -3,6 +3,8 @@ package io.cloudquery.scalar;
 import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 
+import java.time.LocalDateTime;
+
 public class DateMilli extends Scalar<Long> {
   public DateMilli() {
     super();
@@ -31,6 +33,12 @@ public class DateMilli extends Scalar<Long> {
 
     if (value instanceof CharSequence sequence) {
       this.value = Long.parseLong(sequence.toString());
+      return;
+    }
+
+    if (value instanceof LocalDateTime localDateTime) {
+      // we actually store only date
+      this.value = localDateTime.toLocalDate().toEpochDay();
       return;
     }
 

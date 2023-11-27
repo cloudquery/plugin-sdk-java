@@ -207,6 +207,11 @@ public abstract class Number<T> extends Scalar<T> {
         return;
       }
 
+      if (value instanceof Character character) {
+        this.value = UShort.valueOf(character);
+        return;
+      }
+
       throw new ValidationException(
           ValidationException.NO_CONVERSION_AVAILABLE, this.dataType(), value);
     }

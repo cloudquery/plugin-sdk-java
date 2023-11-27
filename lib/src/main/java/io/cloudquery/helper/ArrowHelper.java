@@ -21,10 +21,15 @@ import org.apache.arrow.vector.types.pojo.Field;
 import org.apache.arrow.vector.types.pojo.FieldType;
 import org.apache.arrow.vector.types.pojo.Schema;
 import org.apache.arrow.vector.util.Text;
+import org.joou.UByte;
+import org.joou.UInteger;
+import org.joou.ULong;
+import org.joou.UShort;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.channels.Channels;
+import java.time.Duration;
 import java.util.*;
 
 import static java.util.Arrays.asList;
@@ -61,16 +66,14 @@ public class ArrowHelper {
       dateMilliVector.set(0, (long) data);
       return;
     }
-    if (vector instanceof Decimal256Vector decimal256Vector) {
-      decimal256Vector.set(0, (java.math.BigDecimal) data);
-      return;
-    }
-    if (vector instanceof DecimalVector decimalVector) {
-      decimalVector.set(0, (java.math.BigDecimal) data);
-      return;
-    }
     if (vector instanceof DurationVector durationVector) {
-      durationVector.set(0, (long) data);
+      Duration duration = (Duration) data;
+      switch (durationVector.getUnit()) {
+        case SECOND -> { durationVector.set(0, duration.toSeconds());}
+        case MILLISECOND -> { durationVector.set(0, duration.toMillis());}
+        case MICROSECOND -> { durationVector.set(0, duration.toNanos() / 1000);}
+        case NANOSECOND -> { durationVector.set(0, duration.toNanos());}
+      }
       return;
     }
     if (vector instanceof FixedSizeBinaryVector fixedSizeBinaryVector) {
@@ -126,19 +129,19 @@ public class ArrowHelper {
       return;
     }
     if (vector instanceof UInt1Vector uInt1Vector) {
-      uInt1Vector.set(0, (byte) data);
+      uInt1Vector.set(0, ((UByte) data).shortValue());
       return;
     }
     if (vector instanceof UInt2Vector uInt2Vector) {
-      uInt2Vector.set(0, (short) data);
+      uInt2Vector.set(0, ((UShort) data).intValue());
       return;
     }
     if (vector instanceof UInt4Vector uInt4Vector) {
-      uInt4Vector.set(0, (int) data);
+      uInt4Vector.set(0, ((UInteger) data).intValue());
       return;
     }
     if (vector instanceof UInt8Vector uInt8Vector) {
-      uInt8Vector.set(0, (long) data);
+      uInt8Vector.set(0, ((ULong) data).longValue());
       return;
     }
     if (vector instanceof VarBinaryVector varBinaryVector) {
