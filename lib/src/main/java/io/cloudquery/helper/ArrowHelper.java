@@ -1,5 +1,7 @@
 package io.cloudquery.helper;
 
+import static java.util.Arrays.asList;
+
 import com.google.protobuf.ByteString;
 import io.cloudquery.scalar.ValidationException;
 import io.cloudquery.schema.Column;
@@ -10,6 +12,11 @@ import io.cloudquery.types.JSONType;
 import io.cloudquery.types.JSONType.JSONVector;
 import io.cloudquery.types.UUIDType;
 import io.cloudquery.types.UUIDType.UUIDVector;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.channels.Channels;
+import java.time.Duration;
+import java.util.*;
 import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.*;
@@ -25,14 +32,6 @@ import org.joou.UByte;
 import org.joou.UInteger;
 import org.joou.ULong;
 import org.joou.UShort;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.channels.Channels;
-import java.time.Duration;
-import java.util.*;
-
-import static java.util.Arrays.asList;
 
 public class ArrowHelper {
   public static final String CQ_EXTENSION_INCREMENTAL = "cq:extension:incremental";
@@ -69,10 +68,18 @@ public class ArrowHelper {
     if (vector instanceof DurationVector durationVector) {
       Duration duration = (Duration) data;
       switch (durationVector.getUnit()) {
-        case SECOND -> { durationVector.set(0, duration.toSeconds());}
-        case MILLISECOND -> { durationVector.set(0, duration.toMillis());}
-        case MICROSECOND -> { durationVector.set(0, duration.toNanos() / 1000);}
-        case NANOSECOND -> { durationVector.set(0, duration.toNanos());}
+        case SECOND -> {
+          durationVector.set(0, duration.toSeconds());
+        }
+        case MILLISECOND -> {
+          durationVector.set(0, duration.toMillis());
+        }
+        case MICROSECOND -> {
+          durationVector.set(0, duration.toNanos() / 1000);
+        }
+        case NANOSECOND -> {
+          durationVector.set(0, duration.toNanos());
+        }
       }
       return;
     }
@@ -217,7 +224,10 @@ public class ArrowHelper {
     metadata.put(CQ_EXTENSION_UNIQUE, Boolean.toString(column.isUnique()));
     metadata.put(CQ_EXTENSION_PRIMARY_KEY, Boolean.toString(column.isPrimaryKey()));
     metadata.put(CQ_EXTENSION_INCREMENTAL, Boolean.toString(column.isIncrementalKey()));
-    return new Field(column.getName(), new FieldType(!column.isNotNull(), column.getType(), null, metadata), null);
+    return new Field(
+        column.getName(),
+        new FieldType(!column.isNotNull(), column.getType(), null, metadata),
+        null);
   }
 
   public static Table fromArrowSchema(Schema schema) {
@@ -250,22 +260,29 @@ public class ArrowHelper {
   private static Column getColumn(Field field) {
     boolean isUnique = Objects.equals(field.getMetadata().get(CQ_EXTENSION_UNIQUE), "true");
     boolean isPrimaryKey =
-      Objects.equals(field.getMetadata().get(CQ_EXTENSION_PRIMARY_KEY), "true");
+        Objects.equals(field.getMetadata().get(CQ_EXTENSION_PRIMARY_KEY), "true");
     boolean isIncrementalKey =
-      Objects.equals(field.getMetadata().get(CQ_EXTENSION_INCREMENTAL), "true");
+        Objects.equals(field.getMetadata().get(CQ_EXTENSION_INCREMENTAL), "true");
 
     ArrowType fieldType = field.getType();
-    String extensionName = field.getMetadata().get(ArrowType.ExtensionType.EXTENSION_METADATA_KEY_NAME);
-    String extensionMetadata = field.getMetadata().get(ArrowType.ExtensionType.EXTENSION_METADATA_KEY_METADATA);
+    String extensionName =
+        field.getMetadata().get(ArrowType.ExtensionType.EXTENSION_METADATA_KEY_NAME);
+    String extensionMetadata =
+        field.getMetadata().get(ArrowType.ExtensionType.EXTENSION_METADATA_KEY_METADATA);
 
-    // We need to scan our extension types manually because of https://github.com/apache/arrow/issues/38891
-    if (JSONType.EXTENSION_NAME.equals(extensionName) && JSONType.INSTANCE.serialize().equals(extensionMetadata) && JSONType.INSTANCE.storageType().equals(fieldType)) {
+    // We need to scan our extension types manually because of
+    // https://github.com/apache/arrow/issues/38891
+    if (JSONType.EXTENSION_NAME.equals(extensionName)
+        && JSONType.INSTANCE.serialize().equals(extensionMetadata)
+        && JSONType.INSTANCE.storageType().equals(fieldType)) {
       fieldType = JSONType.INSTANCE;
-    } else if (UUIDType.EXTENSION_NAME.equals(extensionName) && UUIDType.INSTANCE.serialize().equals(extensionMetadata) && UUIDType.INSTANCE.storageType().equals(fieldType)) {
+    } else if (UUIDType.EXTENSION_NAME.equals(extensionName)
+        && UUIDType.INSTANCE.serialize().equals(extensionMetadata)
+        && UUIDType.INSTANCE.storageType().equals(fieldType)) {
       fieldType = UUIDType.INSTANCE;
     }
 
-      return Column.builder()
+    return Column.builder()
         .name(field.getName())
         .unique(isUnique)
         .primaryKey(isPrimaryKey)
@@ -273,7 +290,6 @@ public class ArrowHelper {
         .type(fieldType)
         .build();
   }
-
 
   public static ByteString encode(Resource resource) throws IOException {
     try (BufferAllocator bufferAllocator = new RootAllocator()) {

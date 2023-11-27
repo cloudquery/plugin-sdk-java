@@ -4,14 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.cloudquery.transformers.TypeTransformer.DefaultTypeTransformer;
 import io.cloudquery.types.JSONType;
+import io.cloudquery.types.UUIDType;
 import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Stream;
-
-import io.cloudquery.types.UUIDType;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
@@ -112,7 +111,6 @@ class TypeTransformerTest {
         Arguments.of("byteArrayField", ArrowType.Binary.INSTANCE),
 
         // Object array
-        Arguments.of("objectArrayField", JSONType.INSTANCE)
-    );
+        Arguments.of("objectArrayField", JSONType.INSTANCE));
   }
 }

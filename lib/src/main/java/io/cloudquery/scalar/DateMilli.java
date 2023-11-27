@@ -1,9 +1,8 @@
 package io.cloudquery.scalar;
 
+import java.time.LocalDateTime;
 import org.apache.arrow.vector.types.DateUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
-
-import java.time.LocalDateTime;
 
 public class DateMilli extends Scalar<Long> {
   public DateMilli() {
