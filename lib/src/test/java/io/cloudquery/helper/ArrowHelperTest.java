@@ -9,6 +9,7 @@ import static io.cloudquery.helper.ArrowHelper.CQ_TABLE_DESCRIPTION;
 import static io.cloudquery.helper.ArrowHelper.CQ_TABLE_NAME;
 import static io.cloudquery.helper.ArrowHelper.CQ_TABLE_TITLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import com.google.protobuf.ByteString;
 import io.cloudquery.schema.Column;
@@ -96,29 +97,57 @@ public class ArrowHelperTest {
   public void testToArrowSchema() {
     Schema arrowSchema = ArrowHelper.toArrowSchema(TEST_TABLE);
 
-    assertEquals(arrowSchema.getFields().get(0).getName(), "string_column1");
-    assertEquals(
-        arrowSchema.getFields().get(0).getMetadata(),
-        Map.of(
-            CQ_EXTENSION_UNIQUE,
-            "true",
-            CQ_EXTENSION_INCREMENTAL,
-            "true",
-            CQ_EXTENSION_PRIMARY_KEY,
-            "true"));
-    assertEquals(arrowSchema.getFields().get(1).getName(), "string_column2");
-    assertEquals(
-        arrowSchema.getFields().get(1).getMetadata(),
-        Map.of(
-            CQ_EXTENSION_UNIQUE,
-            "false",
-            CQ_EXTENSION_INCREMENTAL,
-            "false",
-            CQ_EXTENSION_PRIMARY_KEY,
-            "false"));
 
-    assertEquals(arrowSchema.getFields().get(2).getName(), "boolean_column");
-    assertEquals(arrowSchema.getFields().get(3).getName(), "date_days_column");
+    for (Column col : TEST_TABLE.getColumns()) {
+      int idx = TEST_TABLE.indexOfColumn(col.getName());
+      Field field = arrowSchema.getFields().get(idx);
+      assertEquals(col.getName(), field.getName());
+      if (idx == 0) {
+        assertEquals(
+          Map.of(
+            CQ_EXTENSION_UNIQUE,
+            "true",
+            CQ_EXTENSION_INCREMENTAL,
+            "true",
+            CQ_EXTENSION_PRIMARY_KEY,
+            "true"),
+          field.getMetadata()
+        );
+      } else if (col.getName().equals("json")) {
+        assertEquals(
+          Map.of(
+            CQ_EXTENSION_UNIQUE, "false",
+            CQ_EXTENSION_INCREMENTAL, "false",
+            CQ_EXTENSION_PRIMARY_KEY, "false",
+            ArrowType.ExtensionType.EXTENSION_METADATA_KEY_NAME, "json",
+            ArrowType.ExtensionType.EXTENSION_METADATA_KEY_METADATA, "json-serialized"
+            ),
+          field.getMetadata()
+        );
+      } else if (col.getName().equals("uuid")) {
+        assertEquals(
+          Map.of(
+            CQ_EXTENSION_UNIQUE, "false",
+            CQ_EXTENSION_INCREMENTAL, "false",
+            CQ_EXTENSION_PRIMARY_KEY, "false",
+            ArrowType.ExtensionType.EXTENSION_METADATA_KEY_NAME, "uuid",
+            ArrowType.ExtensionType.EXTENSION_METADATA_KEY_METADATA, "uuid-serialized"
+            ),
+          field.getMetadata()
+        );
+      } else {
+        assertEquals(
+          Map.of(
+            CQ_EXTENSION_UNIQUE,
+            "false",
+            CQ_EXTENSION_INCREMENTAL,
+            "false",
+            CQ_EXTENSION_PRIMARY_KEY,
+            "false"),
+          field.getMetadata()
+        );
+      }
+    }
 
     assertEquals(
         arrowSchema.getCustomMetadata(),
@@ -127,7 +156,9 @@ public class ArrowHelperTest {
             CQ_TABLE_DESCRIPTION, "A simple test table",
             CQ_TABLE_TITLE, "Test table title",
             CQ_TABLE_DEPENDS_ON, "parent",
-            CQ_EXTENSION_CONSTRAINT_NAME, ""));
+            CQ_EXTENSION_CONSTRAINT_NAME, ""
+        )
+    );
   }
 
   @Test
@@ -160,10 +191,13 @@ public class ArrowHelperTest {
     assertEquals(table.getDescription(), TEST_TABLE.getDescription());
     assertEquals(table.getTitle(), TEST_TABLE.getTitle());
     assertEquals(table.getParent().getName(), TEST_TABLE.getParent().getName());
+    assertEquals(TEST_TABLE.getColumns().size(), table.getColumns().size());
 
     for (int i = 0; i < TEST_TABLE.getColumns().size(); i++) {
-      assertEquals(TEST_TABLE.getColumns().get(i).getName(), table.getColumns().get(i).getName());
-      assertEquals(TEST_TABLE.getColumns().get(i).getType(), table.getColumns().get(i).getType());
+      Column srcCol = TEST_TABLE.getColumns().get(i);
+      Column dstCol = table.getColumns().get(i);
+      assertEquals(srcCol.getName(), dstCol.getName());
+      assertEquals(srcCol.getType(), dstCol.getType());
     }
   }
 
