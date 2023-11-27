@@ -7,6 +7,7 @@ import com.google.protobuf.ByteString;
 import io.cloudquery.schema.Column;
 import io.cloudquery.schema.Resource;
 import io.cloudquery.schema.Table;
+import io.cloudquery.types.Extensions;
 import io.cloudquery.types.JSONType;
 import io.cloudquery.types.UUIDType;
 import java.io.IOException;
@@ -128,6 +129,8 @@ public class ArrowHelperTest {
 
   @Test
   public void testToArrowSchema() {
+    Extensions.registerExtensions();
+
     Schema arrowSchema = ArrowHelper.toArrowSchema(TEST_TABLE);
 
     for (Column col : TEST_TABLE.getColumns()) {
@@ -197,6 +200,8 @@ public class ArrowHelperTest {
 
   @Test
   public void testFromArrowSchema() {
+    Extensions.registerExtensions();
+
     List<Field> fields =
         List.of(
             Field.nullable("string_column1", ArrowType.Utf8.INSTANCE),
@@ -218,6 +223,8 @@ public class ArrowHelperTest {
 
   @Test
   public void testRoundTripTableEncoding() throws IOException {
+    Extensions.registerExtensions();
+
     ByteString byteString = ArrowHelper.encode(TEST_TABLE);
     Table table = ArrowHelper.decode(byteString);
 
@@ -237,6 +244,8 @@ public class ArrowHelperTest {
 
   @Test
   public void testRoundTripResourceEncoding() throws Exception {
+    Extensions.registerExtensions();
+
     Resource resource = Resource.builder().table(TEST_TABLE).build();
     resource.set("pk", "test_pk");
     resource.set("big_int", -1024L);

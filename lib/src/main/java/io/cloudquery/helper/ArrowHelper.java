@@ -8,9 +8,7 @@ import io.cloudquery.schema.Column;
 import io.cloudquery.schema.Resource;
 import io.cloudquery.schema.Table;
 import io.cloudquery.schema.Table.TableBuilder;
-import io.cloudquery.types.JSONType;
 import io.cloudquery.types.JSONType.JSONVector;
-import io.cloudquery.types.UUIDType;
 import io.cloudquery.types.UUIDType.UUIDVector;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -23,7 +21,6 @@ import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.ipc.ArrowReader;
 import org.apache.arrow.vector.ipc.ArrowStreamReader;
 import org.apache.arrow.vector.ipc.ArrowStreamWriter;
-import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.types.pojo.Field;
 import org.apache.arrow.vector.types.pojo.FieldType;
 import org.apache.arrow.vector.types.pojo.Schema;
@@ -264,30 +261,12 @@ public class ArrowHelper {
     boolean isIncrementalKey =
         Objects.equals(field.getMetadata().get(CQ_EXTENSION_INCREMENTAL), "true");
 
-    ArrowType fieldType = field.getType();
-    String extensionName =
-        field.getMetadata().get(ArrowType.ExtensionType.EXTENSION_METADATA_KEY_NAME);
-    String extensionMetadata =
-        field.getMetadata().get(ArrowType.ExtensionType.EXTENSION_METADATA_KEY_METADATA);
-
-    // We need to scan our extension types manually because of
-    // https://github.com/apache/arrow/issues/38891
-    if (JSONType.EXTENSION_NAME.equals(extensionName)
-        && JSONType.INSTANCE.serialize().equals(extensionMetadata)
-        && JSONType.INSTANCE.storageType().equals(fieldType)) {
-      fieldType = JSONType.INSTANCE;
-    } else if (UUIDType.EXTENSION_NAME.equals(extensionName)
-        && UUIDType.INSTANCE.serialize().equals(extensionMetadata)
-        && UUIDType.INSTANCE.storageType().equals(fieldType)) {
-      fieldType = UUIDType.INSTANCE;
-    }
-
     return Column.builder()
         .name(field.getName())
         .unique(isUnique)
         .primaryKey(isPrimaryKey)
         .incrementalKey(isIncrementalKey)
-        .type(fieldType)
+        .type(field.getType())
         .build();
   }
 
