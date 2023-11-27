@@ -58,6 +58,14 @@ public class ArrowHelper {
       dateMilliVector.set(0, (long) data);
       return;
     }
+    if (vector instanceof Decimal256Vector decimal256Vector) {
+      decimal256Vector.set(0, (java.math.BigDecimal) data);
+      return;
+    }
+    if (vector instanceof DecimalVector decimalVector) {
+      decimalVector.set(0, (java.math.BigDecimal) data);
+      return;
+    }
     if (vector instanceof DurationVector durationVector) {
       durationVector.set(0, (long) data);
       return;
@@ -138,12 +146,14 @@ public class ArrowHelper {
       vectorCharVector.set(0, (Text) data);
       return;
     }
-    if (vector instanceof UUIDVector uuidVector) {
-      uuidVector.set(0, (java.util.UUID) data);
-      return;
-    }
+    // CloudQuery-specific
     if (vector instanceof JSONVector jsonVector) {
       jsonVector.setSafe(0, (byte[]) data);
+      return;
+    }
+    // CloudQuery-specific
+    if (vector instanceof UUIDVector uuidVector) {
+      uuidVector.set(0, (java.util.UUID) data);
       return;
     }
 
