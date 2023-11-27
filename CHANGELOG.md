@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.15](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.14...v0.0.15) (2023-11-27)
+
+
+### Bug Fixes
+
+* **test:** Register extensions in tests ([#144](https://github.com/cloudquery/plugin-sdk-java/issues/144)) ([530e2b2](https://github.com/cloudquery/plugin-sdk-java/commit/530e2b2ceb869abaf7f50c35c1dc3cced084f733))
+
 ## [0.0.14](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.13...v0.0.14) (2023-11-27)
 
 
