@@ -8,45 +8,30 @@ import io.cloudquery.schema.Column;
 import io.cloudquery.schema.Resource;
 import io.cloudquery.schema.Table;
 import io.cloudquery.schema.Table.TableBuilder;
+import io.cloudquery.types.JSONType;
 import io.cloudquery.types.JSONType.JSONVector;
+import io.cloudquery.types.UUIDType;
 import io.cloudquery.types.UUIDType.UUIDVector;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.channels.Channels;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.time.Duration;
+import java.util.*;
 import org.apache.arrow.memory.BufferAllocator;
 import org.apache.arrow.memory.RootAllocator;
-import org.apache.arrow.vector.BigIntVector;
-import org.apache.arrow.vector.BitVector;
-import org.apache.arrow.vector.DateDayVector;
-import org.apache.arrow.vector.FieldVector;
-import org.apache.arrow.vector.FixedSizeBinaryVector;
-import org.apache.arrow.vector.Float4Vector;
-import org.apache.arrow.vector.Float8Vector;
-import org.apache.arrow.vector.IntVector;
-import org.apache.arrow.vector.LargeVarBinaryVector;
-import org.apache.arrow.vector.LargeVarCharVector;
-import org.apache.arrow.vector.SmallIntVector;
-import org.apache.arrow.vector.TimeStampVector;
-import org.apache.arrow.vector.TinyIntVector;
-import org.apache.arrow.vector.UInt1Vector;
-import org.apache.arrow.vector.UInt2Vector;
-import org.apache.arrow.vector.UInt4Vector;
-import org.apache.arrow.vector.UInt8Vector;
-import org.apache.arrow.vector.VarBinaryVector;
-import org.apache.arrow.vector.VarCharVector;
-import org.apache.arrow.vector.VectorSchemaRoot;
+import org.apache.arrow.vector.*;
 import org.apache.arrow.vector.ipc.ArrowReader;
 import org.apache.arrow.vector.ipc.ArrowStreamReader;
 import org.apache.arrow.vector.ipc.ArrowStreamWriter;
+import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.apache.arrow.vector.types.pojo.Field;
 import org.apache.arrow.vector.types.pojo.FieldType;
 import org.apache.arrow.vector.types.pojo.Schema;
 import org.apache.arrow.vector.util.Text;
+import org.joou.UByte;
+import org.joou.UInteger;
+import org.joou.ULong;
+import org.joou.UShort;
 
 public class ArrowHelper {
   public static final String CQ_EXTENSION_INCREMENTAL = "cq:extension:incremental";
@@ -70,6 +55,32 @@ public class ArrowHelper {
     }
     if (vector instanceof BitVector bitVector) {
       bitVector.set(0, (boolean) data ? 1 : 0);
+      return;
+    }
+    if (vector instanceof DateDayVector dayDateVector) {
+      dayDateVector.set(0, (int) data);
+      return;
+    }
+    if (vector instanceof DateMilliVector dateMilliVector) {
+      dateMilliVector.set(0, (long) data);
+      return;
+    }
+    if (vector instanceof DurationVector durationVector) {
+      Duration duration = (Duration) data;
+      switch (durationVector.getUnit()) {
+        case SECOND -> {
+          durationVector.set(0, duration.toSeconds());
+        }
+        case MILLISECOND -> {
+          durationVector.set(0, duration.toMillis());
+        }
+        case MICROSECOND -> {
+          durationVector.set(0, duration.toNanos() / 1000);
+        }
+        case NANOSECOND -> {
+          durationVector.set(0, duration.toNanos());
+        }
+      }
       return;
     }
     if (vector instanceof FixedSizeBinaryVector fixedSizeBinaryVector) {
@@ -100,6 +111,22 @@ public class ArrowHelper {
       smallIntVector.set(0, (short) data);
       return;
     }
+    if (vector instanceof TimeMicroVector timeMicroVector) {
+      timeMicroVector.set(0, (long) data);
+      return;
+    }
+    if (vector instanceof TimeMilliVector timeMilliVector) {
+      timeMilliVector.set(0, (int) data);
+      return;
+    }
+    if (vector instanceof TimeNanoVector timeNanoVector) {
+      timeNanoVector.set(0, (long) data);
+      return;
+    }
+    if (vector instanceof TimeSecVector timeSecVector) {
+      timeSecVector.set(0, (int) data);
+      return;
+    }
     if (vector instanceof TimeStampVector timeStampVector) {
       timeStampVector.set(0, (long) data);
       return;
@@ -109,19 +136,19 @@ public class ArrowHelper {
       return;
     }
     if (vector instanceof UInt1Vector uInt1Vector) {
-      uInt1Vector.set(0, (byte) data);
+      uInt1Vector.set(0, ((UByte) data).shortValue());
       return;
     }
     if (vector instanceof UInt2Vector uInt2Vector) {
-      uInt2Vector.set(0, (short) data);
+      uInt2Vector.set(0, ((UShort) data).intValue());
       return;
     }
     if (vector instanceof UInt4Vector uInt4Vector) {
-      uInt4Vector.set(0, (int) data);
+      uInt4Vector.set(0, ((UInteger) data).intValue());
       return;
     }
     if (vector instanceof UInt8Vector uInt8Vector) {
-      uInt8Vector.set(0, (long) data);
+      uInt8Vector.set(0, ((ULong) data).longValue());
       return;
     }
     if (vector instanceof VarBinaryVector varBinaryVector) {
@@ -132,16 +159,14 @@ public class ArrowHelper {
       vectorCharVector.set(0, (Text) data);
       return;
     }
-    if (vector instanceof UUIDVector uuidVector) {
-      uuidVector.set(0, (java.util.UUID) data);
-      return;
-    }
+    // CloudQuery-specific
     if (vector instanceof JSONVector jsonVector) {
       jsonVector.setSafe(0, (byte[]) data);
       return;
     }
-    if (vector instanceof DateDayVector dayDateVector) {
-      dayDateVector.set(0, (int) data);
+    // CloudQuery-specific
+    if (vector instanceof UUIDVector uuidVector) {
+      uuidVector.set(0, (java.util.UUID) data);
       return;
     }
 
@@ -177,17 +202,7 @@ public class ArrowHelper {
     List<Column> columns = table.getColumns();
     Field[] fields = new Field[columns.size()];
     for (int i = 0; i < columns.size(); i++) {
-      Column column = columns.get(i);
-      Map<String, String> metadata = new HashMap<>();
-      metadata.put(CQ_EXTENSION_UNIQUE, Boolean.toString(column.isUnique()));
-      metadata.put(CQ_EXTENSION_PRIMARY_KEY, Boolean.toString(column.isPrimaryKey()));
-      metadata.put(CQ_EXTENSION_INCREMENTAL, Boolean.toString(column.isIncrementalKey()));
-      Field field =
-          new Field(
-              column.getName(),
-              new FieldType(!column.isNotNull(), column.getType(), null, metadata),
-              null);
-      fields[i] = field;
+      fields[i] = getField(columns.get(i));
     }
     Map<String, String> metadata = new HashMap<>();
     metadata.put(CQ_TABLE_NAME, table.getName());
@@ -204,23 +219,21 @@ public class ArrowHelper {
     return new Schema(asList(fields), metadata);
   }
 
+  private static Field getField(Column column) {
+    Map<String, String> metadata = new HashMap<>();
+    metadata.put(CQ_EXTENSION_UNIQUE, Boolean.toString(column.isUnique()));
+    metadata.put(CQ_EXTENSION_PRIMARY_KEY, Boolean.toString(column.isPrimaryKey()));
+    metadata.put(CQ_EXTENSION_INCREMENTAL, Boolean.toString(column.isIncrementalKey()));
+    return new Field(
+        column.getName(),
+        new FieldType(!column.isNotNull(), column.getType(), null, metadata),
+        null);
+  }
+
   public static Table fromArrowSchema(Schema schema) {
     List<Column> columns = new ArrayList<>();
     for (Field field : schema.getFields()) {
-      boolean isUnique = Objects.equals(field.getMetadata().get(CQ_EXTENSION_UNIQUE), "true");
-      boolean isPrimaryKey =
-          Objects.equals(field.getMetadata().get(CQ_EXTENSION_PRIMARY_KEY), "true");
-      boolean isIncrementalKey =
-          Objects.equals(field.getMetadata().get(CQ_EXTENSION_INCREMENTAL), "true");
-
-      columns.add(
-          Column.builder()
-              .name(field.getName())
-              .unique(isUnique)
-              .primaryKey(isPrimaryKey)
-              .incrementalKey(isIncrementalKey)
-              .type(field.getType())
-              .build());
+      columns.add(getColumn(field));
     }
 
     Map<String, String> metaData = schema.getCustomMetadata();
@@ -242,6 +255,40 @@ public class ArrowHelper {
     }
 
     return tableBuilder.build();
+  }
+
+  private static Column getColumn(Field field) {
+    boolean isUnique = Objects.equals(field.getMetadata().get(CQ_EXTENSION_UNIQUE), "true");
+    boolean isPrimaryKey =
+        Objects.equals(field.getMetadata().get(CQ_EXTENSION_PRIMARY_KEY), "true");
+    boolean isIncrementalKey =
+        Objects.equals(field.getMetadata().get(CQ_EXTENSION_INCREMENTAL), "true");
+
+    ArrowType fieldType = field.getType();
+    String extensionName =
+        field.getMetadata().get(ArrowType.ExtensionType.EXTENSION_METADATA_KEY_NAME);
+    String extensionMetadata =
+        field.getMetadata().get(ArrowType.ExtensionType.EXTENSION_METADATA_KEY_METADATA);
+
+    // We need to scan our extension types manually because of
+    // https://github.com/apache/arrow/issues/38891
+    if (JSONType.EXTENSION_NAME.equals(extensionName)
+        && JSONType.INSTANCE.serialize().equals(extensionMetadata)
+        && JSONType.INSTANCE.storageType().equals(fieldType)) {
+      fieldType = JSONType.INSTANCE;
+    } else if (UUIDType.EXTENSION_NAME.equals(extensionName)
+        && UUIDType.INSTANCE.serialize().equals(extensionMetadata)
+        && UUIDType.INSTANCE.storageType().equals(fieldType)) {
+      fieldType = UUIDType.INSTANCE;
+    }
+
+    return Column.builder()
+        .name(field.getName())
+        .unique(isUnique)
+        .primaryKey(isPrimaryKey)
+        .incrementalKey(isIncrementalKey)
+        .type(fieldType)
+        .build();
   }
 
   public static ByteString encode(Resource resource) throws IOException {

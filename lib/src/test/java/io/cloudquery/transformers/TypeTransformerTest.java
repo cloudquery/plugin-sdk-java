@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.cloudquery.transformers.TypeTransformer.DefaultTypeTransformer;
 import io.cloudquery.types.JSONType;
+import io.cloudquery.types.UUIDType;
 import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Stream;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.TimeUnit;
@@ -41,6 +43,8 @@ class TypeTransformerTest {
     private Double doubleObjectField;
 
     private Map<String, String> mapField;
+
+    private UUID uuidField;
 
     private InnerClass innerClassObjectField;
 
@@ -92,6 +96,9 @@ class TypeTransformerTest {
 
         // Map field
         Arguments.of("mapField", JSONType.INSTANCE),
+
+        // UUID field
+        Arguments.of("uuidField", UUIDType.INSTANCE),
 
         // Inner class
         Arguments.of("innerClassObjectField", JSONType.INSTANCE),

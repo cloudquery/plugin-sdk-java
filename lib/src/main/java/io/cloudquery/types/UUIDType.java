@@ -12,6 +12,7 @@ import org.apache.arrow.vector.types.pojo.ArrowType.ExtensionType;
 import org.apache.arrow.vector.types.pojo.FieldType;
 
 public class UUIDType extends ExtensionType {
+  public static final UUIDType INSTANCE = new UUIDType();
   public static final int BYTE_WIDTH = 16;
   public static final String EXTENSION_NAME = "uuid";
 

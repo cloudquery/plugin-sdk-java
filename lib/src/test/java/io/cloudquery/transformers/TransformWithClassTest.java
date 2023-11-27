@@ -13,10 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import io.cloudquery.schema.Column;
 import io.cloudquery.schema.Table;
 import io.cloudquery.types.JSONType;
+import io.cloudquery.types.UUIDType;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,6 +59,7 @@ class TransformWithClassTest {
     private byte[] byteArrayCol;
     private Object[] anyArrayCol;
     private LocalDateTime timeCol;
+    private UUID uuidCol;
   }
 
   public static final List<Column> expectedColumnsTestClass =
@@ -94,7 +97,8 @@ class TransformWithClassTest {
           Column.builder()
               .name("time_col")
               .type(new Timestamp(TimeUnit.MILLISECOND, ZoneOffset.UTC.getId()))
-              .build());
+              .build(),
+          Column.builder().name("uuid_col").type(UUIDType.INSTANCE).build());
 
   public static final List<Column> expectedColumnsSimpleClass =
       List.of(
