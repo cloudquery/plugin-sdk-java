@@ -39,7 +39,7 @@ public interface TypeTransformer {
           return Timestamp.dt;
         }
         case "java.util.UUID" -> {
-          return new UUIDType();
+          return UUIDType.INSTANCE;
         }
         default -> {
           if (type.isArray()) {

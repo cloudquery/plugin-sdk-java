@@ -8,7 +8,10 @@ import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Stream;
+
+import io.cloudquery.types.UUIDType;
 import org.apache.arrow.vector.types.FloatingPointPrecision;
 import org.apache.arrow.vector.types.TimeUnit;
 import org.apache.arrow.vector.types.pojo.ArrowType;
@@ -41,6 +44,8 @@ class TypeTransformerTest {
     private Double doubleObjectField;
 
     private Map<String, String> mapField;
+
+    private UUID uuidField;
 
     private InnerClass innerClassObjectField;
 
@@ -93,6 +98,9 @@ class TypeTransformerTest {
         // Map field
         Arguments.of("mapField", JSONType.INSTANCE),
 
+        // UUID field
+        Arguments.of("uuidField", UUIDType.INSTANCE),
+
         // Inner class
         Arguments.of("innerClassObjectField", JSONType.INSTANCE),
 
@@ -104,6 +112,7 @@ class TypeTransformerTest {
         Arguments.of("byteArrayField", ArrowType.Binary.INSTANCE),
 
         // Object array
-        Arguments.of("objectArrayField", JSONType.INSTANCE));
+        Arguments.of("objectArrayField", JSONType.INSTANCE)
+    );
   }
 }
