@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.13](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.12...v0.0.13) (2023-11-26)
+
+
+### Bug Fixes
+
+* add date types to ArrowHelper ([#141](https://github.com/cloudquery/plugin-sdk-java/issues/141)) ([21e4981](https://github.com/cloudquery/plugin-sdk-java/commit/21e49818c8a3e55f6b0316750cc8026151ea40d1))
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-annotations to v2.15.3 ([#133](https://github.com/cloudquery/plugin-sdk-java/issues/133)) ([627b49d](https://github.com/cloudquery/plugin-sdk-java/commit/627b49de71ab9e3fa90a3b930970a2b9f1d97a4f))
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-core to v2.15.3 ([#135](https://github.com/cloudquery/plugin-sdk-java/issues/135)) ([235781d](https://github.com/cloudquery/plugin-sdk-java/commit/235781df38e59ff9ae0257a0827561c9bfc26341))
+* **deps:** Update dependency com.google.guava:guava to v32.1.3-jre ([#136](https://github.com/cloudquery/plugin-sdk-java/issues/136)) ([eb7b853](https://github.com/cloudquery/plugin-sdk-java/commit/eb7b853ee48ca2dacb6f03b4b6f4d6cb1898a92f))
+* **deps:** Update dependency gradle to v8.4 ([#137](https://github.com/cloudquery/plugin-sdk-java/issues/137)) ([8675852](https://github.com/cloudquery/plugin-sdk-java/commit/8675852d77cf6676c1a6d214c4b53ad3ef3112e8))
+* **deps:** Update dependency io.grpc:grpc-protobuf to v1.59.0 ([#138](https://github.com/cloudquery/plugin-sdk-java/issues/138)) ([88d3e71](https://github.com/cloudquery/plugin-sdk-java/commit/88d3e713338339dc9fd0dd1c23f55f7c0e508ac5))
+* **deps:** Update dependency io.grpc:grpc-stub to v1.59.0 ([#140](https://github.com/cloudquery/plugin-sdk-java/issues/140)) ([556b91b](https://github.com/cloudquery/plugin-sdk-java/commit/556b91bf28fc21df9b1e1e7e6b42fe1396f505a8))
+
 ## [0.0.12](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.11...v0.0.12) (2023-10-01)
 
 
