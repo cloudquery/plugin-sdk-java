@@ -55,7 +55,7 @@ public class ServeCommand implements Callable<Integer> {
           "the network must be \"tcp\", \"tcp4\", \"tcp6\", \"unix\" or \"unixpacket\" (default \"${DEFAULT-VALUE}\")")
   private String network = "tcp";
 
-  @Option(names = "--disable-sentry", description = "disable sentry")
+  @Option(names = "--no-sentry", description = "disable sentry")
   private Boolean disableSentry = false;
 
   @Option(names = "--otel-endpoint", description = "Open Telemetry HTTP collector endpoint")
