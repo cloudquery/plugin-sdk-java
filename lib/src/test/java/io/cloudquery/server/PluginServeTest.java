@@ -39,7 +39,7 @@ public class PluginServeTest {
           "serve",
           "--address",
           "foo.bar.com:7777",
-          "--disable-sentry",
+          "--no-sentry",
           "--otel-endpoint",
           "some-endpoint"
         };
