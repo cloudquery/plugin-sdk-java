@@ -66,7 +66,9 @@ public class ServeCommand implements Callable<Integer> {
       description = "use Open Telemetry HTTP endpoint (for development only)")
   private Boolean otelEndpointInsecure = false;
 
-  @Option(names = "--license", description = "set offline license file (placeholder for future use)")
+  @Option(
+      names = "--license",
+      description = "set offline license file (placeholder for future use)")
   private String licenseFile = "";
 
   private final Plugin plugin;
