@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.17](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.16...v0.0.17) (2023-12-29)
+
+
+### Bug Fixes
+
+* Add --license placeholder for future use ([#156](https://github.com/cloudquery/plugin-sdk-java/issues/156)) ([4159df8](https://github.com/cloudquery/plugin-sdk-java/commit/4159df84c52fc6db8b7fbad112bdb04fe06d53d6))
+
 ## [0.0.16](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.15...v0.0.16) (2023-12-06)
 
 
