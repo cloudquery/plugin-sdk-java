@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.18](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.17...v0.0.18) (2024-01-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-annotations to v2.16.1 ([#159](https://github.com/cloudquery/plugin-sdk-java/issues/159)) ([bd1e79b](https://github.com/cloudquery/plugin-sdk-java/commit/bd1e79b736c0bbae8cb75b27d58e9c21a79211b4))
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-core to v2.16.1 ([#160](https://github.com/cloudquery/plugin-sdk-java/issues/160)) ([d663db8](https://github.com/cloudquery/plugin-sdk-java/commit/d663db8376ea63bb6244a285f2d8fd70622bffd8))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.11 ([#131](https://github.com/cloudquery/plugin-sdk-java/issues/131)) ([6ae7381](https://github.com/cloudquery/plugin-sdk-java/commit/6ae738194c71d12e7f92b0756110aa5fcb61e0aa))
+* **deps:** Update dependency io.grpc:grpc-protobuf to v1.60.1 ([#163](https://github.com/cloudquery/plugin-sdk-java/issues/163)) ([8dfcccd](https://github.com/cloudquery/plugin-sdk-java/commit/8dfcccd4eea048d53be3f02c09ee22946dd22a5c))
+* **deps:** Update dependency io.grpc:grpc-services to v1.60.1 ([#139](https://github.com/cloudquery/plugin-sdk-java/issues/139)) ([6fc59f2](https://github.com/cloudquery/plugin-sdk-java/commit/6fc59f264e3e544db07459644c29c8bdb1f93391))
+* **deps:** Update dependency io.grpc:grpc-stub to v1.60.1 ([#164](https://github.com/cloudquery/plugin-sdk-java/issues/164)) ([b8b96bd](https://github.com/cloudquery/plugin-sdk-java/commit/b8b96bda65595be115e777e2e9a9ac6c7dabffea))
+* **deps:** Update dependency io.grpc:grpc-testing to v1.60.1 ([#165](https://github.com/cloudquery/plugin-sdk-java/issues/165)) ([f889c39](https://github.com/cloudquery/plugin-sdk-java/commit/f889c3959850cdb2cdc37413791276c0f703983b))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.15.5 ([#161](https://github.com/cloudquery/plugin-sdk-java/issues/161)) ([9057cdf](https://github.com/cloudquery/plugin-sdk-java/commit/9057cdfdb08ebe21ae6edf4df2bb48e210355f45))
+* **deps:** Update dependency org.assertj:assertj-core to v3.25.0 ([#166](https://github.com/cloudquery/plugin-sdk-java/issues/166)) ([54dc63f](https://github.com/cloudquery/plugin-sdk-java/commit/54dc63fa72713f3bbca85fc5654b24a5e4d93d60))
+
 ## [0.0.17](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.16...v0.0.17) (2023-12-29)
 
 
