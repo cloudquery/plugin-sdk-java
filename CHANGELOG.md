@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.19](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.18...v0.0.19) (2024-02-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.12 ([#168](https://github.com/cloudquery/plugin-sdk-java/issues/168)) ([02663c1](https://github.com/cloudquery/plugin-sdk-java/commit/02663c1ea7f5dd664ff2eb66d26648ea6e26bf1d))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.15.6 ([#170](https://github.com/cloudquery/plugin-sdk-java/issues/170)) ([20d4830](https://github.com/cloudquery/plugin-sdk-java/commit/20d48303122f04f2f578e345dcb5d0722502efce))
+* **deps:** Update dependency org.assertj:assertj-core to v3.25.2 ([#171](https://github.com/cloudquery/plugin-sdk-java/issues/171)) ([96d0b66](https://github.com/cloudquery/plugin-sdk-java/commit/96d0b661452b9a8557da9dfe8e52f3fa6212da59))
+* **deps:** Update log4j2 monorepo to v2.22.1 ([#173](https://github.com/cloudquery/plugin-sdk-java/issues/173)) ([60ba1c6](https://github.com/cloudquery/plugin-sdk-java/commit/60ba1c6731a310a9aa84638f60794491e64e1c85))
+* **deps:** Update mockito monorepo to v5.10.0 ([#174](https://github.com/cloudquery/plugin-sdk-java/issues/174)) ([477e6a5](https://github.com/cloudquery/plugin-sdk-java/commit/477e6a5f52c20e9539f76c9cfc6c5d1482ed1a49))
+* **deps:** Update plugin com.diffplug.spotless to v6.25.0 ([#175](https://github.com/cloudquery/plugin-sdk-java/issues/175)) ([1f38c22](https://github.com/cloudquery/plugin-sdk-java/commit/1f38c2285a4580d3d78954c5f73d4ad4649a4892))
+
 ## [0.0.18](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.17...v0.0.18) (2024-01-02)
 
 
