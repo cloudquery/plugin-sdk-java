@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.20](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.19...v0.0.20) (2024-02-06)
+
+
+### Bug Fixes
+
+* Update artifact & group ID ([#176](https://github.com/cloudquery/plugin-sdk-java/issues/176)) ([46db086](https://github.com/cloudquery/plugin-sdk-java/commit/46db08666cad988460288c433db327f4f0a3b49c))
+
 ## [0.0.19](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.18...v0.0.19) (2024-02-01)
 
 
