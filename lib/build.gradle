@@ -9,7 +9,7 @@ ext {
    javaMainClass = "io.cloudquery.MainClass"
 }
 
-group 'io.cloudquery.plugin.sdk'
+group 'io.cloudquery'
 // x-release-please-start-version
 version = '0.0.19'
 // x-release-please-end
@@ -90,6 +90,7 @@ publishing {
     }
     publications {
         gpr(MavenPublication) {
+            artifactId = 'plugin-sdk-java'
             from(components.java)
         }
     }
