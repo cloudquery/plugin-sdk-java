@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.21](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.20...v0.0.21) (2024-02-09)
+
+
+### Features
+
+* Implement `GetSpecSchema` ([#180](https://github.com/cloudquery/plugin-sdk-java/issues/180)) ([9eeb976](https://github.com/cloudquery/plugin-sdk-java/commit/9eeb976c868b1a206230b6285d666671a18682a7))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.14 ([#178](https://github.com/cloudquery/plugin-sdk-java/issues/178)) ([6871551](https://github.com/cloudquery/plugin-sdk-java/commit/6871551de650ee36464699ec6cbb0f124676f282))
+* **deps:** Update grpc-java monorepo to v1.61.1 ([#172](https://github.com/cloudquery/plugin-sdk-java/issues/172)) ([4ada7bc](https://github.com/cloudquery/plugin-sdk-java/commit/4ada7bcade9cf94043a9ba99c86c2fef43c3a645))
+
 ## [0.0.20](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.19...v0.0.20) (2024-02-06)
 
 
