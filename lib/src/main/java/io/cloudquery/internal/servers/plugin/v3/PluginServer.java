@@ -188,7 +188,7 @@ public class PluginServer extends PluginImplBase {
       StreamObserver<io.cloudquery.plugin.v3.GetSpecSchema.Response> responseObserver) {
     io.cloudquery.plugin.v3.GetSpecSchema.Response.Builder builder =
         io.cloudquery.plugin.v3.GetSpecSchema.Response.newBuilder();
-    String schema = this.plugin.getJson_schema();
+    String schema = this.plugin.getJsonSchema();
     if (schema != null && !schema.isBlank()) {
       builder.setJsonSchema(schema);
     }

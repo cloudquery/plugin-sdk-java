@@ -102,20 +102,20 @@ public class PluginServerTest {
     pluginStub.getSpecSchema(GetSpecSchema.Request.getDefaultInstance(), responseObserver);
     responseObserver.await();
 
-    verify(plugin).getJson_schema();
+    verify(plugin).getJsonSchema();
     assertFalse(responseObserver.getValue().hasJsonSchema());
   }
 
   @Test
   public void shouldSendNonNullJSONSchema() throws Exception {
-    Mockito.doReturn("{}").when(plugin).getJson_schema();
+    Mockito.doReturn("{}").when(plugin).getJsonSchema();
 
     NullResponseStream<GetSpecSchema.Response> responseObserver = new NullResponseStream<>();
 
     pluginStub.getSpecSchema(GetSpecSchema.Request.getDefaultInstance(), responseObserver);
     responseObserver.await();
 
-    verify(plugin).getJson_schema();
+    verify(plugin).getJsonSchema();
     assertTrue(responseObserver.getValue().hasJsonSchema());
     assertEquals("{}", responseObserver.getValue().getJsonSchema());
   }
