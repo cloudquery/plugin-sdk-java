@@ -1,5 +1,6 @@
 package io.cloudquery.internal.servers.plugin.v3;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
@@ -9,6 +10,7 @@ import io.cloudquery.messages.WriteDeleteStale;
 import io.cloudquery.messages.WriteInsert;
 import io.cloudquery.messages.WriteMigrateTable;
 import io.cloudquery.plugin.Plugin;
+import io.cloudquery.plugin.v3.GetSpecSchema;
 import io.cloudquery.plugin.v3.PluginGrpc;
 import io.cloudquery.plugin.v3.PluginGrpc.PluginStub;
 import io.cloudquery.plugin.v3.Write;
@@ -25,12 +27,14 @@ import io.grpc.testing.GrpcCleanupRule;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import lombok.Getter;
 import org.apache.arrow.vector.types.pojo.ArrowType;
 import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -91,6 +95,31 @@ public class PluginServerTest {
     verify(plugin).write(any(WriteDeleteStale.class));
   }
 
+  @Test
+  public void shouldSendNullJSONSchema() throws Exception {
+    NullResponseStream<GetSpecSchema.Response> responseObserver = new NullResponseStream<>();
+
+    pluginStub.getSpecSchema(GetSpecSchema.Request.getDefaultInstance(), responseObserver);
+    responseObserver.await();
+
+    verify(plugin).getJson_schema();
+    assertFalse(responseObserver.getValue().hasJsonSchema());
+  }
+
+  @Test
+  public void shouldSendNonNullJSONSchema() throws Exception {
+    Mockito.doReturn("{}").when(plugin).getJson_schema();
+
+    NullResponseStream<GetSpecSchema.Response> responseObserver = new NullResponseStream<>();
+
+    pluginStub.getSpecSchema(GetSpecSchema.Request.getDefaultInstance(), responseObserver);
+    responseObserver.await();
+
+    verify(plugin).getJson_schema();
+    assertTrue(responseObserver.getValue().hasJsonSchema());
+    assertEquals("{}", responseObserver.getValue().getJsonSchema());
+  }
+
   private static Write.Request generateMigrateTableMessage() throws IOException {
     Table table = Table.builder().name("test").build();
     return Write.Request.newBuilder()
@@ -121,12 +150,18 @@ public class PluginServerTest {
 
   private static class NullResponseStream<T> implements StreamObserver<T> {
     private final CountDownLatch countDownLatch = new CountDownLatch(1);
+    @Getter private T value;
+    @Getter private Throwable error;
 
     @Override
-    public void onNext(T value) {}
+    public void onNext(T value) {
+      this.value = value;
+    }
 
     @Override
-    public void onError(Throwable t) {}
+    public void onError(Throwable t) {
+      this.error = t;
+    }
 
     @Override
     public void onCompleted() {

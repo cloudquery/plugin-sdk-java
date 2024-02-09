@@ -181,4 +181,18 @@ public class PluginServer extends PluginImplBase {
         messageDeleteStale.getSourceName(),
         new Date(messageDeleteStale.getSyncTime().getSeconds() * 1000));
   }
+
+  @Override
+  public void getSpecSchema(
+      io.cloudquery.plugin.v3.GetSpecSchema.Request request,
+      StreamObserver<io.cloudquery.plugin.v3.GetSpecSchema.Response> responseObserver) {
+    io.cloudquery.plugin.v3.GetSpecSchema.Response.Builder builder =
+        io.cloudquery.plugin.v3.GetSpecSchema.Response.newBuilder();
+    String schema = this.plugin.getJson_schema();
+    if (schema != null && !schema.isBlank()) {
+      builder.setJsonSchema(schema);
+    }
+    responseObserver.onNext(builder.build());
+    responseObserver.onCompleted();
+  }
 }
