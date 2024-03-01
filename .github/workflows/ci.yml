@@ -20,7 +20,7 @@ jobs:
           java-version: "18"
           cache: "gradle"
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@2572bdd97b8338128030a2a631bfa0ceaac6b6e5
+        uses: gradle/wrapper-validation-action@63d15e7a1e697b1de6f3ba0507106f89100c8518
       - name: Build package
         run: ./gradlew build
         env:
