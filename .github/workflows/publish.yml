@@ -16,9 +16,9 @@ jobs:
            java-version: '18'
            cache: 'gradle'
        - name: Validate Gradle wrapper
-         uses: gradle/wrapper-validation-action@2572bdd97b8338128030a2a631bfa0ceaac6b6e5
+         uses: gradle/wrapper-validation-action@63d15e7a1e697b1de6f3ba0507106f89100c8518
        - name: Publish package
-         uses: gradle/gradle-build-action@0706ab3a3c20483a3f37c3d9de1b0d95297e3743
+         uses: gradle/gradle-build-action@585b565652cefbba63202a7f927df0ff99f34001
          with:
            arguments: publish
          env:
