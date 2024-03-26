@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.24](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.23...v0.0.24) (2024-03-26)
+
+
+### Bug Fixes
+
+* Add missing docker_image_tag in package json ([#196](https://github.com/cloudquery/plugin-sdk-java/issues/196)) ([bd32518](https://github.com/cloudquery/plugin-sdk-java/commit/bd32518bae6fc0761b3a0319fb39c0067a1cf840))
+
 ## [0.0.23](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.22...v0.0.23) (2024-03-26)
 
 
