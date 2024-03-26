@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.23](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.22...v0.0.23) (2024-03-26)
+
+
+### Features
+
+* Add package command ([#194](https://github.com/cloudquery/plugin-sdk-java/issues/194)) ([05407bb](https://github.com/cloudquery/plugin-sdk-java/commit/05407bbec19f2e782aafc21ec6f7511840cccc2d))
+
 ## [0.0.22](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.21...v0.0.22) (2024-03-05)
 
 
