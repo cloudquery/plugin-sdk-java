@@ -9,7 +9,6 @@ import io.cloudquery.glob.Glob;
 import io.cloudquery.schema.Column.ColumnBuilder;
 import io.cloudquery.transformers.TransformerException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,7 @@ public class Table {
   public static List<Table> flattenTables(List<Table> tables) {
     Map<String, Table> flattenMap = new LinkedHashMap<>();
     for (Table table : tables) {
-      Table newTable = table.toBuilder().relations(Collections.emptyList()).build();
+      Table newTable = table.toBuilder().build();
       flattenMap.put(newTable.name, newTable);
       for (Table child : flattenTables(table.getRelations())) {
         flattenMap.put(child.name, child);

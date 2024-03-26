@@ -32,3 +32,5 @@ build
 # Intellij
 .idea
 .cq
+
+dist
