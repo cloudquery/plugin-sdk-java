@@ -11,4 +11,5 @@ public class SupportedTargetJson {
   @NonNull private final String arch;
   @NonNull private final String path;
   @NonNull private final String checksum;
+  @NonNull private final String docker_image_tag;
 }

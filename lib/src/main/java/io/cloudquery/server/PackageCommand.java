@@ -260,7 +260,8 @@ public class PackageCommand implements Callable<Integer> {
       runCommand(dockerSaveArguments);
       try (InputStream is = Files.newInputStream(Paths.get(imagePath))) {
         String checksum = DigestUtils.sha256Hex(is);
-        SupportedTargetJson supportedTarget = new SupportedTargetJson(os, arch, imageTar, checksum);
+        SupportedTargetJson supportedTarget =
+            new SupportedTargetJson(os, arch, imageTar, checksum, imageTag);
         supportedTargets.add(supportedTarget);
       }
     }
