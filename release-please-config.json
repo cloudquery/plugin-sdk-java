@@ -8,7 +8,7 @@
   "packages": {
     ".": {
       "extra-files": [
-        "build.gradle"
+        "lib/build.gradle"
       ]
     }
   }
