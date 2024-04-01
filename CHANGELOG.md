@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.0.25](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.24...v0.0.25) (2024-04-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-annotations to v2.17.0 ([#201](https://github.com/cloudquery/plugin-sdk-java/issues/201)) ([2722410](https://github.com/cloudquery/plugin-sdk-java/commit/2722410c86bc5faa018e8a4f4dd98efe940e8551))
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-core to v2.17.0 ([#202](https://github.com/cloudquery/plugin-sdk-java/issues/202)) ([b8ccd92](https://github.com/cloudquery/plugin-sdk-java/commit/b8ccd92e4e8d554c2d86311ad434a975247a87ac))
+* **deps:** Update dependency com.google.guava:guava to v33 ([#208](https://github.com/cloudquery/plugin-sdk-java/issues/208)) ([a264e2e](https://github.com/cloudquery/plugin-sdk-java/commit/a264e2ec4f00b285e80db9a5ba60647e0a34d164))
+* **deps:** Update dependency commons-io:commons-io to v2.16.0 ([#203](https://github.com/cloudquery/plugin-sdk-java/issues/203)) ([3e92081](https://github.com/cloudquery/plugin-sdk-java/commit/3e92081d7ec5518d0148dd91cf0c81d49530795b))
+* **deps:** Update dependency gradle ([#204](https://github.com/cloudquery/plugin-sdk-java/issues/204)) ([1861a6c](https://github.com/cloudquery/plugin-sdk-java/commit/1861a6cb239c98e21e55a558424e89ebdd3709d1))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.16 ([#205](https://github.com/cloudquery/plugin-sdk-java/issues/205)) ([9083c89](https://github.com/cloudquery/plugin-sdk-java/commit/9083c89a73d8861b864df5a822555e9b2fdce513))
+* **deps:** Update dependency org.apache.arrow:arrow-memory-core to v15 ([#209](https://github.com/cloudquery/plugin-sdk-java/issues/209)) ([688f627](https://github.com/cloudquery/plugin-sdk-java/commit/688f627a8093d42d9ae621134bdb6fcd3ba38f08))
+* **deps:** Update dependency org.apache.arrow:arrow-memory-netty to v15 ([#210](https://github.com/cloudquery/plugin-sdk-java/issues/210)) ([ac5aec4](https://github.com/cloudquery/plugin-sdk-java/commit/ac5aec4eb46874a19d70553606ac4d3aea7d1a79))
+* **deps:** Update eclipse-temurin Docker tag to v21 ([#212](https://github.com/cloudquery/plugin-sdk-java/issues/212)) ([6e950c7](https://github.com/cloudquery/plugin-sdk-java/commit/6e950c77302ab9a227df65798f5eaa2f1e4f791a))
+* **deps:** Update log4j2 monorepo to v2.23.1 ([#199](https://github.com/cloudquery/plugin-sdk-java/issues/199)) ([29ca1d3](https://github.com/cloudquery/plugin-sdk-java/commit/29ca1d31020a7083d71a781b512f24c0999df469))
+* **deps:** Update mockito monorepo to v5.11.0 ([#206](https://github.com/cloudquery/plugin-sdk-java/issues/206)) ([2ce7c14](https://github.com/cloudquery/plugin-sdk-java/commit/2ce7c1423b97e9a250ea98ccc4134aa0f4781aaf))
+* **deps:** Update plugin org.gradle.toolchains.foojay-resolver-convention to v0.8.0 ([#207](https://github.com/cloudquery/plugin-sdk-java/issues/207)) ([2ab7da7](https://github.com/cloudquery/plugin-sdk-java/commit/2ab7da7af1f19992c3dc04d4a2d6bbe96146d51b))
+
 ## [0.0.24](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.23...v0.0.24) (2024-03-26)
 
 
