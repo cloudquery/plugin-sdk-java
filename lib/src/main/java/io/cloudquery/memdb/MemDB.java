@@ -5,6 +5,7 @@ import io.cloudquery.plugin.BackendOptions;
 import io.cloudquery.plugin.ClientNotInitializedException;
 import io.cloudquery.plugin.NewClientOptions;
 import io.cloudquery.plugin.Plugin;
+import io.cloudquery.plugin.PluginKind;
 import io.cloudquery.plugin.TableOutputStream;
 import io.cloudquery.scheduler.Scheduler;
 import io.cloudquery.schema.ClientMeta;
@@ -88,6 +89,8 @@ public class MemDB extends Plugin {
 
   public MemDB() {
     super("memdb", "0.0.1");
+    setTeam("cloudquery");
+    setKind(PluginKind.Source);
   }
 
   @Override
@@ -144,11 +147,13 @@ public class MemDB extends Plugin {
 
   @Override
   public ClientMeta newClient(String spec, NewClientOptions options) throws Exception {
-    this.spec = Spec.fromJSON(spec);
     this.allTables = getTables();
     Tables.transformTables(this.allTables);
     for (Table table : this.allTables) {
       table.addCQIDs();
+    }
+    if (!options.isNoConnection()) {
+      this.spec = Spec.fromJSON(spec);
     }
     return new MemDBClient();
   }

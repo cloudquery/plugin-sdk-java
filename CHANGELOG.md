@@ -1,5 +1,66 @@
 # Changelog
 
+## [0.0.24](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.23...v0.0.24) (2024-03-26)
+
+
+### Bug Fixes
+
+* Add missing docker_image_tag in package json ([#196](https://github.com/cloudquery/plugin-sdk-java/issues/196)) ([bd32518](https://github.com/cloudquery/plugin-sdk-java/commit/bd32518bae6fc0761b3a0319fb39c0067a1cf840))
+
+## [0.0.23](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.22...v0.0.23) (2024-03-26)
+
+
+### Features
+
+* Add package command ([#194](https://github.com/cloudquery/plugin-sdk-java/issues/194)) ([05407bb](https://github.com/cloudquery/plugin-sdk-java/commit/05407bbec19f2e782aafc21ec6f7511840cccc2d))
+
+## [0.0.22](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.21...v0.0.22) (2024-03-05)
+
+
+### Bug Fixes
+
+* **deps:** Update actions/setup-java action to v4 ([#192](https://github.com/cloudquery/plugin-sdk-java/issues/192)) ([d919222](https://github.com/cloudquery/plugin-sdk-java/commit/d919222afa1908a4c74f337ac15528a15faa0fa4))
+* **deps:** Update dependency gradle to v8.6 ([#186](https://github.com/cloudquery/plugin-sdk-java/issues/186)) ([0325779](https://github.com/cloudquery/plugin-sdk-java/commit/032577937cafd9980853d7fed3ef125c37ea807e))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.15 ([#190](https://github.com/cloudquery/plugin-sdk-java/issues/190)) ([a35a6e6](https://github.com/cloudquery/plugin-sdk-java/commit/a35a6e64787b00488874f29c7a9a3a32407f9dbe))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.15.7 ([#182](https://github.com/cloudquery/plugin-sdk-java/issues/182)) ([611c8a7](https://github.com/cloudquery/plugin-sdk-java/commit/611c8a7dff6e279bde190ba3227652e25d8e934e))
+* **deps:** Update dependency org.assertj:assertj-core to v3.25.3 ([#184](https://github.com/cloudquery/plugin-sdk-java/issues/184)) ([c1ab19c](https://github.com/cloudquery/plugin-sdk-java/commit/c1ab19c1b45174561e90ba79609c205375333c44))
+* **deps:** Update grpc-java monorepo to v1.62.2 ([#187](https://github.com/cloudquery/plugin-sdk-java/issues/187)) ([ec009d7](https://github.com/cloudquery/plugin-sdk-java/commit/ec009d7721940b9cb5481c8b81b2287cb4defe80))
+* **deps:** Update junit5 monorepo to v5.10.2 ([#185](https://github.com/cloudquery/plugin-sdk-java/issues/185)) ([144b687](https://github.com/cloudquery/plugin-sdk-java/commit/144b6879c1d4f2b11d31aca19646e8bd6b1313a1))
+* **deps:** Update log4j2 monorepo to v2.23.0 ([#188](https://github.com/cloudquery/plugin-sdk-java/issues/188)) ([04c740c](https://github.com/cloudquery/plugin-sdk-java/commit/04c740c39ea3a4ef3fe40b28d1b4e8d0841e098d))
+* **deps:** Update plugin io.freefair.lombok to v8.6 ([#189](https://github.com/cloudquery/plugin-sdk-java/issues/189)) ([0f5568f](https://github.com/cloudquery/plugin-sdk-java/commit/0f5568f8bdecb251bf13303d2faf368cdeba0da9))
+
+## [0.0.21](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.20...v0.0.21) (2024-02-09)
+
+
+### Features
+
+* Implement `GetSpecSchema` ([#180](https://github.com/cloudquery/plugin-sdk-java/issues/180)) ([9eeb976](https://github.com/cloudquery/plugin-sdk-java/commit/9eeb976c868b1a206230b6285d666671a18682a7))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.14 ([#178](https://github.com/cloudquery/plugin-sdk-java/issues/178)) ([6871551](https://github.com/cloudquery/plugin-sdk-java/commit/6871551de650ee36464699ec6cbb0f124676f282))
+* **deps:** Update grpc-java monorepo to v1.61.1 ([#172](https://github.com/cloudquery/plugin-sdk-java/issues/172)) ([4ada7bc](https://github.com/cloudquery/plugin-sdk-java/commit/4ada7bcade9cf94043a9ba99c86c2fef43c3a645))
+
+## [0.0.20](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.19...v0.0.20) (2024-02-06)
+
+
+### Bug Fixes
+
+* Update artifact & group ID ([#176](https://github.com/cloudquery/plugin-sdk-java/issues/176)) ([46db086](https://github.com/cloudquery/plugin-sdk-java/commit/46db08666cad988460288c433db327f4f0a3b49c))
+
+## [0.0.19](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.18...v0.0.19) (2024-02-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.12 ([#168](https://github.com/cloudquery/plugin-sdk-java/issues/168)) ([02663c1](https://github.com/cloudquery/plugin-sdk-java/commit/02663c1ea7f5dd664ff2eb66d26648ea6e26bf1d))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.15.6 ([#170](https://github.com/cloudquery/plugin-sdk-java/issues/170)) ([20d4830](https://github.com/cloudquery/plugin-sdk-java/commit/20d48303122f04f2f578e345dcb5d0722502efce))
+* **deps:** Update dependency org.assertj:assertj-core to v3.25.2 ([#171](https://github.com/cloudquery/plugin-sdk-java/issues/171)) ([96d0b66](https://github.com/cloudquery/plugin-sdk-java/commit/96d0b661452b9a8557da9dfe8e52f3fa6212da59))
+* **deps:** Update log4j2 monorepo to v2.22.1 ([#173](https://github.com/cloudquery/plugin-sdk-java/issues/173)) ([60ba1c6](https://github.com/cloudquery/plugin-sdk-java/commit/60ba1c6731a310a9aa84638f60794491e64e1c85))
+* **deps:** Update mockito monorepo to v5.10.0 ([#174](https://github.com/cloudquery/plugin-sdk-java/issues/174)) ([477e6a5](https://github.com/cloudquery/plugin-sdk-java/commit/477e6a5f52c20e9539f76c9cfc6c5d1482ed1a49))
+* **deps:** Update plugin com.diffplug.spotless to v6.25.0 ([#175](https://github.com/cloudquery/plugin-sdk-java/issues/175)) ([1f38c22](https://github.com/cloudquery/plugin-sdk-java/commit/1f38c2285a4580d3d78954c5f73d4ad4649a4892))
+
 ## [0.0.18](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.17...v0.0.18) (2024-01-02)
 
 

@@ -14,6 +14,9 @@ public class PluginServe {
 
   public int Serve() {
     Extensions.registerExtensions();
-    return new CommandLine(new RootCommand()).addSubcommand(new ServeCommand(plugin)).execute(args);
+    CommandLine cli = new CommandLine(new RootCommand());
+    cli.addSubcommand(new ServeCommand(plugin));
+    cli.addSubcommand(new PackageCommand(plugin));
+    return cli.execute(args);
   }
 }
