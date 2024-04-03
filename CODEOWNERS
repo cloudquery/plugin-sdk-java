@@ -1,0 +1,5 @@
+* @cloudquery/cloudquery-framework
+
+lib/build.gradle
+.release-please-manifest.json
+CHANGELOG.md
