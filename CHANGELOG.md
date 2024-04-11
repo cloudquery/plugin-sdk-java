@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.27](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.26...v0.0.27) (2024-04-11)
+
+
+### Bug Fixes
+
+* Call setParents on `MemDB` tables ([#217](https://github.com/cloudquery/plugin-sdk-java/issues/217)) ([4015cb5](https://github.com/cloudquery/plugin-sdk-java/commit/4015cb59625f6cb7269b47ae3421f499d9879ac0))
+
 ## [0.0.26](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.25...v0.0.26) (2024-04-01)
 
 
