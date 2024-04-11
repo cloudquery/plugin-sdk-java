@@ -23,64 +23,71 @@ import java.util.UUID;
 
 public class MemDB extends Plugin {
   private static List<Table> getTables() {
-    return List.of(
-        Table.builder()
-            .name("table1")
-            .resolver(
-                new TableResolver() {
-                  @Override
-                  public void resolve(
-                      ClientMeta clientMeta, Resource parent, TableOutputStream stream) {
-                    stream.write(
-                        Table1Data.builder()
-                            .id(UUID.fromString("46b2b6e6-8f3e-4340-a721-4aa0786b1cc0"))
-                            .name("name1")
-                            .timestamp(LocalDateTime.now())
-                            .json(Map.of("key1", "value1", "key2", "value2"))
-                            .build());
-                    stream.write(
-                        Table1Data.builder()
-                            .id(UUID.fromString("e89f95df-a389-4f1b-9ba6-1fab565523d6"))
-                            .name("name2")
-                            .build());
-                  }
-                })
-            .transform(TransformWithClass.builder(Table1Data.class).pkField("id").build())
-            .build(),
-        Table.builder()
-            .name("table2")
-            .resolver(
-                new TableResolver() {
-                  @Override
-                  public void resolve(
-                      ClientMeta clientMeta, Resource parent, TableOutputStream stream) {
-                    stream.write(Table2Data.builder().id(1).name("name1").build());
-                    stream.write(Table2Data.builder().id(2).name("name2").build());
-                  }
-                })
-            .transform(TransformWithClass.builder(Table2Data.class).pkField("id").build())
-            .relations(
-                List.of(
-                    Table.builder()
-                        .name("table2_child")
-                        .resolver(
-                            new TableResolver() {
+    List<Table> tables =
+        List.of(
+            Table.builder()
+                .name("table1")
+                .resolver(
+                    new TableResolver() {
+                      @Override
+                      public void resolve(
+                          ClientMeta clientMeta, Resource parent, TableOutputStream stream) {
+                        stream.write(
+                            Table1Data.builder()
+                                .id(UUID.fromString("46b2b6e6-8f3e-4340-a721-4aa0786b1cc0"))
+                                .name("name1")
+                                .timestamp(LocalDateTime.now())
+                                .json(Map.of("key1", "value1", "key2", "value2"))
+                                .build());
+                        stream.write(
+                            Table1Data.builder()
+                                .id(UUID.fromString("e89f95df-a389-4f1b-9ba6-1fab565523d6"))
+                                .name("name2")
+                                .build());
+                      }
+                    })
+                .transform(TransformWithClass.builder(Table1Data.class).pkField("id").build())
+                .build(),
+            Table.builder()
+                .name("table2")
+                .resolver(
+                    new TableResolver() {
+                      @Override
+                      public void resolve(
+                          ClientMeta clientMeta, Resource parent, TableOutputStream stream) {
+                        stream.write(Table2Data.builder().id(1).name("name1").build());
+                        stream.write(Table2Data.builder().id(2).name("name2").build());
+                      }
+                    })
+                .transform(TransformWithClass.builder(Table2Data.class).pkField("id").build())
+                .relations(
+                    List.of(
+                        Table.builder()
+                            .name("table2_child")
+                            .resolver(
+                                new TableResolver() {
 
-                              @Override
-                              public void resolve(
-                                  ClientMeta clientMeta,
-                                  Resource parent,
-                                  TableOutputStream stream) {
-                                String parentName = parent.get("name").toString();
-                                stream.write(
-                                    Table2ChildData.builder().name(parentName + "_name1").build());
-                                stream.write(
-                                    Table2ChildData.builder().name(parentName + "_name2").build());
-                              }
-                            })
-                        .transform(TransformWithClass.builder(Table2ChildData.class).build())
-                        .build()))
-            .build());
+                                  @Override
+                                  public void resolve(
+                                      ClientMeta clientMeta,
+                                      Resource parent,
+                                      TableOutputStream stream) {
+                                    String parentName = parent.get("name").toString();
+                                    stream.write(
+                                        Table2ChildData.builder()
+                                            .name(parentName + "_name1")
+                                            .build());
+                                    stream.write(
+                                        Table2ChildData.builder()
+                                            .name(parentName + "_name2")
+                                            .build());
+                                  }
+                                })
+                            .transform(TransformWithClass.builder(Table2ChildData.class).build())
+                            .build()))
+                .build());
+    Tables.setParents(tables, null);
+    return tables;
   }
 
   private List<Table> allTables;
