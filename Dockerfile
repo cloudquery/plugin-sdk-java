@@ -8,7 +8,7 @@ COPY . .
 
 RUN gradle jar --no-daemon
 
-FROM eclipse-temurin:21.0.2_13-jre
+FROM eclipse-temurin:21.0.3_9-jre
 
 COPY --from=build /code/lib/build/libs/*.jar /app/app.jar
 
