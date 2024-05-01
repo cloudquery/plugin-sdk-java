@@ -59,7 +59,7 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.25.3'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
 
-    runtimeOnly "org.apache.arrow:arrow-memory-netty:15.0.2"
+    runtimeOnly "org.apache.arrow:arrow-memory-netty:16.0.0"
 }
 
 test {
