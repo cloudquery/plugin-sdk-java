@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.29](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.28...v0.0.29) (2024-06-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-annotations to v2.17.1 ([#229](https://github.com/cloudquery/plugin-sdk-java/issues/229)) ([838b81b](https://github.com/cloudquery/plugin-sdk-java/commit/838b81b45c22dc93e0cb6833b481300f49ee361a))
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-core to v2.17.1 ([#230](https://github.com/cloudquery/plugin-sdk-java/issues/230)) ([2266863](https://github.com/cloudquery/plugin-sdk-java/commit/2266863f941764485606805c70c7a3e407c19fb8))
+* **deps:** Update dependency com.google.guava:guava to v33.2.1-jre ([#233](https://github.com/cloudquery/plugin-sdk-java/issues/233)) ([c98b5f3](https://github.com/cloudquery/plugin-sdk-java/commit/c98b5f37e7cd2fb5656b0baa8d8862fa5fd5b925))
+* **deps:** Update dependency gradle to v8.8 ([#234](https://github.com/cloudquery/plugin-sdk-java/issues/234)) ([f8cd80c](https://github.com/cloudquery/plugin-sdk-java/commit/f8cd80cbb48e2951f22fdad544f580696364ea83))
+* **deps:** Update dependency info.picocli:picocli to v4.7.6 ([#232](https://github.com/cloudquery/plugin-sdk-java/issues/232)) ([c66f061](https://github.com/cloudquery/plugin-sdk-java/commit/c66f061f1bf03906bbb58b39b5ca107050191063))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.18 ([#238](https://github.com/cloudquery/plugin-sdk-java/issues/238)) ([2df653e](https://github.com/cloudquery/plugin-sdk-java/commit/2df653e35924848f1e3c37f278e44efb10244514))
+* **deps:** Update dependency org.assertj:assertj-core to v3.26.0 ([#235](https://github.com/cloudquery/plugin-sdk-java/issues/235)) ([a17d68b](https://github.com/cloudquery/plugin-sdk-java/commit/a17d68b4fc8483269b2d3aee8c3bf4caa6da4b8d))
+* **deps:** Update grpc-java monorepo to v1.64.0 ([#236](https://github.com/cloudquery/plugin-sdk-java/issues/236)) ([263359b](https://github.com/cloudquery/plugin-sdk-java/commit/263359bef71d5861d8f9e13c3a0f2d2753069d49))
+* **deps:** Update mockito monorepo to v5.12.0 ([#237](https://github.com/cloudquery/plugin-sdk-java/issues/237)) ([ae93cd0](https://github.com/cloudquery/plugin-sdk-java/commit/ae93cd036b3f64a1ec9fafc894c4379ff241817c))
+
 ## [0.0.28](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.27...v0.0.28) (2024-05-06)
 
 
