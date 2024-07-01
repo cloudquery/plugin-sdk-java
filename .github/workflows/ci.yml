@@ -23,7 +23,7 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@216d1ad2b3710bf005dc39237337b9673fd8fcd5
+        uses: gradle/wrapper-validation-action@88425854a36845f9c881450d9660b5fd46bee142
       - name: Build package
         run: ./gradlew build
         env:
