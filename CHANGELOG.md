@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.30](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.29...v0.0.30) (2024-07-08)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.19 ([#243](https://github.com/cloudquery/plugin-sdk-java/issues/243)) ([27c8044](https://github.com/cloudquery/plugin-sdk-java/commit/27c804403f38f12e6bca568057888c4f61871e0e))
+* **deps:** Update grpc-java monorepo to v1.65.0 ([#242](https://github.com/cloudquery/plugin-sdk-java/issues/242)) ([79ad2c5](https://github.com/cloudquery/plugin-sdk-java/commit/79ad2c50d96dd4d6e4e5a1a2091ce32b12245006))
+* **deps:** Update junit5 monorepo to v5.10.3 ([#240](https://github.com/cloudquery/plugin-sdk-java/issues/240)) ([1863b62](https://github.com/cloudquery/plugin-sdk-java/commit/1863b62ee6fe2e8d8b9504db81604cbc33178b0e))
+
 ## [0.0.29](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.28...v0.0.29) (2024-06-02)
 
 
