@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.32](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.31...v0.0.32) (2024-07-30)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.21 ([#247](https://github.com/cloudquery/plugin-sdk-java/issues/247)) ([4841a15](https://github.com/cloudquery/plugin-sdk-java/commit/4841a15ad58da5292ebd3c7737291394a46bb9f0))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.22 ([#249](https://github.com/cloudquery/plugin-sdk-java/issues/249)) ([76980e2](https://github.com/cloudquery/plugin-sdk-java/commit/76980e25f2e3b815093d8a1a97badc0c59465303))
+
 ## [0.0.31](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.30...v0.0.31) (2024-07-17)
 
 
