@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.35](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.34...v0.0.35) (2024-11-04)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-annotations to v2.18.1 ([#280](https://github.com/cloudquery/plugin-sdk-java/issues/280)) ([4b4d603](https://github.com/cloudquery/plugin-sdk-java/commit/4b4d60310dadfdb7f3efa6f257c923c84a753172))
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-core to v2.18.1 ([#281](https://github.com/cloudquery/plugin-sdk-java/issues/281)) ([62ba6f0](https://github.com/cloudquery/plugin-sdk-java/commit/62ba6f08e72e4c831a2d4819b69c321459a0241f))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.27 ([#289](https://github.com/cloudquery/plugin-sdk-java/issues/289)) ([ac66f9f](https://github.com/cloudquery/plugin-sdk-java/commit/ac66f9f5310a1f7454692fb3f3ee5990d2902400))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.17.1 ([#283](https://github.com/cloudquery/plugin-sdk-java/issues/283)) ([a327de7](https://github.com/cloudquery/plugin-sdk-java/commit/a327de7cd6aa1d65a8743cadd4ee8d52c5bb6076))
+* **deps:** Update eclipse-temurin Docker tag to v21.0.5_11-jre ([#284](https://github.com/cloudquery/plugin-sdk-java/issues/284)) ([7ebc6db](https://github.com/cloudquery/plugin-sdk-java/commit/7ebc6db3f7068914a98d5ccdfe385c167b6104a2))
+* **deps:** Update grpc-java monorepo to v1.68.1 ([#285](https://github.com/cloudquery/plugin-sdk-java/issues/285)) ([569f427](https://github.com/cloudquery/plugin-sdk-java/commit/569f4274dbe44c1ee54dbf2391e9f7ed8f55eaba))
+* **deps:** Update junit5 monorepo to v5.11.3 ([#286](https://github.com/cloudquery/plugin-sdk-java/issues/286)) ([18e0644](https://github.com/cloudquery/plugin-sdk-java/commit/18e0644d7d45aca0571d14ee48b2c360ddbab8ea))
+* **deps:** Update log4j2 monorepo to v2.24.1 ([#288](https://github.com/cloudquery/plugin-sdk-java/issues/288)) ([671e747](https://github.com/cloudquery/plugin-sdk-java/commit/671e7474411f3f9c14a5b144b3b5b2353bc28eeb))
+* **deps:** Update plugin io.freefair.lombok to v8.10.2 ([#287](https://github.com/cloudquery/plugin-sdk-java/issues/287)) ([e69b87f](https://github.com/cloudquery/plugin-sdk-java/commit/e69b87fec058c791b0314d239625b628800fb90c))
+
 ## [0.0.34](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.33...v0.0.34) (2024-10-01)
 
 
