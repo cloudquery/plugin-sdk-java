@@ -37,7 +37,7 @@ dependencies {
     implementation 'io.grpc:grpc-protobuf:1.68.2'
     implementation 'io.grpc:grpc-stub:1.68.2'
     implementation 'io.grpc:grpc-services:1.68.2'
-    implementation 'io.cloudquery:plugin-pb-java:0.0.28'
+    implementation 'io.cloudquery:plugin-pb-java:0.0.29'
     implementation 'org.apache.arrow:arrow-memory-core:18.1.0'
     implementation 'org.apache.arrow:arrow-vector:18.1.0'
     implementation 'commons-io:commons-io:2.18.0'
