@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.0.37](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.36...v0.0.37) (2025-01-07)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.google.guava:guava to v33.4.0-jre ([#310](https://github.com/cloudquery/plugin-sdk-java/issues/310)) ([1a54ac6](https://github.com/cloudquery/plugin-sdk-java/commit/1a54ac6b4c9acb68b6803bc194f55ecb9a963621))
+* **deps:** Update dependency gradle to v8.12 ([#311](https://github.com/cloudquery/plugin-sdk-java/issues/311)) ([1b6dd6f](https://github.com/cloudquery/plugin-sdk-java/commit/1b6dd6fa730135bb1e45a62af5c2bc91341127cf))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.29 ([#312](https://github.com/cloudquery/plugin-sdk-java/issues/312)) ([b0b06e3](https://github.com/cloudquery/plugin-sdk-java/commit/b0b06e3e534122c26ca56e325f6eef20e7c863e0))
+* **deps:** Update junit5 monorepo to v5.11.4 ([#307](https://github.com/cloudquery/plugin-sdk-java/issues/307)) ([16989e5](https://github.com/cloudquery/plugin-sdk-java/commit/16989e548d7a9fdc91be48321ff9383fec81c9ed))
+* **deps:** Update log4j2 monorepo to v2.24.3 ([#308](https://github.com/cloudquery/plugin-sdk-java/issues/308)) ([5967f90](https://github.com/cloudquery/plugin-sdk-java/commit/5967f9092724e2b8bbdf798c7dfdaf2779f11b52))
+
 ## [0.0.36](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.35...v0.0.36) (2024-12-02)
 
 
