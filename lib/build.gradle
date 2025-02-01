@@ -34,9 +34,9 @@ dependencies {
     implementation 'com.google.guava:guava:33.4.0-jre'
     implementation 'info.picocli:picocli:4.7.6'
     implementation 'com.google.guava:guava:33.4.0-jre'
-    implementation 'io.grpc:grpc-protobuf:1.68.2'
-    implementation 'io.grpc:grpc-stub:1.68.2'
-    implementation 'io.grpc:grpc-services:1.68.2'
+    implementation 'io.grpc:grpc-protobuf:1.70.0'
+    implementation 'io.grpc:grpc-stub:1.70.0'
+    implementation 'io.grpc:grpc-services:1.70.0'
     implementation 'io.cloudquery:plugin-pb-java:0.0.29'
     implementation 'org.apache.arrow:arrow-memory-core:18.1.0'
     implementation 'org.apache.arrow:arrow-vector:18.1.0'
@@ -48,15 +48,15 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-api:2.24.3'
     implementation 'org.apache.logging.log4j:log4j-core:2.24.3'
 
-    testImplementation 'io.grpc:grpc-testing:1.68.2'
-    testImplementation 'io.grpc:grpc-inprocess:1.68.2'
+    testImplementation 'io.grpc:grpc-testing:1.70.0'
+    testImplementation 'io.grpc:grpc-inprocess:1.70.0'
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
     testImplementation 'org.mockito:mockito-core:5.15.2'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.15.2'
     testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.18.1'
-    testImplementation 'org.assertj:assertj-core:3.26.3'
+    testImplementation 'org.assertj:assertj-core:3.27.3'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
 
     runtimeOnly "org.apache.arrow:arrow-memory-netty:18.1.0"
