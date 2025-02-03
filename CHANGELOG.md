@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.38](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.37...v0.0.38) (2025-02-03)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency gradle to v8.12.1 ([#314](https://github.com/cloudquery/plugin-sdk-java/issues/314)) ([0b29ccd](https://github.com/cloudquery/plugin-sdk-java/commit/0b29ccd5940d660f5e471e5055b5d2d1e98c2d29))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.30 ([#321](https://github.com/cloudquery/plugin-sdk-java/issues/321)) ([b875a01](https://github.com/cloudquery/plugin-sdk-java/commit/b875a01de78de0d68d4655614fb542672cb62790))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.18.1 ([#317](https://github.com/cloudquery/plugin-sdk-java/issues/317)) ([c1d543d](https://github.com/cloudquery/plugin-sdk-java/commit/c1d543d755c5328d9d6f970dbf0191d4d6738e01))
+* **deps:** Update dependency org.assertj:assertj-core to v3.27.3 ([#318](https://github.com/cloudquery/plugin-sdk-java/issues/318)) ([f321084](https://github.com/cloudquery/plugin-sdk-java/commit/f3210842975ca24d4cff089e29539450360adbcd))
+* **deps:** Update eclipse-temurin Docker tag to v21.0.6_7-jre ([#315](https://github.com/cloudquery/plugin-sdk-java/issues/315)) ([c888a38](https://github.com/cloudquery/plugin-sdk-java/commit/c888a38482089def2a7bbbcef61b72d562a94268))
+* **deps:** Update grpc-java monorepo to v1.70.0 ([#319](https://github.com/cloudquery/plugin-sdk-java/issues/319)) ([97b3b6c](https://github.com/cloudquery/plugin-sdk-java/commit/97b3b6c2ffce1d61b0966ce29304a4faee39866d))
+* **deps:** Update mockito monorepo to v5.15.2 ([#320](https://github.com/cloudquery/plugin-sdk-java/issues/320)) ([5110a9a](https://github.com/cloudquery/plugin-sdk-java/commit/5110a9a8f2a93cf808f58b20ca27b1e4a02806a7))
+
 ## [0.0.37](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.36...v0.0.37) (2025-01-07)
 
 
