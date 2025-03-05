@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.39](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.38...v0.0.39) (2025-03-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.19.1 ([#322](https://github.com/cloudquery/plugin-sdk-java/issues/322)) ([fd4d455](https://github.com/cloudquery/plugin-sdk-java/commit/fd4d4557529c38d1ea7ca2cbc7df41690b29c3f1))
+* **deps:** Update dependency org.apache.arrow:arrow-memory-core to v18.2.0 ([#323](https://github.com/cloudquery/plugin-sdk-java/issues/323)) ([db4448c](https://github.com/cloudquery/plugin-sdk-java/commit/db4448c1b2d473153c254fe3073508077c4b295d))
+* **deps:** Update dependency org.apache.arrow:arrow-memory-netty to v18.2.0 ([#325](https://github.com/cloudquery/plugin-sdk-java/issues/325)) ([efa937d](https://github.com/cloudquery/plugin-sdk-java/commit/efa937d7c0ad245177589580647da9816649cb8f))
+* **deps:** Update dependency org.apache.arrow:arrow-vector to v18.2.0 ([#326](https://github.com/cloudquery/plugin-sdk-java/issues/326)) ([5c884bd](https://github.com/cloudquery/plugin-sdk-java/commit/5c884bd91260bb118d3e8353b589c69800538a8c))
+
 ## [0.0.38](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.37...v0.0.38) (2025-02-03)
 
 
