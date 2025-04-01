@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.40](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.39...v0.0.40) (2025-04-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.google.guava:guava to v33.4.5-jre ([#327](https://github.com/cloudquery/plugin-sdk-java/issues/327)) ([ba04bd3](https://github.com/cloudquery/plugin-sdk-java/commit/ba04bd3a666fe4146cab45259acfd7d716d56945))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.31 ([#330](https://github.com/cloudquery/plugin-sdk-java/issues/330)) ([cf7fc42](https://github.com/cloudquery/plugin-sdk-java/commit/cf7fc42c19128ade5819fae3455e98a24d008eee))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.19.2 ([#328](https://github.com/cloudquery/plugin-sdk-java/issues/328)) ([8928df4](https://github.com/cloudquery/plugin-sdk-java/commit/8928df4817126f752e2867f5128fef577a53a8e8))
+
 ## [0.0.39](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.38...v0.0.39) (2025-03-01)
 
 
