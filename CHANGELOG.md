@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.0.41](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.40...v0.0.41) (2025-05-09)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.google.guava:guava to v33.4.8-jre ([#331](https://github.com/cloudquery/plugin-sdk-java/issues/331)) ([becd515](https://github.com/cloudquery/plugin-sdk-java/commit/becd515da6ff4786d2a733d87294d3814f2cd89e))
+* **deps:** Update dependency info.picocli:picocli to v4.7.7 ([#332](https://github.com/cloudquery/plugin-sdk-java/issues/332)) ([0e12831](https://github.com/cloudquery/plugin-sdk-java/commit/0e12831cf0663b2abdced91eabd406e4bf4c4440))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.32 ([#336](https://github.com/cloudquery/plugin-sdk-java/issues/336)) ([24ef423](https://github.com/cloudquery/plugin-sdk-java/commit/24ef423ef0497b92c83a950a2728d5baa3956cd6))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.19.3 ([#334](https://github.com/cloudquery/plugin-sdk-java/issues/334)) ([a541e73](https://github.com/cloudquery/plugin-sdk-java/commit/a541e73db6eafcc656a3c0e00e79624c4a314418))
+* **deps:** Update eclipse-temurin Docker tag to v21.0.7_6-jre ([#335](https://github.com/cloudquery/plugin-sdk-java/issues/335)) ([97b296b](https://github.com/cloudquery/plugin-sdk-java/commit/97b296b828c9b13c2a0eca430457e0ef75019f21))
+
 ## [0.0.40](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.39...v0.0.40) (2025-04-01)
 
 
