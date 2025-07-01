@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.42](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.41...v0.0.42) (2025-07-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency commons-io:commons-io to v2.19.0 ([#339](https://github.com/cloudquery/plugin-sdk-java/issues/339)) ([f99a5aa](https://github.com/cloudquery/plugin-sdk-java/commit/f99a5aa606f2114fd3711fc01063510911629441))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.33 ([#337](https://github.com/cloudquery/plugin-sdk-java/issues/337)) ([44b294c](https://github.com/cloudquery/plugin-sdk-java/commit/44b294c9903aed0354bc23226d3a1c7eb2dcc32e))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.34 ([#341](https://github.com/cloudquery/plugin-sdk-java/issues/341)) ([2eb3a83](https://github.com/cloudquery/plugin-sdk-java/commit/2eb3a83feef57382c79c36c2f74235465b7e3147))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v3.19.4 ([#338](https://github.com/cloudquery/plugin-sdk-java/issues/338)) ([41b66b7](https://github.com/cloudquery/plugin-sdk-java/commit/41b66b78b33d9839d5a9851e5ddd5f0dfaac6d7f))
+
 ## [0.0.41](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.40...v0.0.41) (2025-05-09)
 
 
