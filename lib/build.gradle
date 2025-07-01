@@ -11,7 +11,7 @@ ext {
 
 group 'io.cloudquery'
 // x-release-please-start-version
-version = '0.0.41'
+version = '0.0.42'
 // x-release-please-end
 
 repositories {
