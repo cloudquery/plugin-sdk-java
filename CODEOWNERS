@@ -1,4 +1,4 @@
-* @cloudquery/integrations-backend
+* @cloudquery/backend
 
 lib/build.gradle
 .release-please-manifest.json
