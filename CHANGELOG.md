@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.43](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.42...v0.0.43) (2025-09-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency commons-io:commons-io to v2.20.0 ([#343](https://github.com/cloudquery/plugin-sdk-java/issues/343)) ([a8781df](https://github.com/cloudquery/plugin-sdk-java/commit/a8781df5d3498638eab256e31fb95fce89f821e7))
+* **deps:** Update dependency gradle to v8.14.3 ([#344](https://github.com/cloudquery/plugin-sdk-java/issues/344)) ([9bfb2ba](https://github.com/cloudquery/plugin-sdk-java/commit/9bfb2baac9d8ce480c1cde1647c7efcce110a708))
+* **deps:** Update dependency org.apache.arrow:arrow-memory-core to v18.3.0 ([#346](https://github.com/cloudquery/plugin-sdk-java/issues/346)) ([7a72630](https://github.com/cloudquery/plugin-sdk-java/commit/7a72630fd95ac3f7c0e6a45f08d6015cc7e256e1))
+* **deps:** Update dependency org.apache.arrow:arrow-memory-netty to v18.3.0 ([#347](https://github.com/cloudquery/plugin-sdk-java/issues/347)) ([a842d83](https://github.com/cloudquery/plugin-sdk-java/commit/a842d833b1876a43424b01e849a9b72e75705b74))
+* **deps:** Update dependency org.apache.arrow:arrow-vector to v18.3.0 ([#352](https://github.com/cloudquery/plugin-sdk-java/issues/352)) ([5b81081](https://github.com/cloudquery/plugin-sdk-java/commit/5b81081f171853d2beffe3daae900b02f919f6de))
+* **deps:** Update dependency org.assertj:assertj-core to v3.27.4 ([#350](https://github.com/cloudquery/plugin-sdk-java/issues/350)) ([8812244](https://github.com/cloudquery/plugin-sdk-java/commit/8812244e2dd808027a76b71c15e6d980910b3878))
+* **deps:** Update eclipse-temurin Docker tag to v21.0.8_9-jre ([#351](https://github.com/cloudquery/plugin-sdk-java/issues/351)) ([52b6f5f](https://github.com/cloudquery/plugin-sdk-java/commit/52b6f5f3d94536f6284504aa9dc4faf85e621056))
+
 ## [0.0.42](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.41...v0.0.42) (2025-07-01)
 
 
