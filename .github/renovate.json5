@@ -3,7 +3,7 @@
   packageRules: [
     {
       matchPackageNames: ["^org.junit"],
-      groupName: "junit,
+      groupName: "junit",
     },
   ],
 }
