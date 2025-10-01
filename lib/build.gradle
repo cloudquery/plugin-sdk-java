@@ -2,7 +2,7 @@ plugins {
     id 'java-library'
     id "io.freefair.lombok" version "8.14.2"
     id "maven-publish"
-    id "com.diffplug.spotless" version "6.25.0"
+    id "com.diffplug.spotless" version "7.2.1"
 }
 
 ext {
@@ -11,7 +11,7 @@ ext {
 
 group 'io.cloudquery'
 // x-release-please-start-version
-version = '0.0.43'
+version = '0.0.44'
 // x-release-please-end
 
 repositories {
@@ -55,7 +55,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
     testImplementation 'org.mockito:mockito-core:5.15.2'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.15.2'
-    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.19.4'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:4.1.1'
     testImplementation 'org.assertj:assertj-core:3.27.6'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
 
