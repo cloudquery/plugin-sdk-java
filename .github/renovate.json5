@@ -2,7 +2,7 @@
   extends: ["github>cloudquery/.github//.github/renovate-java-default.json5"],
   packageRules: [
     {
-      matchPackageNames: ["^org.junit"],
+      matchPackageNames: ["/junit/"],
       groupName: "junit",
     },
   ],

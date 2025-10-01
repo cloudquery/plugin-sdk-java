@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.44](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.43...v0.0.44) (2025-10-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.google.guava:guava to v33.5.0-jre ([#358](https://github.com/cloudquery/plugin-sdk-java/issues/358)) ([e60eb99](https://github.com/cloudquery/plugin-sdk-java/commit/e60eb99b2ea35bbd45ed88d439e1db1e27ba7752))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.35 ([#353](https://github.com/cloudquery/plugin-sdk-java/issues/353)) ([fbb196c](https://github.com/cloudquery/plugin-sdk-java/commit/fbb196cfb7268e3209cfa99997055e77deb75c8c))
+* **deps:** Update dependency org.assertj:assertj-core to v3.27.6 ([#357](https://github.com/cloudquery/plugin-sdk-java/issues/357)) ([af74a56](https://github.com/cloudquery/plugin-sdk-java/commit/af74a56160220e58d901db67961b3bd3f95d43d2))
+* **deps:** Update grpc-java monorepo to v1.75.0 ([#365](https://github.com/cloudquery/plugin-sdk-java/issues/365)) ([cd8f5fa](https://github.com/cloudquery/plugin-sdk-java/commit/cd8f5fa719f99abf70d3e96ec54fa675792974d1))
+* **deps:** Update jackson monorepo ([#366](https://github.com/cloudquery/plugin-sdk-java/issues/366)) ([05df6b2](https://github.com/cloudquery/plugin-sdk-java/commit/05df6b2e6984b48d1e2997b3438903d291a9601c))
+* **deps:** Update log4j2 monorepo to v2.25.2 ([#367](https://github.com/cloudquery/plugin-sdk-java/issues/367)) ([a978959](https://github.com/cloudquery/plugin-sdk-java/commit/a97895901f8dac1cbd0155e2b85a9c3f87e977fd))
+* **deps:** Update plugin io.freefair.lombok to v8.14.2 ([#369](https://github.com/cloudquery/plugin-sdk-java/issues/369)) ([94dd81c](https://github.com/cloudquery/plugin-sdk-java/commit/94dd81c2d396cdaa425cb1b020415b117fcc1520))
+* **deps:** Update plugin org.gradle.toolchains.foojay-resolver-convention to v0.10.0 ([#370](https://github.com/cloudquery/plugin-sdk-java/issues/370)) ([fbe0ce7](https://github.com/cloudquery/plugin-sdk-java/commit/fbe0ce7b8969add19d555dd17368349729b35047))
+
 ## [0.0.43](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.42...v0.0.43) (2025-09-01)
 
 
