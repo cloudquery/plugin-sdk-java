@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.46](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.45...v0.0.46) (2025-10-01)
+
+
+### Bug Fixes
+
+* **deps:** Update junit ([#379](https://github.com/cloudquery/plugin-sdk-java/issues/379)) ([0c0be66](https://github.com/cloudquery/plugin-sdk-java/commit/0c0be66971add6c9143779d8c514ad2c85b27aca))
+* **deps:** Update junit to v6 (major) ([#380](https://github.com/cloudquery/plugin-sdk-java/issues/380)) ([7706ec7](https://github.com/cloudquery/plugin-sdk-java/commit/7706ec71b6a03c7c07c269a9be548d14ea78d81f))
+* **deps:** Update plugin com.diffplug.spotless to v8 ([#381](https://github.com/cloudquery/plugin-sdk-java/issues/381)) ([119c9b1](https://github.com/cloudquery/plugin-sdk-java/commit/119c9b16059f1e2bb88e6f1013e5c177f4ee695a))
+* **deps:** Update plugin io.freefair.lombok to v9 ([#382](https://github.com/cloudquery/plugin-sdk-java/issues/382)) ([b023d40](https://github.com/cloudquery/plugin-sdk-java/commit/b023d4064da2d93bd142f2133bf9bd5cab8697b6))
+
 ## [0.0.45](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.44...v0.0.45) (2025-10-01)
 
 
