@@ -5,10 +5,6 @@ plugins {
     id "com.diffplug.spotless" version "7.2.1"
 }
 
-ext {
-   javaMainClass = "io.cloudquery.MainClass"
-}
-
 group 'io.cloudquery'
 // x-release-please-start-version
 version = '0.0.44'
@@ -57,7 +53,7 @@ dependencies {
     testImplementation 'org.mockito:mockito-junit-jupiter:5.15.2'
     testImplementation 'nl.jqno.equalsverifier:equalsverifier:4.1.1'
     testImplementation 'org.assertj:assertj-core:3.27.6'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     runtimeOnly "org.apache.arrow:arrow-memory-netty:18.3.0"
 }
@@ -109,10 +105,10 @@ publishing {
 }
 
 task runMemDBServe(type: JavaExec) {
+    mainClass.set("io.cloudquery.MainClass")
     group = "Execution"
     description = "Start the MemDB plugin server"
     classpath = sourceSets.main.runtimeClasspath
-    main = javaMainClass
     args = ["serve"]
     jvmArgs = ["--add-opens=java.base/java.nio=ALL-UNNAMED"]
 }
