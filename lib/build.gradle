@@ -31,9 +31,9 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'org.jooq:joou:0.9.4'
-    implementation 'com.google.guava:guava:33.4.8-jre'
+    implementation 'com.google.guava:guava:33.5.0-jre'
     implementation 'info.picocli:picocli:4.7.7'
-    implementation 'com.google.guava:guava:33.4.8-jre'
+    implementation 'com.google.guava:guava:33.5.0-jre'
     implementation 'io.grpc:grpc-protobuf:1.70.0'
     implementation 'io.grpc:grpc-stub:1.70.0'
     implementation 'io.grpc:grpc-services:1.70.0'
