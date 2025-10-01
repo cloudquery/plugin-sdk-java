@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.0.45](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.44...v0.0.45) (2025-10-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency gradle to v9 ([#374](https://github.com/cloudquery/plugin-sdk-java/issues/374)) ([ec34114](https://github.com/cloudquery/plugin-sdk-java/commit/ec34114c214270e0a76cbc0c0b59d3bf12b5966f))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v4 ([#375](https://github.com/cloudquery/plugin-sdk-java/issues/375)) ([ff6972d](https://github.com/cloudquery/plugin-sdk-java/commit/ff6972d5691e173845c24c74a45a49cedb75daf5))
+* **deps:** Update dependency org.mockito:mockito-core to v5.20.0 ([#368](https://github.com/cloudquery/plugin-sdk-java/issues/368)) ([14791e2](https://github.com/cloudquery/plugin-sdk-java/commit/14791e27b2cca4d0bae855d2beb395ce06f4b304))
+* **deps:** Update plugin com.diffplug.spotless to v7 ([#376](https://github.com/cloudquery/plugin-sdk-java/issues/376)) ([d38c03e](https://github.com/cloudquery/plugin-sdk-java/commit/d38c03e16e92f26fa884b0058e26fa5d483a39e8))
+* **deps:** Update plugin org.gradle.toolchains.foojay-resolver-convention to v1 ([#377](https://github.com/cloudquery/plugin-sdk-java/issues/377)) ([0c0c48c](https://github.com/cloudquery/plugin-sdk-java/commit/0c0c48cab9196fd21b5f97925fc87e6ab4d5a75a))
+
 ## [0.0.44](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.43...v0.0.44) (2025-10-01)
 
 
