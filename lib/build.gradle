@@ -34,22 +34,22 @@ dependencies {
     implementation 'com.google.guava:guava:33.5.0-jre'
     implementation 'info.picocli:picocli:4.7.7'
     implementation 'com.google.guava:guava:33.5.0-jre'
-    implementation 'io.grpc:grpc-protobuf:1.70.0'
-    implementation 'io.grpc:grpc-stub:1.70.0'
-    implementation 'io.grpc:grpc-services:1.70.0'
+    implementation 'io.grpc:grpc-protobuf:1.75.0'
+    implementation 'io.grpc:grpc-stub:1.75.0'
+    implementation 'io.grpc:grpc-services:1.75.0'
     implementation 'io.cloudquery:plugin-pb-java:0.0.35'
     implementation 'org.apache.arrow:arrow-memory-core:18.3.0'
     implementation 'org.apache.arrow:arrow-vector:18.3.0'
     implementation 'commons-io:commons-io:2.20.0'
 
-    implementation "com.fasterxml.jackson.core:jackson-core:2.18.2"
-    implementation "com.fasterxml.jackson.core:jackson-annotations:2.18.2"
+    implementation "com.fasterxml.jackson.core:jackson-core:2.20.0"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:2.20"
 
-    implementation 'org.apache.logging.log4j:log4j-api:2.24.3'
-    implementation 'org.apache.logging.log4j:log4j-core:2.24.3'
+    implementation 'org.apache.logging.log4j:log4j-api:2.25.2'
+    implementation 'org.apache.logging.log4j:log4j-core:2.25.2'
 
-    testImplementation 'io.grpc:grpc-testing:1.70.0'
-    testImplementation 'io.grpc:grpc-inprocess:1.70.0'
+    testImplementation 'io.grpc:grpc-testing:1.75.0'
+    testImplementation 'io.grpc:grpc-inprocess:1.75.0'
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
