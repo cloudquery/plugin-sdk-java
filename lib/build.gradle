@@ -7,7 +7,7 @@ plugins {
 
 group 'io.cloudquery'
 // x-release-please-start-version
-version = '0.0.47'
+version = '0.0.48'
 // x-release-please-end
 
 repositories {
