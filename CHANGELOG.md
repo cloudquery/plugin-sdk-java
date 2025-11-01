@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.48](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.47...v0.0.48) (2025-11-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v4.2 ([#387](https://github.com/cloudquery/plugin-sdk-java/issues/387)) ([5dc3164](https://github.com/cloudquery/plugin-sdk-java/commit/5dc316419a12bf6b707eb6fb266f8cb768d40eef))
+* **deps:** Update grpc-java monorepo to v1.76.0 ([#389](https://github.com/cloudquery/plugin-sdk-java/issues/389)) ([5c0c9ce](https://github.com/cloudquery/plugin-sdk-java/commit/5c0c9ce0e1cf283ca58c1100e5f4e85ecaa1c29f))
+
 ## [0.0.47](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.46...v0.0.47) (2025-10-16)
 
 
