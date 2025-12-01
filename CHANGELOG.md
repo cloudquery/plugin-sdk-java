@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.0.48](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.47...v0.0.48) (2025-12-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-core to v2.20.1 ([#391](https://github.com/cloudquery/plugin-sdk-java/issues/391)) ([9fe07de](https://github.com/cloudquery/plugin-sdk-java/commit/9fe07de8c1a445fd7c877e0d4509b457d78a6a44))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v4.2 ([#387](https://github.com/cloudquery/plugin-sdk-java/issues/387)) ([5dc3164](https://github.com/cloudquery/plugin-sdk-java/commit/5dc316419a12bf6b707eb6fb266f8cb768d40eef))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v4.2.3 ([#392](https://github.com/cloudquery/plugin-sdk-java/issues/392)) ([4aff709](https://github.com/cloudquery/plugin-sdk-java/commit/4aff709e71a95b459861b46caf0c973f57a231b7))
+* **deps:** Update eclipse-temurin Docker tag to v21.0.9_10-jre ([#393](https://github.com/cloudquery/plugin-sdk-java/issues/393)) ([4154089](https://github.com/cloudquery/plugin-sdk-java/commit/4154089a9133d38a3d8f43dbf7b6f3cbb0f0083a))
+* **deps:** Update grpc-java monorepo to v1.76.0 ([#389](https://github.com/cloudquery/plugin-sdk-java/issues/389)) ([5c0c9ce](https://github.com/cloudquery/plugin-sdk-java/commit/5c0c9ce0e1cf283ca58c1100e5f4e85ecaa1c29f))
+
 ## [0.0.47](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.46...v0.0.47) (2025-10-16)
 
 
