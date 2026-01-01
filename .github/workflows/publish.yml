@@ -20,9 +20,9 @@ jobs:
           java-version: "18"
           cache: "gradle"
       - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@261794afacfbe7a93883fe9e989f80e083e3547f
+        uses: gradle/actions/wrapper-validation@bfd569614358980afc8f89c2730eee75bb97efdf
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@261794afacfbe7a93883fe9e989f80e083e3547f
+        uses: gradle/actions/setup-gradle@bfd569614358980afc8f89c2730eee75bb97efdf
       - name: Publish Package
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
