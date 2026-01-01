@@ -26,7 +26,7 @@ dependencies {
     api 'org.apache.commons:commons-math3:3.6.1'
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'org.jooq:joou:0.9.4'
+    implementation 'org.jooq:joou:0.9.5'
     implementation 'com.google.guava:guava:33.5.0-jre'
     implementation 'info.picocli:picocli:4.7.7'
     implementation 'com.google.guava:guava:33.5.0-jre'
