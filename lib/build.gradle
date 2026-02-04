@@ -30,9 +30,9 @@ dependencies {
     implementation 'com.google.guava:guava:33.5.0-jre'
     implementation 'info.picocli:picocli:4.7.7'
     implementation 'com.google.guava:guava:33.5.0-jre'
-    implementation 'io.grpc:grpc-protobuf:1.78.0'
-    implementation 'io.grpc:grpc-stub:1.78.0'
-    implementation 'io.grpc:grpc-services:1.78.0'
+    implementation 'io.grpc:grpc-protobuf:1.79.0'
+    implementation 'io.grpc:grpc-stub:1.79.0'
+    implementation 'io.grpc:grpc-services:1.79.0'
     implementation 'io.cloudquery:plugin-pb-java:0.0.42'
     implementation 'org.apache.arrow:arrow-memory-core:18.3.0'
     implementation 'org.apache.arrow:arrow-vector:18.3.0'
@@ -44,8 +44,8 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-api:2.25.3'
     implementation 'org.apache.logging.log4j:log4j-core:2.25.3'
 
-    testImplementation 'io.grpc:grpc-testing:1.78.0'
-    testImplementation 'io.grpc:grpc-inprocess:1.78.0'
+    testImplementation 'io.grpc:grpc-testing:1.79.0'
+    testImplementation 'io.grpc:grpc-inprocess:1.79.0'
     testImplementation platform('org.junit:junit-bom:6.0.2')
     testImplementation 'org.junit.jupiter:junit-jupiter:6.0.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:6.0.2'
