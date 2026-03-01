@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.50](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.49...v0.0.50) (2026-03-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v4.4 ([#421](https://github.com/cloudquery/plugin-sdk-java/issues/421)) ([d78cb38](https://github.com/cloudquery/plugin-sdk-java/commit/d78cb38268b76054c96fc8231c7854903d829f35))
+* **deps:** Update eclipse-temurin Docker tag to v21.0.10_7-jre ([#419](https://github.com/cloudquery/plugin-sdk-java/issues/419)) ([61cbcdd](https://github.com/cloudquery/plugin-sdk-java/commit/61cbcdd0ba29cf290e6814d0d4f64aa731b20ef0))
+* **deps:** Update junit to v6.0.3 ([#420](https://github.com/cloudquery/plugin-sdk-java/issues/420)) ([9e9cc74](https://github.com/cloudquery/plugin-sdk-java/commit/9e9cc74899035d5a8998bfbeda55f301b15e2e18))
+
 ## [0.0.49](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.48...v0.0.49) (2026-02-04)
 
 
