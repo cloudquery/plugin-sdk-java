@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.0.50](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.49...v0.0.50) (2026-04-01)
+
+
+### Bug Fixes
+
+* **deps:** Pin dependencies ([#428](https://github.com/cloudquery/plugin-sdk-java/issues/428)) ([348d4f2](https://github.com/cloudquery/plugin-sdk-java/commit/348d4f2c3fccc69227f2f79ff1eabdad4f4cc758))
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-core to v2.21.2 ([#430](https://github.com/cloudquery/plugin-sdk-java/issues/430)) ([9700fdb](https://github.com/cloudquery/plugin-sdk-java/commit/9700fdbc18b813546c08ef4e38518c942ae98032))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.43 ([#423](https://github.com/cloudquery/plugin-sdk-java/issues/423)) ([61bf310](https://github.com/cloudquery/plugin-sdk-java/commit/61bf31019ea0896ec15fa73d035149a5a517292d))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.44 ([#441](https://github.com/cloudquery/plugin-sdk-java/issues/441)) ([15246c6](https://github.com/cloudquery/plugin-sdk-java/commit/15246c68ad36e41c5eda49e1c9c961ca24a0f44e))
+* **deps:** Update dependency io.cloudquery:plugin-pb-java to v0.0.45 ([#442](https://github.com/cloudquery/plugin-sdk-java/issues/442)) ([e0e403a](https://github.com/cloudquery/plugin-sdk-java/commit/e0e403a7d68acbd91ea60f5f35b9017d8cb15a52))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v4.4 ([#421](https://github.com/cloudquery/plugin-sdk-java/issues/421)) ([d78cb38](https://github.com/cloudquery/plugin-sdk-java/commit/d78cb38268b76054c96fc8231c7854903d829f35))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v4.4.1 ([#431](https://github.com/cloudquery/plugin-sdk-java/issues/431)) ([5917944](https://github.com/cloudquery/plugin-sdk-java/commit/591794424c8415598b932f205e7b4bc03b756ed8))
+* **deps:** Update dependency org.apache.arrow:arrow-memory-core to v19 ([#437](https://github.com/cloudquery/plugin-sdk-java/issues/437)) ([c02cbd7](https://github.com/cloudquery/plugin-sdk-java/commit/c02cbd78d72a840736216231e731f5fc7f81e3f8))
+* **deps:** Update dependency org.apache.arrow:arrow-memory-netty to v19 ([#438](https://github.com/cloudquery/plugin-sdk-java/issues/438)) ([e3f3811](https://github.com/cloudquery/plugin-sdk-java/commit/e3f38117cbd4b60822a780e6166a78a759c0e345))
+* **deps:** Update dependency org.apache.arrow:arrow-vector to v19 ([#439](https://github.com/cloudquery/plugin-sdk-java/issues/439)) ([284a6ff](https://github.com/cloudquery/plugin-sdk-java/commit/284a6ff1a331eeafeb838fcf4790dc00e4927f61))
+* **deps:** Update dependency org.mockito:mockito-core to v5.23.0 ([#432](https://github.com/cloudquery/plugin-sdk-java/issues/432)) ([24da588](https://github.com/cloudquery/plugin-sdk-java/commit/24da58803bcab2addd875b6542c60e808b3b0588))
+* **deps:** Update eclipse-temurin Docker tag to v21.0.10_7-jre ([#419](https://github.com/cloudquery/plugin-sdk-java/issues/419)) ([61cbcdd](https://github.com/cloudquery/plugin-sdk-java/commit/61cbcdd0ba29cf290e6814d0d4f64aa731b20ef0))
+* **deps:** Update eclipse-temurin Docker tag to v25 ([#440](https://github.com/cloudquery/plugin-sdk-java/issues/440)) ([1e16f27](https://github.com/cloudquery/plugin-sdk-java/commit/1e16f273b6a9f63ac4d45ee83279f705e8eb2e16))
+* **deps:** Update Gradle to v9.4.1 ([#433](https://github.com/cloudquery/plugin-sdk-java/issues/433)) ([55f1c17](https://github.com/cloudquery/plugin-sdk-java/commit/55f1c17af681c5e47c7fc5ff4d06743e1b29f133))
+* **deps:** Update grpc-java monorepo to v1.80.0 ([#434](https://github.com/cloudquery/plugin-sdk-java/issues/434)) ([9a20a3e](https://github.com/cloudquery/plugin-sdk-java/commit/9a20a3e5690ef1a276d1d2c49b43615c13a60ef3))
+* **deps:** Update junit to v6.0.3 ([#420](https://github.com/cloudquery/plugin-sdk-java/issues/420)) ([9e9cc74](https://github.com/cloudquery/plugin-sdk-java/commit/9e9cc74899035d5a8998bfbeda55f301b15e2e18))
+* **deps:** Update plugin com.diffplug.spotless to v8.4.0 ([#435](https://github.com/cloudquery/plugin-sdk-java/issues/435)) ([cd2fc4f](https://github.com/cloudquery/plugin-sdk-java/commit/cd2fc4f0d67fe6f147607dd6f1736e1714d850b9))
+
 ## [0.0.49](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.48...v0.0.49) (2026-02-04)
 
 
