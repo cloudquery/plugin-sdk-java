@@ -2,7 +2,7 @@ plugins {
     id 'java-library'
     id "io.freefair.lombok" version "9.2.0"
     id "maven-publish"
-    id "com.diffplug.spotless" version "8.2.1"
+    id "com.diffplug.spotless" version "8.4.0"
 }
 
 group 'io.cloudquery'
@@ -30,32 +30,32 @@ dependencies {
     implementation 'com.google.guava:guava:33.5.0-jre'
     implementation 'info.picocli:picocli:4.7.7'
     implementation 'com.google.guava:guava:33.5.0-jre'
-    implementation 'io.grpc:grpc-protobuf:1.79.0'
-    implementation 'io.grpc:grpc-stub:1.79.0'
-    implementation 'io.grpc:grpc-services:1.79.0'
-    implementation 'io.cloudquery:plugin-pb-java:0.0.43'
-    implementation 'org.apache.arrow:arrow-memory-core:18.3.0'
+    implementation 'io.grpc:grpc-protobuf:1.80.0'
+    implementation 'io.grpc:grpc-stub:1.80.0'
+    implementation 'io.grpc:grpc-services:1.80.0'
+    implementation 'io.cloudquery:plugin-pb-java:0.0.44'
+    implementation 'org.apache.arrow:arrow-memory-core:19.0.0'
     implementation 'org.apache.arrow:arrow-vector:18.3.0'
     implementation 'commons-io:commons-io:2.21.0'
 
-    implementation "com.fasterxml.jackson.core:jackson-core:2.21.0"
+    implementation "com.fasterxml.jackson.core:jackson-core:2.21.2"
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.21"
 
     implementation 'org.apache.logging.log4j:log4j-api:2.25.3'
     implementation 'org.apache.logging.log4j:log4j-core:2.25.3'
 
-    testImplementation 'io.grpc:grpc-testing:1.79.0'
-    testImplementation 'io.grpc:grpc-inprocess:1.79.0'
+    testImplementation 'io.grpc:grpc-testing:1.80.0'
+    testImplementation 'io.grpc:grpc-inprocess:1.80.0'
     testImplementation platform('org.junit:junit-bom:6.0.3')
     testImplementation 'org.junit.jupiter:junit-jupiter:6.0.3'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:6.0.3'
-    testImplementation 'org.mockito:mockito-core:5.21.0'
-    testImplementation 'org.mockito:mockito-junit-jupiter:5.21.0'
-    testImplementation 'nl.jqno.equalsverifier:equalsverifier:4.4'
+    testImplementation 'org.mockito:mockito-core:5.23.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.23.0'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:4.4.1'
     testImplementation 'org.assertj:assertj-core:3.27.7'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    runtimeOnly "org.apache.arrow:arrow-memory-netty:18.3.0"
+    runtimeOnly "org.apache.arrow:arrow-memory-netty:19.0.0"
 }
 
 test {
