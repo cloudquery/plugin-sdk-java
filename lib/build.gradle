@@ -55,7 +55,7 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.27.7'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    runtimeOnly "org.apache.arrow:arrow-memory-netty:18.3.0"
+    runtimeOnly "org.apache.arrow:arrow-memory-netty:19.0.0"
 }
 
 test {
