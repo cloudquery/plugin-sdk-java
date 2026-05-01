@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.0.51](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.50...v0.0.51) (2026-05-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.google.guava:guava to v33.6.0-jre ([#445](https://github.com/cloudquery/plugin-sdk-java/issues/445)) ([80d5a80](https://github.com/cloudquery/plugin-sdk-java/commit/80d5a8009e9d134a78c0bebcc409d791e78cf3c1))
+* **deps:** Update dependency commons-io:commons-io to v2.22.0 ([#446](https://github.com/cloudquery/plugin-sdk-java/issues/446)) ([8cd5be7](https://github.com/cloudquery/plugin-sdk-java/commit/8cd5be778b106afc87b8537222add4665f11b3f9))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v4.5 ([#447](https://github.com/cloudquery/plugin-sdk-java/issues/447)) ([7095add](https://github.com/cloudquery/plugin-sdk-java/commit/7095add77b7f03bfd24fbbe71d46aec7b5c2cfbe))
+* **deps:** Update log4j2 monorepo to v2.25.4 ([#444](https://github.com/cloudquery/plugin-sdk-java/issues/444)) ([38114ea](https://github.com/cloudquery/plugin-sdk-java/commit/38114ea7a34d604b4ed126e925c84d1739c32037))
+* **deps:** Update plugin io.freefair.lombok to v9.4.0 ([#448](https://github.com/cloudquery/plugin-sdk-java/issues/448)) ([e416550](https://github.com/cloudquery/plugin-sdk-java/commit/e416550f15243c239c02c1b939fec07f662880ad))
+
 ## [0.0.50](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.49...v0.0.50) (2026-04-01)
 
 
