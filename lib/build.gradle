@@ -36,7 +36,7 @@ dependencies {
     implementation 'io.cloudquery:plugin-pb-java:0.0.45'
     implementation 'org.apache.arrow:arrow-memory-core:19.0.0'
     implementation 'org.apache.arrow:arrow-vector:19.0.0'
-    implementation 'commons-io:commons-io:2.21.0'
+    implementation 'commons-io:commons-io:2.22.0'
 
     implementation "com.fasterxml.jackson.core:jackson-core:2.21.2"
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.21"
