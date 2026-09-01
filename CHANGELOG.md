@@ -1,5 +1,40 @@
 # Changelog
 
+## [0.0.51](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.50...v0.0.51) (2026-09-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-core to v2.21.3 ([#453](https://github.com/cloudquery/plugin-sdk-java/issues/453)) ([9ab333d](https://github.com/cloudquery/plugin-sdk-java/commit/9ab333d565e36c7b6c55e13112cdca3d087e8d72))
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-core to v2.22.1 ([#468](https://github.com/cloudquery/plugin-sdk-java/issues/468)) ([366ea2e](https://github.com/cloudquery/plugin-sdk-java/commit/366ea2e8c8623f9bdcae94b2fb2089ccf498ba31))
+* **deps:** Update dependency com.fasterxml.jackson.core:jackson-core to v2.22.2 ([#476](https://github.com/cloudquery/plugin-sdk-java/issues/476)) ([191efea](https://github.com/cloudquery/plugin-sdk-java/commit/191efeaf1c911af9e6a3335d9a242df1fe94bddb))
+* **deps:** Update dependency com.google.guava:guava to v33.6.0-jre ([#445](https://github.com/cloudquery/plugin-sdk-java/issues/445)) ([80d5a80](https://github.com/cloudquery/plugin-sdk-java/commit/80d5a8009e9d134a78c0bebcc409d791e78cf3c1))
+* **deps:** Update dependency com.google.guava:guava to v33.7.1-jre ([#480](https://github.com/cloudquery/plugin-sdk-java/issues/480)) ([9e2a2c8](https://github.com/cloudquery/plugin-sdk-java/commit/9e2a2c86332ce5550e2ac643a2ee2a231918d2b3))
+* **deps:** Update dependency commons-io:commons-io to v2.22.0 ([#446](https://github.com/cloudquery/plugin-sdk-java/issues/446)) ([8cd5be7](https://github.com/cloudquery/plugin-sdk-java/commit/8cd5be778b106afc87b8537222add4665f11b3f9))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v4.5 ([#447](https://github.com/cloudquery/plugin-sdk-java/issues/447)) ([7095add](https://github.com/cloudquery/plugin-sdk-java/commit/7095add77b7f03bfd24fbbe71d46aec7b5c2cfbe))
+* **deps:** Update dependency nl.jqno.equalsverifier:equalsverifier to v4.5.1 ([#477](https://github.com/cloudquery/plugin-sdk-java/issues/477)) ([b8faf4e](https://github.com/cloudquery/plugin-sdk-java/commit/b8faf4e958626f5aa225d83f51e39cd602c403c0))
+* **deps:** Update eclipse-temurin Docker tag to v25.0.3_9-jre ([#454](https://github.com/cloudquery/plugin-sdk-java/issues/454)) ([6f47856](https://github.com/cloudquery/plugin-sdk-java/commit/6f47856c71ebe71f15468f8e8d241e2306fa4f7a))
+* **deps:** Update eclipse-temurin Docker tag to v25.0.4_7-jre ([#478](https://github.com/cloudquery/plugin-sdk-java/issues/478)) ([9d20385](https://github.com/cloudquery/plugin-sdk-java/commit/9d2038516f37e87cd7f6186c8e3b10542715ca92))
+* **deps:** Update Gradle to v9.5.1 ([#455](https://github.com/cloudquery/plugin-sdk-java/issues/455)) ([8412b56](https://github.com/cloudquery/plugin-sdk-java/commit/8412b562585e70734e7f5ddb86b175fe4111f698))
+* **deps:** Update Gradle to v9.6.0 ([#462](https://github.com/cloudquery/plugin-sdk-java/issues/462)) ([b8eeaaa](https://github.com/cloudquery/plugin-sdk-java/commit/b8eeaaa78b040bb49ac748de5b32d4fcfefac99e))
+* **deps:** Update Gradle to v9.6.1 ([#469](https://github.com/cloudquery/plugin-sdk-java/issues/469)) ([de9fa56](https://github.com/cloudquery/plugin-sdk-java/commit/de9fa56584c7d8c97b6a7bd279550f9c6ea5a8dc))
+* **deps:** Update Gradle to v9.7.1 ([#481](https://github.com/cloudquery/plugin-sdk-java/issues/481)) ([a34bb74](https://github.com/cloudquery/plugin-sdk-java/commit/a34bb745857531b477fc7dae8408b4fd50a7805a))
+* **deps:** Update grpc-java monorepo to v1.81.0 ([#456](https://github.com/cloudquery/plugin-sdk-java/issues/456)) ([41b6392](https://github.com/cloudquery/plugin-sdk-java/commit/41b63926b16fb72a1a5d353bf13853a0d3271a13))
+* **deps:** Update grpc-java monorepo to v1.82.1 ([#463](https://github.com/cloudquery/plugin-sdk-java/issues/463)) ([1330ea4](https://github.com/cloudquery/plugin-sdk-java/commit/1330ea4c2a8d5907b56809dd92235b6dadd1204b))
+* **deps:** Update grpc-java monorepo to v1.83.0 ([#472](https://github.com/cloudquery/plugin-sdk-java/issues/472)) ([cfe457f](https://github.com/cloudquery/plugin-sdk-java/commit/cfe457f54a141a3744b8eed0597c62b047f993ec))
+* **deps:** Update grpc-java monorepo to v1.83.1 ([#479](https://github.com/cloudquery/plugin-sdk-java/issues/479)) ([b1e5216](https://github.com/cloudquery/plugin-sdk-java/commit/b1e52160dee735cb71a52f81d89061b5e1824456))
+* **deps:** Update jackson monorepo ([#464](https://github.com/cloudquery/plugin-sdk-java/issues/464)) ([03ea627](https://github.com/cloudquery/plugin-sdk-java/commit/03ea627f0660d2fa653bea9d1c271a7f7ada1ad1))
+* **deps:** Update junit to v6.1.2 ([#470](https://github.com/cloudquery/plugin-sdk-java/issues/470)) ([e85ce32](https://github.com/cloudquery/plugin-sdk-java/commit/e85ce32dc9793783c05b48156e65b7e118c46e61))
+* **deps:** Update log4j2 monorepo to v2.25.4 ([#444](https://github.com/cloudquery/plugin-sdk-java/issues/444)) ([38114ea](https://github.com/cloudquery/plugin-sdk-java/commit/38114ea7a34d604b4ed126e925c84d1739c32037))
+* **deps:** Update log4j2 monorepo to v2.26.0 ([#457](https://github.com/cloudquery/plugin-sdk-java/issues/457)) ([281e6df](https://github.com/cloudquery/plugin-sdk-java/commit/281e6df578d834f050617bfe50b96027b399271a))
+* **deps:** Update log4j2 monorepo to v2.26.1 ([#471](https://github.com/cloudquery/plugin-sdk-java/issues/471)) ([f51ae11](https://github.com/cloudquery/plugin-sdk-java/commit/f51ae11f4861f8d5a4674052c55ec9938899133a))
+* **deps:** Update plugin com.diffplug.spotless to v8.10.0 ([#482](https://github.com/cloudquery/plugin-sdk-java/issues/482)) ([f5d65d6](https://github.com/cloudquery/plugin-sdk-java/commit/f5d65d63fd4278152112a022b5458b74f6944662))
+* **deps:** Update plugin com.diffplug.spotless to v8.5.1 ([#458](https://github.com/cloudquery/plugin-sdk-java/issues/458)) ([bd5f7b7](https://github.com/cloudquery/plugin-sdk-java/commit/bd5f7b7f45e4b23c2038fff266dd9f5fb84c2ba0))
+* **deps:** Update plugin com.diffplug.spotless to v8.7.0 ([#465](https://github.com/cloudquery/plugin-sdk-java/issues/465)) ([679d37a](https://github.com/cloudquery/plugin-sdk-java/commit/679d37a2caf213961d0cf2e9e18ebbe7afa69af0))
+* **deps:** Update plugin com.diffplug.spotless to v8.8.0 ([#473](https://github.com/cloudquery/plugin-sdk-java/issues/473)) ([1927c11](https://github.com/cloudquery/plugin-sdk-java/commit/1927c1112b7459d48a36558796cef0dac160d3a3))
+* **deps:** Update plugin io.freefair.lombok to v9.4.0 ([#448](https://github.com/cloudquery/plugin-sdk-java/issues/448)) ([e416550](https://github.com/cloudquery/plugin-sdk-java/commit/e416550f15243c239c02c1b939fec07f662880ad))
+* **deps:** Update plugin io.freefair.lombok to v9.5.0 ([#459](https://github.com/cloudquery/plugin-sdk-java/issues/459)) ([cb08da1](https://github.com/cloudquery/plugin-sdk-java/commit/cb08da1d2e4a7bad5629893e4ecab2335c6710a8))
+
 ## [0.0.50](https://github.com/cloudquery/plugin-sdk-java/compare/v0.0.49...v0.0.50) (2026-04-01)
 
 
